@@ -425,7 +425,6 @@ Class b2Manager Extends Resource
 	
 		Local retArray:b2Fixture[]
 		Local fixtureStack:=New Stack<b2Fixture>
-	
 		For Local fixt:=Eachin fixtureInfos
 			If fixt.fixtureName=name
 				fixtureStack.Add(fixt.fixture)

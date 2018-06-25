@@ -64,9 +64,10 @@ Function Createb2FixtureInfoStack:Stack<b2FixtureInfo> (world:b2World,path:Strin
 							Local fixname:=	fixObj["name"]
 							If fixname.IsString
 								Local fn:=fixname.ToString()
-								If Not fixList.Contains(fn)
-									fixList.Add(fn)
-								End
+
+								'If Not fixList.Contains(fn) 'non mais c quoi ce bug! peut y avoir plusieurs fixtures du même nom
+								fixList.Add(fn)
+								'End
 							End
 						Else
 							fixList.Add("noNameFixture"+noNameCount)
@@ -118,6 +119,7 @@ Function Createb2FixtureInfoStack:Stack<b2FixtureInfo> (world:b2World,path:Strin
 			Print "no 'body' value in json !!!!!!!!!"
 		#End
 	End
+
 	
 	Local fixtureNameStack:=fixList 'the function has been inserted/returned here
 	
