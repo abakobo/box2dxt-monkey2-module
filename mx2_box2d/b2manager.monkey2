@@ -42,15 +42,24 @@ Class b2Manager Extends Resource
 	
 	'Public
 	
-	Method New(gravity:b2Vec2,pScale:Float=15,yAxisInversion:Bool=True)
-		world=New b2World(gravity)
-		
-		debugDrawer=New b2DebugDraw(physScale,yAxisInversion)	
-	End
-	
-	Method New (jsonPath:String,pScale:Float=15,yAxisInversion:Bool=True,offset:b2Vec2=New b2Vec2(0,0))
+	Method New(gravity:b2Vec2,pScale:Float=15,yAxisInvert:Bool=True)
 		
 		physScale=pScale
+		yAxisInversion=yAxisInvert
+		
+		world=New b2World(gravity)
+		
+		debugDrawer=New b2DebugDraw(physScale,yAxisInvert)
+		
+		world.SetDebugDraw( debugDrawer  )
+		debugDrawer.SetFlags( e_shapeBit|e_jointBit )
+			
+	End
+	
+	Method New (jsonPath:String,pScale:Float=15,yAxisInvert:Bool=True,offset:b2Vec2=New b2Vec2(0,0))
+		
+		physScale=pScale
+		yAxisInversion=yAxisInvert
 		
 		b2dJsons[0]=New mx2b2dJson.b2dJson()
 		
