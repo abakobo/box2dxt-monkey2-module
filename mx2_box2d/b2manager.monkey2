@@ -82,6 +82,41 @@ Class b2Manager Extends Resource
 		
 	End
 	
+	Method CreateBody:b2Body(bd:b2BodyDef,name:String="nonamebody")
+		
+		Local l:=Self.bodyInfos.Length
+		
+		Self.bodyInfos=Self.bodyInfos.Resize(l+1)
+		Self.bodyInfos[l]=New b2BodyImageInfo()
+		Local bii:=Self.bodyInfos[l]
+		bii.index=l
+		bii.bodyName=name
+		bii.body=Self.world.CreateBody(bd)
+		bii.bodyUserData=New StringMap<Variant>
+		bii.bodyUserData["b2ManagerBodyInfo"]=bii
+		bii.body.SetUserData(Cast<Void Ptr>(bii.bodyUserData))
+		
+		Return bii.body
+		
+	End
+	
+	Method CreateFixture:b2Fixture(b:b2Body,fd:b2FixtureDef,name:String="")
+		
+		If name="" Then name=Self.GetBodyName(b)+"_Fixture"
+		
+		Local fi:=New b2FixtureInfo()
+		fi.fixture=b.CreateFixture(fd)
+		fi.fixtureName=name
+		fi.fixtureUserData=New StringMap<Variant>
+		fi.fixtureUserData["b2ManagerFixtureInfo"]=fi
+		fi.fixture.SetUserData(Cast<Void Ptr>(fi.fixtureUserData))
+		
+		Self.fixtureInfos.Add(fi)
+		
+		Return fi.fixture
+		
+	End
+	
 	Method AddJson(jsonPath:String,offset:b2Vec2=New b2Vec2(0,0))
 		
 		Local firstWSize:=world.GetBodyCount()
@@ -741,6 +776,37 @@ Class b2Manager Extends Resource
 		Return Null
 
 	End
+	
+	Method GetBodyInfo:b2BodyImageInfo(b:b2Body)
+	
+		Local biiVariant:=GetBodyUserDataToM(b)["b2ManagerBodyInfo"]
+		Local bii:=Cast<b2BodyImageInfo>(biiVariant)
+	
+		Return bii
+	
+	End
+	
+	Method GetBodyName:String(b:b2Body)
+		
+		Return GetBodyInfo(b).bodyName
+		
+	End
+	
+	'Method GetFixtureInfo:b2FixtureInfo(f:b2Fixture)
+	
+	'	Local fiVariant:=GetFixtureUserDataToM(b)["b2ManagerBodyInfo"]
+	'	Local bii:=Cast<b2BodyImageInfo>(biiVariant)
+	
+	'	Return bii
+	
+	'End
+	
+	'Method GetFixtureName:String(b:b2Body)
+		
+	'	Return GetBodyInfo(b).bodyName
+		
+	'End
+		
 	
 	Method GetBodyUserDataToB:Bool(name:String,dataName:String)
 	

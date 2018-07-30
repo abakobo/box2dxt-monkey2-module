@@ -318,11 +318,8 @@ Function Createb2BodyImageInfoArray:b2BodyImageInfo[](world:b2World,path:String 
 		If custoMaMap.Contains(i)
 			
 			ret[i].bodyUserData=custoMaMap[i]
-		
-
 		Else
 			ret[i].bodyUserData=New StringMap<Variant>
-
 		End
 		
 		ret[i].bodyUserData["b2ManagerBodyInfo"]=ret[i]
