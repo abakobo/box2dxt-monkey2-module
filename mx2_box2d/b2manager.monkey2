@@ -792,20 +792,31 @@ Class b2Manager Extends Resource
 		
 	End
 	
-	'Method GetFixtureInfo:b2FixtureInfo(f:b2Fixture)
+	Method GetFixtureInfo:b2FixtureInfo(f:b2Fixture)
 	
-	'	Local fiVariant:=GetFixtureUserDataToM(b)["b2ManagerBodyInfo"]
-	'	Local bii:=Cast<b2BodyImageInfo>(biiVariant)
+		Local fiVariant:=GetFixtureUserDataToM(f)["b2ManagerFixtureInfo"]
+		Local fi:=Cast<b2FixtureInfo>(fiVariant)
 	
-	'	Return bii
+		Return fi
 	
-	'End
+	End
 	
-	'Method GetFixtureName:String(b:b2Body)
+	Method GetFixtureName:String(f:b2Fixture)
 		
-	'	Return GetBodyInfo(b).bodyName
+		Return GetFixtureInfo(f).fixtureName
 		
-	'End
+	End
+	
+	Method GetFixtureUserDataToM:StringMap<Variant>(fixt:b2Fixture)
+		
+		
+		Local ret:=Cast<StringMap<Variant>>(fixt.GetUserData())
+		#If __DEBUG__
+			If ret=Null Then Print "Fixture GetUserData returns Null !!!!!!!!!!!!!!!"
+		#End
+		Return ret
+
+	End
 		
 	
 	Method GetBodyUserDataToB:Bool(name:String,dataName:String)
