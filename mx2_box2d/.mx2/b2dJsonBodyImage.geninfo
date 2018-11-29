@@ -1,5 +1,5 @@
 {
-	"endpos":"973:0",
+	"endpos":"969:0",
 	"flags":0,
 	"ident":"box2dxt_mx2_0box2d_2b2dJsonBodyImage",
 	"imports":["<std.monkey2>","<mojo.monkey2>","<box2d.monkey2>","../iforce2d-b2djson/mx2b2djson.monkey2"],
@@ -62,7 +62,7 @@
 		}],
 		"srcpos":"20:0"
 	},{
-		"endpos":"162:0",
+		"endpos":"161:0",
 		"flags":1,
 		"ident":"Createb2FixtureInfoStack",
 		"kind":"function",
@@ -170,7 +170,7 @@
 			"semtype":"std.collections.Stack<std.collections.StringMap<monkey.types.Variant>>",
 			"srcpos":"34:7"
 		},{
-			"endpos":"115:0",
+			"endpos":"116:0",
 			"kind":"block",
 			"srcpos":"36:1",
 			"stmts":[{
@@ -230,7 +230,7 @@
 				"semtype":"monkey.types.Int",
 				"srcpos":"42:8"
 			},{
-				"endpos":"115:0",
+				"endpos":"116:0",
 				"kind":"block",
 				"srcpos":"44:2",
 				"stmts":[{
@@ -264,7 +264,7 @@
 					"semtype":"std.collections.StringMap<std.json.JsonValue>",
 					"srcpos":"47:9"
 				},{
-					"endpos":"109:0",
+					"endpos":"110:0",
 					"kind":"block",
 					"srcpos":"49:3",
 					"stmts":[{
@@ -280,7 +280,7 @@
 						"semtype":"std.json.JsonValue",
 						"srcpos":"51:10"
 					},{
-						"endpos":"103:0",
+						"endpos":"104:0",
 						"kind":"block",
 						"srcpos":"53:4",
 						"stmts":[{
@@ -315,7 +315,7 @@
 							"semtype":"monkey.types.Int",
 							"srcpos":"56:11"
 						},{
-							"endpos":"103:0",
+							"endpos":"104:0",
 							"kind":"block",
 							"srcpos":"58:5",
 							"stmts":[{
@@ -349,7 +349,7 @@
 								"semtype":"std.collections.StringMap<std.json.JsonValue>",
 								"srcpos":"61:12"
 							},{
-								"endpos":"71:0",
+								"endpos":"72:0",
 								"kind":"block",
 								"srcpos":"63:6",
 								"stmts":[{
@@ -365,7 +365,7 @@
 									"semtype":"std.json.JsonValue",
 									"srcpos":"64:13"
 								},{
-									"endpos":"71:0",
+									"endpos":"72:0",
 									"kind":"block",
 									"srcpos":"65:7",
 									"stmts":[{
@@ -380,174 +380,169 @@
 										"kind":"local",
 										"semtype":"monkey.types.String",
 										"srcpos":"66:14"
-									},{
-										"endpos":"70:0",
-										"kind":"block",
-										"srcpos":"67:8",
-										"stmts":[]
 									}]
 								}]
 							},{
-								"endpos":"78:0",
+								"endpos":"79:0",
 								"kind":"block",
-								"srcpos":"71:6",
+								"srcpos":"72:6",
 								"stmts":[]
 							},{
-								"endpos":"94:0",
+								"endpos":"95:0",
 								"kind":"block",
-								"srcpos":"78:6",
+								"srcpos":"79:6",
 								"stmts":[{
-									"endpos":"80:47",
+									"endpos":"81:47",
 									"flags":1,
 									"ident":"imgval",
 									"init":{
-										"endpos":"80:47",
+										"endpos":"81:47",
 										"kind":"????Expr?????",
-										"srcpos":"80:27"
+										"srcpos":"81:27"
 									},
 									"kind":"local",
 									"semtype":"std.json.JsonValue",
-									"srcpos":"80:13"
+									"srcpos":"81:13"
 								},{
-									"endpos":"85:0",
+									"endpos":"86:0",
 									"kind":"block",
-									"srcpos":"81:7",
+									"srcpos":"82:7",
 									"stmts":[{
-										"endpos":"82:58",
+										"endpos":"83:58",
 										"flags":1,
 										"ident":"cp",
 										"init":{
-											"endpos":"82:58",
+											"endpos":"83:58",
 											"kind":"????Expr?????",
-											"srcpos":"82:50"
+											"srcpos":"83:50"
 										},
 										"kind":"local",
 										"semtype":"std.collections.StringMap<monkey.types.Variant>",
-										"srcpos":"82:14"
+										"srcpos":"83:14"
 									}]
 								},{
-									"endpos":"94:0",
+									"endpos":"95:0",
 									"kind":"block",
-									"srcpos":"86:7",
+									"srcpos":"87:7",
 									"stmts":[]
 								}]
 							},{
-								"endpos":"102:0",
+								"endpos":"103:0",
 								"kind":"block",
-								"srcpos":"94:6",
+								"srcpos":"95:6",
 								"stmts":[]
 							}]
 						}]
 					},{
-						"endpos":"109:0",
+						"endpos":"110:0",
 						"kind":"block",
-						"srcpos":"104:4",
+						"srcpos":"105:4",
 						"stmts":[]
 					}]
 				},{
-					"endpos":"114:0",
+					"endpos":"115:0",
 					"kind":"block",
-					"srcpos":"109:3",
+					"srcpos":"110:3",
 					"stmts":[]
 				}]
 			}]
 		},{
-			"endpos":"121:0",
+			"endpos":"122:0",
 			"kind":"block",
-			"srcpos":"116:1",
+			"srcpos":"117:1",
 			"stmts":[]
 		},{
-			"endpos":"125:32",
+			"endpos":"124:32",
 			"flags":1,
 			"ident":"fixtureNameStack",
 			"init":{
-				"endpos":"125:32",
+				"endpos":"124:32",
 				"ident":"fixList",
 				"kind":"ident",
-				"srcpos":"125:25"
+				"srcpos":"124:25"
 			},
 			"kind":"local",
 			"semtype":"std.collections.Stack<monkey.types.String>",
-			"srcpos":"125:7"
+			"srcpos":"124:7"
 		},{
-			"endpos":"127:39",
+			"endpos":"126:39",
 			"flags":1,
 			"ident":"currentBody",
 			"init":{
-				"endpos":"127:39",
+				"endpos":"126:39",
 				"kind":"????Expr?????",
-				"srcpos":"127:37"
+				"srcpos":"126:37"
 			},
 			"kind":"local",
 			"semtype":"box2d.b2Body",
-			"srcpos":"127:7"
+			"srcpos":"126:7"
 		},{
-			"endpos":"128:48",
+			"endpos":"127:48",
 			"flags":1,
 			"ident":"currentFixt",
 			"init":{
-				"endpos":"128:48",
+				"endpos":"127:48",
 				"kind":"????Expr?????",
-				"srcpos":"128:46"
+				"srcpos":"127:46"
 			},
 			"kind":"local",
 			"semtype":"box2d.b2Fixture",
-			"srcpos":"128:7"
+			"srcpos":"127:7"
 		},{
-			"endpos":"158:0",
+			"endpos":"157:0",
 			"kind":"block",
-			"srcpos":"130:1",
+			"srcpos":"129:1",
 			"stmts":[{
-				"endpos":"132:2",
+				"endpos":"131:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"130:11"
+				"srcpos":"129:11"
 			},{
-				"endpos":"132:43",
+				"endpos":"131:43",
 				"flags":1,
 				"ident":"fixtureNameStr",
 				"init":{
-					"endpos":"132:43",
+					"endpos":"131:43",
 					"kind":"????Expr?????",
-					"srcpos":"132:40"
+					"srcpos":"131:40"
 				},
 				"kind":"local",
 				"semtype":"monkey.types.String",
-				"srcpos":"132:8"
+				"srcpos":"131:8"
 			},{
-				"endpos":"141:0",
+				"endpos":"140:0",
 				"kind":"block",
-				"srcpos":"133:2",
+				"srcpos":"132:2",
 				"stmts":[{
-					"endpos":"139:0",
+					"endpos":"138:0",
 					"kind":"block",
-					"srcpos":"136:3",
+					"srcpos":"135:3",
 					"stmts":[]
 				}]
 			},{
-				"endpos":"154:0",
+				"endpos":"153:0",
 				"kind":"block",
-				"srcpos":"142:2",
+				"srcpos":"141:2",
 				"stmts":[{
-					"endpos":"144:33",
+					"endpos":"143:33",
 					"flags":1,
 					"ident":"inf",
 					"init":{
 						"args":[],
-						"endpos":"144:33",
+						"endpos":"143:33",
 						"kind":"newobject",
-						"srcpos":"144:14",
+						"srcpos":"143:14",
 						"type":{
-							"endpos":"144:31",
+							"endpos":"143:31",
 							"ident":"b2FixtureInfo",
 							"kind":"ident",
-							"srcpos":"144:18"
+							"srcpos":"143:18"
 						}
 					},
 					"kind":"local",
 					"semtype":"box2dxt.b2FixtureInfo",
-					"srcpos":"144:9"
+					"srcpos":"143:9"
 				}]
 			}]
 		}],
@@ -601,217 +596,229 @@
 			"srcpos":"27:34"
 		}
 	},{
-		"endpos":"211:0",
+		"endpos":"210:0",
 		"flags":1,
 		"ident":"GetCustomPropertiesFromJsonArray",
 		"kind":"function",
-		"srcpos":"164:0",
+		"srcpos":"163:0",
 		"stmts":[{
-			"endpos":"165:33",
+			"endpos":"164:33",
 			"flags":1,
 			"ident":"custoArr",
 			"init":{
-				"endpos":"165:33",
+				"endpos":"164:33",
 				"kind":"????Expr?????",
-				"srcpos":"165:31"
+				"srcpos":"164:31"
 			},
 			"kind":"local",
 			"semtype":"std.collections.Stack<std.json.JsonValue>",
-			"srcpos":"165:7"
+			"srcpos":"164:7"
 		},{
-			"endpos":"166:38",
+			"endpos":"165:38",
 			"flags":1,
 			"ident":"custoArraySize",
 			"init":{
-				"endpos":"166:38",
+				"endpos":"165:38",
 				"expr":{
-					"endpos":"166:31",
+					"endpos":"165:31",
 					"ident":"custoArr",
 					"kind":"ident",
-					"srcpos":"166:23"
+					"srcpos":"165:23"
 				},
 				"ident":"Length",
 				"kind":"member",
-				"srcpos":"166:31"
+				"srcpos":"165:31"
 			},
 			"kind":"local",
 			"semtype":"monkey.types.Int",
-			"srcpos":"166:7"
+			"srcpos":"165:7"
 		},{
-			"endpos":"167:42",
+			"endpos":"166:42",
 			"flags":1,
 			"ident":"custoFixMap",
 			"init":{
 				"args":[],
-				"endpos":"167:42",
+				"endpos":"166:42",
 				"kind":"newobject",
-				"srcpos":"167:20",
+				"srcpos":"166:20",
 				"type":{
 					"args":[{
-						"endpos":"167:41",
+						"endpos":"166:41",
 						"ident":"variant",
 						"kind":"ident",
-						"srcpos":"167:34"
+						"srcpos":"166:34"
 					}],
-					"endpos":"167:42",
+					"endpos":"166:42",
 					"expr":{
-						"endpos":"167:33",
+						"endpos":"166:33",
 						"ident":"StringMap",
 						"kind":"ident",
-						"srcpos":"167:24"
+						"srcpos":"166:24"
 					},
 					"kind":"generic",
-					"srcpos":"167:24"
+					"srcpos":"166:24"
 				}
 			},
 			"kind":"local",
 			"semtype":"std.collections.Map<monkey.types.String,monkey.types.Variant>",
-			"srcpos":"167:7"
+			"srcpos":"166:7"
 		},{
-			"endpos":"207:0",
+			"endpos":"206:0",
 			"kind":"block",
-			"srcpos":"169:1",
+			"srcpos":"168:1",
 			"stmts":[{
-				"endpos":"171:2",
+				"endpos":"170:2",
 				"flags":1,
 				"ident":"j",
 				"kind":"local",
-				"srcpos":"169:11"
+				"srcpos":"168:11"
 			},{
-				"endpos":"171:47",
+				"endpos":"170:47",
 				"flags":1,
 				"ident":"custoArrElemObj",
 				"init":{
-					"endpos":"171:47",
+					"endpos":"170:47",
 					"kind":"????Expr?????",
-					"srcpos":"171:45"
+					"srcpos":"170:45"
 				},
 				"kind":"local",
 				"semtype":"std.collections.StringMap<std.json.JsonValue>",
-				"srcpos":"171:8"
+				"srcpos":"170:8"
 			},{
-				"endpos":"177:0",
+				"endpos":"176:0",
 				"kind":"block",
-				"srcpos":"173:2",
+				"srcpos":"172:2",
 				"stmts":[{
-					"endpos":"174:52",
+					"endpos":"173:52",
 					"flags":1,
 					"ident":"f",
 					"init":{
-						"endpos":"174:52",
+						"endpos":"173:52",
 						"kind":"????Expr?????",
-						"srcpos":"174:50"
+						"srcpos":"173:50"
 					},
 					"kind":"local",
 					"semtype":"monkey.types.Float",
-					"srcpos":"174:9",
+					"srcpos":"173:9",
 					"type":{
-						"endpos":"174:16",
+						"endpos":"173:16",
 						"ident":"float",
 						"kind":"ident",
-						"srcpos":"174:11"
+						"srcpos":"173:11"
 					}
 				},{
-					"endpos":"175:46",
+					"endpos":"174:46",
 					"flags":1,
 					"ident":"n",
 					"init":{
-						"endpos":"175:46",
+						"endpos":"174:46",
 						"kind":"????Expr?????",
-						"srcpos":"175:44"
+						"srcpos":"174:44"
 					},
 					"kind":"local",
 					"semtype":"monkey.types.String",
-					"srcpos":"175:9"
+					"srcpos":"174:9"
 				}]
 			},{
-				"endpos":"181:0",
+				"endpos":"180:0",
 				"kind":"block",
-				"srcpos":"177:2",
+				"srcpos":"176:2",
 				"stmts":[{
-					"endpos":"178:51",
+					"endpos":"177:51",
 					"flags":1,
 					"ident":"inte",
 					"init":{
-						"endpos":"178:51",
+						"endpos":"177:51",
 						"kind":"????Expr?????",
-						"srcpos":"178:49"
+						"srcpos":"177:49"
 					},
 					"kind":"local",
 					"semtype":"monkey.types.Int",
-					"srcpos":"178:9",
+					"srcpos":"177:9",
 					"type":{
-						"endpos":"178:17",
+						"endpos":"177:17",
 						"ident":"int",
 						"kind":"ident",
-						"srcpos":"178:14"
+						"srcpos":"177:14"
 					}
 				},{
-					"endpos":"179:46",
+					"endpos":"178:46",
 					"flags":1,
 					"ident":"n",
 					"init":{
-						"endpos":"179:46",
+						"endpos":"178:46",
 						"kind":"????Expr?????",
-						"srcpos":"179:44"
+						"srcpos":"178:44"
 					},
 					"kind":"local",
 					"semtype":"monkey.types.String",
-					"srcpos":"179:9"
+					"srcpos":"178:9"
 				}]
 			},{
-				"endpos":"185:0",
+				"endpos":"184:0",
 				"kind":"block",
-				"srcpos":"181:2",
+				"srcpos":"180:2",
 				"stmts":[{
-					"endpos":"182:48",
+					"endpos":"181:48",
 					"flags":1,
 					"ident":"s",
 					"init":{
-						"endpos":"182:48",
+						"endpos":"181:48",
 						"kind":"????Expr?????",
-						"srcpos":"182:46"
+						"srcpos":"181:46"
+					},
+					"kind":"local",
+					"semtype":"monkey.types.String",
+					"srcpos":"181:9"
+				},{
+					"endpos":"182:46",
+					"flags":1,
+					"ident":"n",
+					"init":{
+						"endpos":"182:46",
+						"kind":"????Expr?????",
+						"srcpos":"182:44"
 					},
 					"kind":"local",
 					"semtype":"monkey.types.String",
 					"srcpos":"182:9"
-				},{
-					"endpos":"183:46",
-					"flags":1,
-					"ident":"n",
-					"init":{
-						"endpos":"183:46",
-						"kind":"????Expr?????",
-						"srcpos":"183:44"
-					},
-					"kind":"local",
-					"semtype":"monkey.types.String",
-					"srcpos":"183:9"
 				}]
 			},{
-				"endpos":"196:0",
+				"endpos":"195:0",
 				"kind":"block",
-				"srcpos":"185:2",
+				"srcpos":"184:2",
 				"stmts":[{
-					"endpos":"192:0",
+					"endpos":"191:0",
 					"kind":"block",
-					"srcpos":"186:3",
+					"srcpos":"185:3",
 					"stmts":[{
-						"endpos":"187:50",
+						"endpos":"186:50",
 						"flags":1,
 						"ident":"vObj",
 						"init":{
-							"endpos":"187:50",
+							"endpos":"186:50",
 							"kind":"????Expr?????",
-							"srcpos":"187:48"
+							"srcpos":"186:48"
 						},
 						"kind":"local",
 						"semtype":"std.collections.StringMap<std.json.JsonValue>",
+						"srcpos":"186:10"
+					},{
+						"endpos":"187:33",
+						"flags":1,
+						"ident":"x",
+						"init":{
+							"endpos":"187:33",
+							"kind":"????Expr?????",
+							"srcpos":"187:31"
+						},
+						"kind":"local",
+						"semtype":"monkey.types.Double",
 						"srcpos":"187:10"
 					},{
 						"endpos":"188:33",
 						"flags":1,
-						"ident":"x",
+						"ident":"y",
 						"init":{
 							"endpos":"188:33",
 							"kind":"????Expr?????",
@@ -821,180 +828,181 @@
 						"semtype":"monkey.types.Double",
 						"srcpos":"188:10"
 					},{
-						"endpos":"189:33",
-						"flags":1,
-						"ident":"y",
-						"init":{
-							"endpos":"189:33",
-							"kind":"????Expr?????",
-							"srcpos":"189:31"
-						},
-						"kind":"local",
-						"semtype":"monkey.types.Double",
-						"srcpos":"189:10"
-					},{
-						"endpos":"190:47",
+						"endpos":"189:47",
 						"flags":1,
 						"ident":"n",
 						"init":{
-							"endpos":"190:47",
+							"endpos":"189:47",
 							"kind":"????Expr?????",
-							"srcpos":"190:45"
+							"srcpos":"189:45"
 						},
 						"kind":"local",
 						"semtype":"monkey.types.String",
-						"srcpos":"190:10"
+						"srcpos":"189:10"
 					}]
 				},{
-					"endpos":"196:0",
+					"endpos":"195:0",
 					"kind":"block",
-					"srcpos":"192:3",
+					"srcpos":"191:3",
 					"stmts":[{
-						"endpos":"193:47",
+						"endpos":"192:47",
 						"flags":1,
 						"ident":"n",
 						"init":{
-							"endpos":"193:47",
+							"endpos":"192:47",
 							"kind":"????Expr?????",
-							"srcpos":"193:45"
+							"srcpos":"192:45"
 						},
 						"kind":"local",
 						"semtype":"monkey.types.String",
-						"srcpos":"193:10"
+						"srcpos":"192:10"
 					}]
 				}]
 			},{
-				"endpos":"200:0",
+				"endpos":"199:0",
 				"kind":"block",
-				"srcpos":"196:2",
+				"srcpos":"195:2",
 				"stmts":[{
-					"endpos":"197:44",
+					"endpos":"196:44",
 					"flags":1,
 					"ident":"b",
 					"init":{
-						"endpos":"197:44",
+						"endpos":"196:44",
 						"kind":"????Expr?????",
-						"srcpos":"197:42"
+						"srcpos":"196:42"
 					},
 					"kind":"local",
 					"semtype":"monkey.types.Bool",
-					"srcpos":"197:9"
+					"srcpos":"196:9"
 				},{
-					"endpos":"198:46",
+					"endpos":"197:46",
 					"flags":1,
 					"ident":"n",
 					"init":{
-						"endpos":"198:46",
+						"endpos":"197:46",
 						"kind":"????Expr?????",
-						"srcpos":"198:44"
+						"srcpos":"197:44"
 					},
 					"kind":"local",
 					"semtype":"monkey.types.String",
-					"srcpos":"198:9"
+					"srcpos":"197:9"
 				}]
 			},{
-				"endpos":"205:0",
+				"endpos":"204:0",
 				"kind":"block",
-				"srcpos":"200:2",
+				"srcpos":"199:2",
 				"stmts":[]
 			}]
 		}],
 		"type":{
-			"endpos":"164:87",
+			"endpos":"163:87",
 			"kind":"functype",
 			"params":[{
-				"endpos":"164:86",
+				"endpos":"163:86",
 				"flags":1,
 				"ident":"imgval",
 				"kind":"param",
 				"semtype":"std.json.JsonValue",
-				"srcpos":"164:61",
+				"srcpos":"163:61",
 				"type":{
-					"endpos":"164:86",
+					"endpos":"163:86",
 					"expr":{
-						"endpos":"164:76",
+						"endpos":"163:76",
 						"expr":{
-							"endpos":"164:71",
+							"endpos":"163:71",
 							"ident":"std",
 							"kind":"ident",
-							"srcpos":"164:68"
+							"srcpos":"163:68"
 						},
 						"ident":"json",
 						"kind":"member",
-						"srcpos":"164:68"
+						"srcpos":"163:68"
 					},
 					"ident":"JsonValue",
 					"kind":"member",
-					"srcpos":"164:68"
+					"srcpos":"163:68"
 				}
 			}],
 			"retType":{
 				"args":[{
-					"endpos":"164:59",
+					"endpos":"163:59",
 					"ident":"variant",
 					"kind":"ident",
-					"srcpos":"164:52"
+					"srcpos":"163:52"
 				}],
-				"endpos":"164:60",
+				"endpos":"163:60",
 				"expr":{
-					"endpos":"164:51",
+					"endpos":"163:51",
 					"ident":"StringMap",
 					"kind":"ident",
-					"srcpos":"164:42"
+					"srcpos":"163:42"
 				},
 				"kind":"generic",
-				"srcpos":"164:42"
+				"srcpos":"163:42"
 			},
-			"srcpos":"164:42"
+			"srcpos":"163:42"
 		}
 	},{
-		"endpos":"267:0",
+		"endpos":"266:0",
 		"flags":1,
 		"ident":"b2BodyImageInfo",
 		"kind":"class",
 		"members":[{
-			"endpos":"225:18",
+			"endpos":"224:18",
 			"flags":1,
 			"ident":"body",
 			"kind":"field",
 			"semtype":"box2d.b2Body",
-			"srcpos":"225:7",
+			"srcpos":"224:7",
 			"type":{
-				"endpos":"225:18",
+				"endpos":"224:18",
 				"ident":"b2Body",
 				"kind":"ident",
-				"srcpos":"225:12"
+				"srcpos":"224:12"
 			}
 		},{
-			"endpos":"226:16",
+			"endpos":"225:16",
 			"flags":1,
 			"ident":"index",
 			"kind":"field",
 			"semtype":"monkey.types.Int",
-			"srcpos":"226:7",
+			"srcpos":"225:7",
 			"type":{
-				"endpos":"226:16",
+				"endpos":"225:16",
 				"ident":"int",
 				"kind":"ident",
-				"srcpos":"226:13"
+				"srcpos":"225:13"
 			}
 		},{
-			"endpos":"228:22",
+			"endpos":"227:22",
 			"flags":1,
 			"ident":"bodyName",
 			"kind":"field",
 			"semtype":"monkey.types.String",
-			"srcpos":"228:7",
+			"srcpos":"227:7",
 			"type":{
-				"endpos":"228:22",
+				"endpos":"227:22",
 				"ident":"string",
 				"kind":"ident",
-				"srcpos":"228:16"
+				"srcpos":"227:16"
+			}
+		},{
+			"endpos":"231:27",
+			"flags":1,
+			"ident":"imageRubeName",
+			"kind":"field",
+			"semtype":"monkey.types.String",
+			"srcpos":"231:7",
+			"type":{
+				"endpos":"231:27",
+				"ident":"string",
+				"kind":"ident",
+				"srcpos":"231:21"
 			}
 		},{
 			"endpos":"232:27",
 			"flags":1,
-			"ident":"imageRubeName",
+			"ident":"imageFileName",
 			"kind":"field",
 			"semtype":"monkey.types.String",
 			"srcpos":"232:7",
@@ -1005,48 +1013,48 @@
 				"srcpos":"232:21"
 			}
 		},{
-			"endpos":"233:27",
-			"flags":1,
-			"ident":"imageFileName",
-			"kind":"field",
-			"semtype":"monkey.types.String",
-			"srcpos":"233:7",
-			"type":{
-				"endpos":"233:27",
-				"ident":"string",
-				"kind":"ident",
-				"srcpos":"233:21"
-			}
-		},{
-			"endpos":"235:31",
+			"endpos":"234:31",
 			"flags":1,
 			"ident":"imageLocalPosition",
 			"kind":"field",
 			"semtype":"std.geom.Vec2f",
-			"srcpos":"235:7",
+			"srcpos":"234:7",
 			"type":{
-				"endpos":"235:31",
+				"endpos":"234:31",
 				"ident":"Vec2f",
 				"kind":"ident",
-				"srcpos":"235:26"
+				"srcpos":"234:26"
 			}
 		},{
-			"endpos":"236:28",
+			"endpos":"235:28",
 			"flags":1,
 			"ident":"imageLocalAngle",
 			"kind":"field",
 			"semtype":"monkey.types.Float",
-			"srcpos":"236:7",
+			"srcpos":"235:7",
 			"type":{
-				"endpos":"236:28",
+				"endpos":"235:28",
 				"ident":"float",
 				"kind":"ident",
-				"srcpos":"236:23"
+				"srcpos":"235:23"
+			}
+		},{
+			"endpos":"237:29",
+			"flags":1,
+			"ident":"imageAspectScale",
+			"kind":"field",
+			"semtype":"monkey.types.Float",
+			"srcpos":"237:7",
+			"type":{
+				"endpos":"237:29",
+				"ident":"float",
+				"kind":"ident",
+				"srcpos":"237:24"
 			}
 		},{
 			"endpos":"238:29",
 			"flags":1,
-			"ident":"imageAspectScale",
+			"ident":"imageWorldHeight",
 			"kind":"field",
 			"semtype":"monkey.types.Float",
 			"srcpos":"238:7",
@@ -1059,3311 +1067,3298 @@
 		},{
 			"endpos":"239:29",
 			"flags":1,
-			"ident":"imageWorldHeight",
+			"ident":"imageRenderScale",
 			"kind":"field",
-			"semtype":"monkey.types.Float",
+			"semtype":"std.geom.Vec2f",
 			"srcpos":"239:7",
 			"type":{
 				"endpos":"239:29",
-				"ident":"float",
+				"ident":"Vec2f",
 				"kind":"ident",
 				"srcpos":"239:24"
 			}
 		},{
-			"endpos":"240:29",
-			"flags":1,
-			"ident":"imageRenderScale",
-			"kind":"field",
-			"semtype":"std.geom.Vec2f",
-			"srcpos":"240:7",
-			"type":{
-				"endpos":"240:29",
-				"ident":"Vec2f",
-				"kind":"ident",
-				"srcpos":"240:24"
-			}
-		},{
-			"endpos":"242:27",
+			"endpos":"241:27",
 			"flags":1,
 			"ident":"imageRenderOrder",
 			"kind":"field",
 			"semtype":"monkey.types.Int",
-			"srcpos":"242:7",
+			"srcpos":"241:7",
 			"type":{
-				"endpos":"242:27",
+				"endpos":"241:27",
 				"ident":"int",
 				"kind":"ident",
-				"srcpos":"242:24"
+				"srcpos":"241:24"
 			}
 		},{
-			"endpos":"243:25",
+			"endpos":"242:25",
 			"flags":1,
 			"ident":"imageOpacity",
 			"kind":"field",
 			"semtype":"monkey.types.Float",
-			"srcpos":"243:7",
+			"srcpos":"242:7",
 			"type":{
-				"endpos":"243:25",
+				"endpos":"242:25",
 				"ident":"float",
 				"kind":"ident",
-				"srcpos":"243:20"
+				"srcpos":"242:20"
 			}
 		},{
-			"endpos":"244:20",
+			"endpos":"243:20",
 			"flags":1,
 			"ident":"imageFlip",
 			"kind":"field",
 			"semtype":"monkey.types.Int",
-			"srcpos":"244:7",
+			"srcpos":"243:7",
 			"type":{
-				"endpos":"244:20",
+				"endpos":"243:20",
 				"ident":"int",
 				"kind":"ident",
-				"srcpos":"244:17"
+				"srcpos":"243:17"
 			}
 		},{
-			"endpos":"246:18",
+			"endpos":"245:18",
 			"flags":1,
 			"ident":"image",
 			"kind":"field",
 			"semtype":"mojo.graphics.Image",
-			"srcpos":"246:7",
+			"srcpos":"245:7",
 			"type":{
-				"endpos":"246:18",
+				"endpos":"245:18",
 				"ident":"Image",
 				"kind":"ident",
-				"srcpos":"246:13"
+				"srcpos":"245:13"
 			}
 		},{
-			"endpos":"249:38",
+			"endpos":"248:38",
 			"flags":1,
 			"ident":"bodyUserData",
 			"kind":"field",
 			"semtype":"std.collections.StringMap<monkey.types.Variant>",
-			"srcpos":"249:7",
+			"srcpos":"248:7",
 			"type":{
 				"args":[{
-					"endpos":"249:37",
+					"endpos":"248:37",
 					"ident":"variant",
 					"kind":"ident",
-					"srcpos":"249:30"
+					"srcpos":"248:30"
 				}],
-				"endpos":"249:38",
+				"endpos":"248:38",
 				"expr":{
-					"endpos":"249:29",
+					"endpos":"248:29",
 					"ident":"StringMap",
 					"kind":"ident",
-					"srcpos":"249:20"
+					"srcpos":"248:20"
 				},
 				"kind":"generic",
-				"srcpos":"249:20"
+				"srcpos":"248:20"
 			}
 		},{
-			"endpos":"258:0",
+			"endpos":"257:0",
 			"flags":1,
 			"getFunc":{
-				"endpos":"258:0",
+				"endpos":"257:0",
 				"flags":65537,
 				"ident":"imageWorldPosition",
 				"kind":"method",
-				"srcpos":"251:1",
+				"srcpos":"250:1",
 				"stmts":[{
-					"endpos":"253:60",
+					"endpos":"252:60",
 					"flags":1,
 					"ident":"rotation",
 					"init":{
-						"endpos":"253:60",
+						"endpos":"252:60",
 						"kind":"????Expr?????",
-						"srcpos":"253:42"
+						"srcpos":"252:42"
 					},
 					"kind":"local",
 					"semtype":"std.geom.AffineMat3<monkey.types.Float>",
-					"srcpos":"253:8"
+					"srcpos":"252:8"
 				}],
 				"type":{
-					"endpos":"251:37",
+					"endpos":"250:37",
 					"kind":"functype",
 					"params":[],
 					"retType":{
-						"endpos":"251:35",
+						"endpos":"250:35",
 						"ident":"b2Vec2",
 						"kind":"ident",
-						"srcpos":"251:29"
+						"srcpos":"250:29"
 					},
-					"srcpos":"251:29"
+					"srcpos":"250:29"
 				}
 			},
 			"ident":"imageWorldPosition",
 			"kind":"property",
-			"srcpos":"251:1"
+			"srcpos":"250:1"
 		},{
-			"endpos":"264:0",
+			"endpos":"263:0",
 			"flags":1,
 			"getFunc":{
-				"endpos":"264:0",
+				"endpos":"263:0",
 				"flags":65537,
 				"ident":"imageWorldAngle",
 				"kind":"method",
-				"srcpos":"259:1",
+				"srcpos":"258:1",
 				"stmts":[],
 				"type":{
-					"endpos":"259:33",
+					"endpos":"258:33",
 					"kind":"functype",
 					"params":[],
 					"retType":{
-						"endpos":"259:31",
+						"endpos":"258:31",
 						"ident":"float",
 						"kind":"ident",
-						"srcpos":"259:26"
+						"srcpos":"258:26"
 					},
-					"srcpos":"259:26"
+					"srcpos":"258:26"
 				}
 			},
 			"ident":"imageWorldAngle",
 			"kind":"property",
-			"srcpos":"259:1"
+			"srcpos":"258:1"
 		}],
-		"srcpos":"223:0"
+		"srcpos":"222:0"
 	},{
-		"endpos":"279:0",
+		"endpos":"278:0",
 		"flags":1,
 		"ident":"Createb2BodyImageMap",
 		"kind":"function",
-		"srcpos":"268:0",
+		"srcpos":"267:0",
 		"stmts":[{
-			"endpos":"270:32",
+			"endpos":"269:32",
 			"flags":1,
 			"ident":"retMap",
 			"init":{
 				"args":[],
-				"endpos":"270:32",
+				"endpos":"269:32",
 				"kind":"newobject",
-				"srcpos":"270:15",
+				"srcpos":"269:15",
 				"type":{
 					"args":[{
-						"endpos":"270:31",
+						"endpos":"269:31",
 						"ident":"Image",
 						"kind":"ident",
-						"srcpos":"270:26"
+						"srcpos":"269:26"
 					}],
-					"endpos":"270:32",
+					"endpos":"269:32",
 					"expr":{
-						"endpos":"270:25",
+						"endpos":"269:25",
 						"ident":"IntMap",
 						"kind":"ident",
-						"srcpos":"270:19"
+						"srcpos":"269:19"
 					},
 					"kind":"generic",
-					"srcpos":"270:19"
+					"srcpos":"269:19"
 				}
 			},
 			"kind":"local",
 			"semtype":"std.collections.Map<monkey.types.Int,mojo.graphics.Image>",
-			"srcpos":"270:7"
+			"srcpos":"269:7"
 		},{
-			"endpos":"277:0",
+			"endpos":"276:0",
 			"kind":"block",
-			"srcpos":"272:1",
+			"srcpos":"271:1",
 			"stmts":[{
-				"endpos":"273:2",
+				"endpos":"272:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"272:11"
+				"srcpos":"271:11"
 			},{
-				"endpos":"276:0",
+				"endpos":"275:0",
 				"kind":"block",
-				"srcpos":"273:2",
+				"srcpos":"272:2",
 				"stmts":[]
 			}]
 		}],
 		"type":{
-			"endpos":"268:72",
+			"endpos":"267:72",
 			"kind":"functype",
 			"params":[{
-				"endpos":"268:71",
+				"endpos":"267:71",
 				"flags":1,
 				"ident":"bodyInfos",
 				"kind":"param",
 				"semtype":"box2dxt.b2BodyImageInfo[]",
-				"srcpos":"268:44",
+				"srcpos":"267:44",
 				"type":{
-					"endpos":"268:71",
+					"endpos":"267:71",
 					"kind":"arraytype",
 					"rank":1,
-					"srcpos":"268:54",
+					"srcpos":"267:54",
 					"type":{
-						"endpos":"268:69",
+						"endpos":"267:69",
 						"ident":"b2BodyImageInfo",
 						"kind":"ident",
-						"srcpos":"268:54"
+						"srcpos":"267:54"
 					}
 				}
 			}],
 			"retType":{
 				"args":[{
-					"endpos":"268:42",
+					"endpos":"267:42",
 					"ident":"Image",
 					"kind":"ident",
-					"srcpos":"268:37"
+					"srcpos":"267:37"
 				}],
-				"endpos":"268:43",
+				"endpos":"267:43",
 				"expr":{
-					"endpos":"268:36",
+					"endpos":"267:36",
 					"ident":"IntMap",
 					"kind":"ident",
-					"srcpos":"268:30"
+					"srcpos":"267:30"
 				},
 				"kind":"generic",
-				"srcpos":"268:30"
+				"srcpos":"267:30"
 			},
-			"srcpos":"268:30"
+			"srcpos":"267:30"
 		}
 	},{
-		"endpos":"473:0",
+		"endpos":"469:0",
 		"flags":1,
 		"ident":"Createb2BodyImageInfoArray",
 		"kind":"function",
-		"srcpos":"280:0",
+		"srcpos":"279:0",
 		"stmts":[{
-			"endpos":"283:52",
+			"endpos":"282:52",
 			"flags":1,
 			"ident":"bodyCount",
 			"init":{
-				"endpos":"283:52",
+				"endpos":"282:52",
 				"kind":"????Expr?????",
-				"srcpos":"283:18"
+				"srcpos":"282:18"
 			},
 			"kind":"local",
 			"semtype":"monkey.types.Int",
-			"srcpos":"283:7"
+			"srcpos":"282:7"
 		},{
-			"endpos":"284:42",
+			"endpos":"283:42",
 			"flags":1,
 			"ident":"ret",
 			"init":{
-				"endpos":"284:42",
+				"endpos":"283:42",
 				"kind":"newarray",
 				"sizes":[{
-					"endpos":"284:41",
+					"endpos":"283:41",
 					"ident":"bodyCount",
 					"kind":"ident",
-					"srcpos":"284:32"
+					"srcpos":"283:32"
 				}],
-				"srcpos":"284:12",
+				"srcpos":"283:12",
 				"type":{
-					"endpos":"284:42",
+					"endpos":"283:42",
 					"kind":"arraytype",
 					"rank":1,
-					"srcpos":"284:12",
+					"srcpos":"283:12",
 					"type":{
-						"endpos":"284:31",
+						"endpos":"283:31",
 						"ident":"b2BodyImageInfo",
 						"kind":"ident",
-						"srcpos":"284:16"
+						"srcpos":"283:16"
 					}
 				}
 			},
 			"kind":"local",
 			"semtype":"box2dxt.b2BodyImageInfo[]",
-			"srcpos":"284:7"
+			"srcpos":"283:7"
 		},{
-			"endpos":"286:36",
+			"endpos":"285:36",
 			"flags":1,
 			"ident":"json",
 			"init":{
-				"endpos":"286:36",
+				"endpos":"285:36",
 				"kind":"????Expr?????",
-				"srcpos":"286:28"
+				"srcpos":"285:28"
 			},
 			"kind":"local",
 			"semtype":"std.json.JsonObject",
-			"srcpos":"286:7"
+			"srcpos":"285:7"
 		},{
-			"endpos":"289:53",
+			"endpos":"288:53",
 			"flags":1,
 			"ident":"imageToBodyArray",
 			"init":{
-				"endpos":"289:53",
+				"endpos":"288:53",
 				"kind":"????Expr?????",
-				"srcpos":"289:47"
+				"srcpos":"288:47"
 			},
 			"kind":"local",
 			"semtype":"monkey.types.Int[]",
-			"srcpos":"289:7"
+			"srcpos":"288:7"
 		},{
-			"endpos":"290:38",
+			"endpos":"289:38",
 			"flags":1,
 			"ident":"bodyToImageMap",
 			"init":{
 				"args":[],
-				"endpos":"290:38",
+				"endpos":"289:38",
 				"kind":"newobject",
-				"srcpos":"290:23",
+				"srcpos":"289:23",
 				"type":{
 					"args":[{
-						"endpos":"290:37",
+						"endpos":"289:37",
 						"ident":"int",
 						"kind":"ident",
-						"srcpos":"290:34"
+						"srcpos":"289:34"
 					}],
-					"endpos":"290:38",
+					"endpos":"289:38",
 					"expr":{
-						"endpos":"290:33",
+						"endpos":"289:33",
 						"ident":"IntMap",
 						"kind":"ident",
-						"srcpos":"290:27"
+						"srcpos":"289:27"
 					},
 					"kind":"generic",
-					"srcpos":"290:27"
+					"srcpos":"289:27"
 				}
 			},
 			"kind":"local",
 			"semtype":"std.collections.Map<monkey.types.Int,monkey.types.Int>",
-			"srcpos":"290:7"
+			"srcpos":"289:7"
 		},{
-			"endpos":"294:0",
+			"endpos":"293:0",
 			"kind":"block",
-			"srcpos":"291:1",
+			"srcpos":"290:1",
 			"stmts":[{
-				"endpos":"292:2",
+				"endpos":"291:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"291:11"
+				"srcpos":"290:11"
 			}]
 		},{
-			"endpos":"295:54",
+			"endpos":"294:54",
 			"flags":1,
 			"ident":"bodyArray",
 			"init":{
-				"endpos":"295:54",
+				"endpos":"294:54",
 				"kind":"????Expr?????",
-				"srcpos":"295:33"
+				"srcpos":"294:33"
 			},
 			"kind":"local",
 			"semtype":"box2d.b2Body[]",
-			"srcpos":"295:7"
+			"srcpos":"294:7"
 		},{
-			"endpos":"301:0",
+			"endpos":"300:0",
 			"kind":"block",
-			"srcpos":"296:1",
+			"srcpos":"295:1",
 			"stmts":[{
-				"endpos":"297:2",
+				"endpos":"296:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"296:11"
+				"srcpos":"295:11"
 			}]
 		},{
-			"endpos":"302:40",
+			"endpos":"301:40",
 			"flags":1,
 			"ident":"bodyNameMap",
 			"init":{
-				"endpos":"302:40",
+				"endpos":"301:40",
 				"kind":"????Expr?????",
-				"srcpos":"302:34"
+				"srcpos":"301:34"
 			},
 			"kind":"local",
 			"semtype":"std.collections.IntMap<monkey.types.String>",
-			"srcpos":"302:7"
+			"srcpos":"301:7"
 		},{
-			"endpos":"315:0",
+			"endpos":"314:0",
 			"kind":"block",
-			"srcpos":"303:1",
+			"srcpos":"302:1",
 			"stmts":[{
-				"endpos":"304:2",
+				"endpos":"303:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"303:11"
+				"srcpos":"302:11"
 			},{
-				"endpos":"306:0",
+				"endpos":"305:0",
 				"kind":"block",
-				"srcpos":"304:2",
+				"srcpos":"303:2",
 				"stmts":[]
 			},{
-				"endpos":"314:0",
+				"endpos":"313:0",
 				"kind":"block",
-				"srcpos":"308:2",
+				"srcpos":"307:2",
 				"stmts":[]
 			}]
 		},{
-			"endpos":"317:42",
+			"endpos":"316:42",
 			"flags":1,
 			"ident":"custoMaMap",
 			"init":{
-				"endpos":"317:42",
+				"endpos":"316:42",
 				"kind":"????Expr?????",
-				"srcpos":"317:36"
+				"srcpos":"316:36"
 			},
 			"kind":"local",
 			"semtype":"std.collections.IntMap<std.collections.Map<monkey.types.String,monkey.types.Variant>>",
-			"srcpos":"317:7"
+			"srcpos":"316:7"
 		},{
-			"endpos":"334:0",
+			"endpos":"330:0",
 			"kind":"block",
-			"srcpos":"318:1",
+			"srcpos":"317:1",
 			"stmts":[{
-				"endpos":"319:2",
+				"endpos":"318:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"318:11"
+				"srcpos":"317:11"
 			},{
-				"endpos":"322:0",
+				"endpos":"321:0",
 				"kind":"block",
-				"srcpos":"319:2",
+				"srcpos":"318:2",
 				"stmts":[]
 			},{
-				"endpos":"328:0",
+				"endpos":"324:0",
 				"kind":"block",
-				"srcpos":"324:2",
+				"srcpos":"321:2",
 				"stmts":[]
 			}]
 		},{
-			"endpos":"337:38",
+			"endpos":"333:38",
 			"flags":1,
 			"ident":"posMap",
 			"init":{
-				"endpos":"337:38",
+				"endpos":"333:38",
 				"kind":"????Expr?????",
-				"srcpos":"337:32"
+				"srcpos":"333:32"
 			},
 			"kind":"local",
 			"semtype":"std.collections.IntMap<box2d.b2Vec2>",
-			"srcpos":"337:7"
+			"srcpos":"333:7"
 		},{
-			"endpos":"345:0",
+			"endpos":"341:0",
 			"kind":"block",
-			"srcpos":"338:1",
+			"srcpos":"334:1",
 			"stmts":[{
-				"endpos":"339:2",
+				"endpos":"335:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"338:11"
+				"srcpos":"334:11"
 			},{
-				"endpos":"341:0",
+				"endpos":"337:0",
 				"kind":"block",
-				"srcpos":"339:2",
+				"srcpos":"335:2",
 				"stmts":[]
 			},{
-				"endpos":"344:0",
+				"endpos":"340:0",
 				"kind":"block",
-				"srcpos":"341:2",
+				"srcpos":"337:2",
 				"stmts":[]
 			}]
 		},{
-			"endpos":"346:45",
+			"endpos":"342:45",
 			"flags":1,
 			"ident":"rubeNameMap",
 			"init":{
-				"endpos":"346:45",
+				"endpos":"342:45",
 				"kind":"????Expr?????",
-				"srcpos":"346:39"
+				"srcpos":"342:39"
 			},
 			"kind":"local",
 			"semtype":"std.collections.IntMap<monkey.types.String>",
-			"srcpos":"346:7"
+			"srcpos":"342:7"
 		},{
-			"endpos":"355:0",
+			"endpos":"351:0",
 			"kind":"block",
-			"srcpos":"347:1",
+			"srcpos":"343:1",
 			"stmts":[{
-				"endpos":"349:2",
+				"endpos":"345:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"347:11"
+				"srcpos":"343:11"
 			},{
-				"endpos":"351:0",
+				"endpos":"347:0",
 				"kind":"block",
-				"srcpos":"349:2",
+				"srcpos":"345:2",
 				"stmts":[]
 			},{
-				"endpos":"354:0",
+				"endpos":"350:0",
 				"kind":"block",
-				"srcpos":"351:2",
+				"srcpos":"347:2",
 				"stmts":[]
 			}]
 		},{
-			"endpos":"356:41",
+			"endpos":"352:41",
 			"flags":1,
 			"ident":"nameMap",
 			"init":{
-				"endpos":"356:41",
+				"endpos":"352:41",
 				"kind":"????Expr?????",
-				"srcpos":"356:35"
+				"srcpos":"352:35"
 			},
 			"kind":"local",
 			"semtype":"std.collections.IntMap<monkey.types.String>",
-			"srcpos":"356:7"
+			"srcpos":"352:7"
 		},{
-			"endpos":"375:0",
+			"endpos":"371:0",
 			"kind":"block",
-			"srcpos":"357:1",
+			"srcpos":"353:1",
 			"stmts":[{
-				"endpos":"359:2",
+				"endpos":"355:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"357:11"
+				"srcpos":"353:11"
 			},{
-				"endpos":"369:0",
+				"endpos":"365:0",
 				"kind":"block",
-				"srcpos":"359:2",
+				"srcpos":"355:2",
 				"stmts":[{
-					"endpos":"364:0",
+					"endpos":"360:0",
 					"kind":"block",
-					"srcpos":"362:3",
+					"srcpos":"358:3",
 					"stmts":[]
 				},{
-					"endpos":"369:0",
+					"endpos":"365:0",
 					"kind":"block",
-					"srcpos":"364:3",
+					"srcpos":"360:3",
 					"stmts":[]
 				}]
 			},{
-				"endpos":"372:0",
+				"endpos":"368:0",
 				"kind":"block",
-				"srcpos":"369:2",
+				"srcpos":"365:2",
 				"stmts":[]
 			}]
 		},{
-			"endpos":"376:45",
+			"endpos":"372:45",
 			"flags":1,
 			"ident":"scaleMap",
 			"init":{
-				"endpos":"376:45",
+				"endpos":"372:45",
 				"kind":"????Expr?????",
-				"srcpos":"376:39"
+				"srcpos":"372:39"
 			},
 			"kind":"local",
 			"semtype":"std.collections.IntMap<monkey.types.Float>",
-			"srcpos":"376:7"
+			"srcpos":"372:7"
 		},{
-			"endpos":"385:0",
+			"endpos":"381:0",
 			"kind":"block",
-			"srcpos":"377:1",
+			"srcpos":"373:1",
 			"stmts":[{
-				"endpos":"379:2",
+				"endpos":"375:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"377:11"
+				"srcpos":"373:11"
 			},{
-				"endpos":"381:0",
+				"endpos":"377:0",
 				"kind":"block",
-				"srcpos":"379:2",
+				"srcpos":"375:2",
 				"stmts":[]
 			},{
-				"endpos":"384:0",
+				"endpos":"380:0",
 				"kind":"block",
-				"srcpos":"381:2",
+				"srcpos":"377:2",
 				"stmts":[]
 			}]
 		},{
-			"endpos":"387:46",
+			"endpos":"383:46",
 			"flags":1,
 			"ident":"heightMap",
 			"init":{
-				"endpos":"387:46",
+				"endpos":"383:46",
 				"kind":"????Expr?????",
-				"srcpos":"387:40"
+				"srcpos":"383:40"
 			},
 			"kind":"local",
 			"semtype":"std.collections.IntMap<monkey.types.Float>",
-			"srcpos":"387:7"
+			"srcpos":"383:7"
 		},{
-			"endpos":"399:0",
+			"endpos":"395:0",
 			"kind":"block",
-			"srcpos":"388:1",
+			"srcpos":"384:1",
 			"stmts":[{
-				"endpos":"390:2",
+				"endpos":"386:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"388:11"
+				"srcpos":"384:11"
 			},{
-				"endpos":"392:0",
+				"endpos":"388:0",
 				"kind":"block",
-				"srcpos":"390:2",
+				"srcpos":"386:2",
 				"stmts":[]
 			},{
-				"endpos":"398:0",
+				"endpos":"394:0",
 				"kind":"block",
-				"srcpos":"392:2",
+				"srcpos":"388:2",
 				"stmts":[]
 			}]
 		},{
-			"endpos":"408:0",
+			"endpos":"404:0",
 			"kind":"block",
-			"srcpos":"401:1",
+			"srcpos":"397:1",
 			"stmts":[{
-				"endpos":"402:2",
+				"endpos":"398:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"401:11"
+				"srcpos":"397:11"
 			},{
-				"endpos":"407:0",
+				"endpos":"403:0",
 				"kind":"block",
-				"srcpos":"402:2",
+				"srcpos":"398:2",
 				"stmts":[{
-					"endpos":"404:58",
+					"endpos":"400:58",
 					"flags":1,
 					"ident":"fact",
 					"init":{
-						"endpos":"404:58",
+						"endpos":"400:58",
 						"kind":"????Expr?????",
-						"srcpos":"404:15"
+						"srcpos":"400:15"
 					},
 					"kind":"local",
 					"semtype":"monkey.types.Float",
-					"srcpos":"404:9"
+					"srcpos":"400:9"
 				}]
 			}]
 		},{
-			"endpos":"410:44",
+			"endpos":"406:44",
 			"flags":1,
 			"ident":"angleMap",
 			"init":{
-				"endpos":"410:44",
+				"endpos":"406:44",
 				"kind":"????Expr?????",
-				"srcpos":"410:38"
+				"srcpos":"406:38"
 			},
 			"kind":"local",
 			"semtype":"std.collections.IntMap<monkey.types.Float>",
-			"srcpos":"410:7"
+			"srcpos":"406:7"
 		},{
-			"endpos":"419:0",
+			"endpos":"415:0",
 			"kind":"block",
-			"srcpos":"411:1",
+			"srcpos":"407:1",
 			"stmts":[{
-				"endpos":"413:2",
+				"endpos":"409:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"411:11"
+				"srcpos":"407:11"
 			},{
-				"endpos":"415:0",
+				"endpos":"411:0",
 				"kind":"block",
-				"srcpos":"413:2",
+				"srcpos":"409:2",
 				"stmts":[]
 			},{
-				"endpos":"418:0",
+				"endpos":"414:0",
 				"kind":"block",
-				"srcpos":"415:2",
+				"srcpos":"411:2",
 				"stmts":[]
 			}]
 		},{
-			"endpos":"421:43",
+			"endpos":"417:43",
 			"flags":1,
 			"ident":"opacityMap",
 			"init":{
-				"endpos":"421:43",
+				"endpos":"417:43",
 				"kind":"????Expr?????",
-				"srcpos":"421:37"
+				"srcpos":"417:37"
 			},
 			"kind":"local",
 			"semtype":"std.collections.IntMap<monkey.types.Float>",
-			"srcpos":"421:7"
+			"srcpos":"417:7"
 		},{
-			"endpos":"434:0",
+			"endpos":"430:0",
 			"kind":"block",
-			"srcpos":"422:1",
+			"srcpos":"418:1",
 			"stmts":[{
-				"endpos":"424:2",
+				"endpos":"420:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"422:11"
+				"srcpos":"418:11"
+			},{
+				"endpos":"424:0",
+				"kind":"block",
+				"srcpos":"420:2",
+				"stmts":[]
 			},{
 				"endpos":"428:0",
 				"kind":"block",
-				"srcpos":"424:2",
-				"stmts":[]
-			},{
-				"endpos":"432:0",
-				"kind":"block",
-				"srcpos":"429:2",
+				"srcpos":"425:2",
 				"stmts":[]
 			}]
 		},{
-			"endpos":"436:37",
+			"endpos":"432:37",
 			"flags":1,
 			"ident":"flipMap",
 			"init":{
-				"endpos":"436:37",
+				"endpos":"432:37",
 				"kind":"????Expr?????",
-				"srcpos":"436:31"
+				"srcpos":"432:31"
 			},
 			"kind":"local",
 			"semtype":"std.collections.IntMap<monkey.types.Int>",
-			"srcpos":"436:7"
+			"srcpos":"432:7"
 		},{
-			"endpos":"445:0",
+			"endpos":"441:0",
 			"kind":"block",
-			"srcpos":"437:1",
+			"srcpos":"433:1",
 			"stmts":[{
-				"endpos":"439:2",
+				"endpos":"435:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"437:11"
+				"srcpos":"433:11"
 			},{
-				"endpos":"441:0",
+				"endpos":"437:0",
 				"kind":"block",
-				"srcpos":"439:2",
+				"srcpos":"435:2",
 				"stmts":[]
 			},{
-				"endpos":"444:0",
+				"endpos":"440:0",
 				"kind":"block",
-				"srcpos":"441:2",
+				"srcpos":"437:2",
 				"stmts":[]
 			}]
 		},{
-			"endpos":"447:45",
+			"endpos":"443:45",
 			"flags":1,
 			"ident":"orderMap",
 			"init":{
-				"endpos":"447:45",
+				"endpos":"443:45",
 				"kind":"????Expr?????",
-				"srcpos":"447:39"
+				"srcpos":"443:39"
 			},
 			"kind":"local",
 			"semtype":"std.collections.IntMap<monkey.types.Int>",
-			"srcpos":"447:7"
+			"srcpos":"443:7"
 		},{
-			"endpos":"467:0",
+			"endpos":"463:0",
 			"kind":"block",
-			"srcpos":"448:1",
+			"srcpos":"444:1",
 			"stmts":[{
-				"endpos":"449:2",
+				"endpos":"445:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"448:11"
+				"srcpos":"444:11"
 			},{
-				"endpos":"451:0",
+				"endpos":"447:0",
 				"kind":"block",
-				"srcpos":"449:2",
+				"srcpos":"445:2",
 				"stmts":[]
 			},{
-				"endpos":"454:0",
+				"endpos":"450:0",
 				"kind":"block",
-				"srcpos":"451:2",
+				"srcpos":"447:2",
 				"stmts":[]
 			}]
 		}],
 		"type":{
-			"endpos":"280:102",
+			"endpos":"279:102",
 			"kind":"functype",
 			"params":[{
-				"endpos":"280:67",
+				"endpos":"279:67",
 				"flags":1,
 				"ident":"world",
 				"kind":"param",
 				"semtype":"box2d.b2World",
-				"srcpos":"280:54",
+				"srcpos":"279:54",
 				"type":{
-					"endpos":"280:67",
+					"endpos":"279:67",
 					"ident":"b2World",
 					"kind":"ident",
-					"srcpos":"280:60"
+					"srcpos":"279:60"
 				}
 			},{
-				"endpos":"280:79",
+				"endpos":"279:79",
 				"flags":1,
 				"ident":"path",
 				"kind":"param",
 				"semtype":"monkey.types.String",
-				"srcpos":"280:68",
+				"srcpos":"279:68",
 				"type":{
-					"endpos":"280:79",
+					"endpos":"279:79",
 					"ident":"string",
 					"kind":"ident",
-					"srcpos":"280:73"
+					"srcpos":"279:73"
 				}
 			},{
-				"endpos":"280:101",
+				"endpos":"279:101",
 				"flags":1,
 				"ident":"existingCount",
 				"init":{
-					"endpos":"280:101",
+					"endpos":"279:101",
 					"kind":"literal",
-					"srcpos":"280:100",
+					"srcpos":"279:100",
 					"toke":"0"
 				},
 				"kind":"param",
 				"semtype":"monkey.types.Int",
-				"srcpos":"280:82",
+				"srcpos":"279:82",
 				"type":{
-					"endpos":"280:99",
+					"endpos":"279:99",
 					"ident":"int",
 					"kind":"ident",
-					"srcpos":"280:96"
+					"srcpos":"279:96"
 				}
 			}],
 			"retType":{
-				"endpos":"280:53",
+				"endpos":"279:53",
 				"kind":"arraytype",
 				"rank":1,
-				"srcpos":"280:36",
+				"srcpos":"279:36",
 				"type":{
-					"endpos":"280:51",
+					"endpos":"279:51",
 					"ident":"b2BodyImageInfo",
 					"kind":"ident",
-					"srcpos":"280:36"
+					"srcpos":"279:36"
 				}
 			},
-			"srcpos":"280:36"
+			"srcpos":"279:36"
 		}
 	},{
-		"endpos":"493:0",
+		"endpos":"489:0",
 		"flags":1,
 		"ident":"CreateImageToBodyArray",
 		"kind":"function",
-		"srcpos":"474:0",
+		"srcpos":"470:0",
 		"stmts":[{
-			"endpos":"476:28",
+			"endpos":"472:28",
 			"flags":1,
 			"ident":"bodyImageArray",
 			"kind":"local",
 			"semtype":"monkey.types.Int[]",
-			"srcpos":"476:7",
+			"srcpos":"472:7",
 			"type":{
-				"endpos":"476:28",
+				"endpos":"472:28",
 				"kind":"arraytype",
 				"rank":1,
-				"srcpos":"476:23",
+				"srcpos":"472:23",
 				"type":{
-					"endpos":"476:26",
+					"endpos":"472:26",
 					"ident":"int",
 					"kind":"ident",
-					"srcpos":"476:23"
+					"srcpos":"472:23"
 				}
 			}
 		},{
-			"endpos":"491:0",
+			"endpos":"487:0",
 			"kind":"block",
-			"srcpos":"478:1",
+			"srcpos":"474:1",
 			"stmts":[{
-				"endpos":"479:29",
+				"endpos":"475:29",
 				"flags":1,
 				"ident":"imgval",
 				"init":{
-					"endpos":"479:29",
+					"endpos":"475:29",
 					"kind":"????Expr?????",
-					"srcpos":"479:20"
+					"srcpos":"475:20"
 				},
 				"kind":"local",
 				"semtype":"std.json.JsonValue",
-				"srcpos":"479:8"
+				"srcpos":"475:8"
 			},{
-				"endpos":"480:32",
+				"endpos":"476:32",
 				"flags":1,
 				"ident":"imgarr",
 				"init":{
-					"endpos":"480:32",
+					"endpos":"476:32",
 					"kind":"????Expr?????",
-					"srcpos":"480:30"
+					"srcpos":"476:30"
 				},
 				"kind":"local",
 				"semtype":"std.collections.Stack<std.json.JsonValue>",
-				"srcpos":"480:8"
+				"srcpos":"476:8"
 			},{
-				"endpos":"481:35",
+				"endpos":"477:35",
 				"flags":1,
 				"ident":"imgArraySize",
 				"init":{
-					"endpos":"481:35",
+					"endpos":"477:35",
 					"expr":{
-						"endpos":"481:28",
+						"endpos":"477:28",
 						"ident":"imgarr",
 						"kind":"ident",
-						"srcpos":"481:22"
+						"srcpos":"477:22"
 					},
 					"ident":"Length",
 					"kind":"member",
-					"srcpos":"481:28"
+					"srcpos":"477:28"
 				},
 				"kind":"local",
 				"semtype":"monkey.types.Int",
-				"srcpos":"481:8"
+				"srcpos":"477:8"
 			},{
-				"endpos":"490:0",
+				"endpos":"486:0",
 				"kind":"block",
-				"srcpos":"484:2",
+				"srcpos":"480:2",
 				"stmts":[{
-					"endpos":"485:3",
+					"endpos":"481:3",
 					"flags":1,
 					"ident":"i",
 					"kind":"local",
-					"srcpos":"484:12"
+					"srcpos":"480:12"
 				},{
-					"endpos":"485:30",
+					"endpos":"481:30",
 					"flags":1,
 					"ident":"imgarrelem",
 					"init":{
-						"endpos":"485:30",
+						"endpos":"481:30",
 						"kind":"????Expr?????",
-						"srcpos":"485:27"
+						"srcpos":"481:27"
 					},
 					"kind":"local",
 					"semtype":"std.json.JsonValue",
-					"srcpos":"485:9"
+					"srcpos":"481:9"
 				},{
-					"endpos":"486:42",
+					"endpos":"482:42",
 					"flags":1,
 					"ident":"imgelemobj",
 					"init":{
-						"endpos":"486:42",
+						"endpos":"482:42",
 						"kind":"????Expr?????",
-						"srcpos":"486:40"
+						"srcpos":"482:40"
 					},
 					"kind":"local",
 					"semtype":"std.collections.StringMap<std.json.JsonValue>",
-					"srcpos":"486:9"
+					"srcpos":"482:9"
 				}]
 			}]
 		}],
 		"type":{
-			"endpos":"474:54",
+			"endpos":"470:54",
 			"kind":"functype",
 			"params":[{
-				"endpos":"474:53",
+				"endpos":"470:53",
 				"flags":1,
 				"ident":"lobj",
 				"kind":"param",
 				"semtype":"std.json.JsonObject",
-				"srcpos":"474:38",
+				"srcpos":"470:38",
 				"type":{
-					"endpos":"474:53",
+					"endpos":"470:53",
 					"ident":"JsonObject",
 					"kind":"ident",
-					"srcpos":"474:43"
+					"srcpos":"470:43"
 				}
 			}],
 			"retType":{
-				"endpos":"474:37",
+				"endpos":"470:37",
 				"kind":"arraytype",
 				"rank":1,
-				"srcpos":"474:32",
+				"srcpos":"470:32",
 				"type":{
-					"endpos":"474:35",
+					"endpos":"470:35",
 					"ident":"int",
 					"kind":"ident",
-					"srcpos":"474:32"
+					"srcpos":"470:32"
 				}
 			},
-			"srcpos":"474:32"
+			"srcpos":"470:32"
 		}
 	},{
-		"endpos":"513:0",
+		"endpos":"509:0",
 		"flags":1,
 		"ident":"CreateBodyArray",
 		"kind":"function",
-		"srcpos":"494:0",
+		"srcpos":"490:0",
 		"stmts":[{
-			"endpos":"496:49",
+			"endpos":"492:49",
 			"flags":1,
 			"ident":"count",
 			"init":{
-				"endpos":"496:49",
+				"endpos":"492:49",
 				"kind":"????Expr?????",
-				"srcpos":"496:14"
+				"srcpos":"492:14"
 			},
 			"kind":"local",
 			"semtype":"monkey.types.Int",
-			"srcpos":"496:7"
+			"srcpos":"492:7"
 		},{
-			"endpos":"497:35",
+			"endpos":"493:35",
 			"flags":1,
 			"ident":"BodyArray",
 			"init":{
-				"endpos":"497:35",
+				"endpos":"493:35",
 				"kind":"newarray",
 				"sizes":[{
-					"endpos":"497:34",
+					"endpos":"493:34",
 					"ident":"count",
 					"kind":"ident",
-					"srcpos":"497:29"
+					"srcpos":"493:29"
 				}],
-				"srcpos":"497:18",
+				"srcpos":"493:18",
 				"type":{
-					"endpos":"497:35",
+					"endpos":"493:35",
 					"kind":"arraytype",
 					"rank":1,
-					"srcpos":"497:18",
+					"srcpos":"493:18",
 					"type":{
-						"endpos":"497:28",
+						"endpos":"493:28",
 						"ident":"b2Body",
 						"kind":"ident",
-						"srcpos":"497:22"
+						"srcpos":"493:22"
 					}
 				}
 			},
 			"kind":"local",
 			"semtype":"box2d.b2Body[]",
-			"srcpos":"497:7"
+			"srcpos":"493:7"
 		},{
-			"endpos":"498:38",
+			"endpos":"494:38",
 			"flags":1,
 			"ident":"BodyArrayInv",
 			"init":{
-				"endpos":"498:38",
+				"endpos":"494:38",
 				"kind":"newarray",
 				"sizes":[{
-					"endpos":"498:37",
+					"endpos":"494:37",
 					"ident":"count",
 					"kind":"ident",
-					"srcpos":"498:32"
+					"srcpos":"494:32"
 				}],
-				"srcpos":"498:21",
+				"srcpos":"494:21",
 				"type":{
-					"endpos":"498:38",
+					"endpos":"494:38",
 					"kind":"arraytype",
 					"rank":1,
-					"srcpos":"498:21",
+					"srcpos":"494:21",
 					"type":{
-						"endpos":"498:31",
+						"endpos":"494:31",
 						"ident":"b2Body",
 						"kind":"ident",
-						"srcpos":"498:25"
+						"srcpos":"494:25"
 					}
 				}
 			},
 			"kind":"local",
 			"semtype":"box2d.b2Body[]",
-			"srcpos":"498:7"
+			"srcpos":"494:7"
 		},{
-			"endpos":"501:11",
+			"endpos":"497:11",
 			"flags":1,
 			"ident":"i",
 			"init":{
-				"endpos":"501:11",
+				"endpos":"497:11",
 				"kind":"literal",
-				"srcpos":"501:10",
+				"srcpos":"497:10",
 				"toke":"1"
 			},
 			"kind":"local",
 			"semtype":"monkey.types.Int",
-			"srcpos":"501:7"
+			"srcpos":"497:7"
 		},{
-			"endpos":"506:0",
+			"endpos":"502:0",
 			"kind":"block",
-			"srcpos":"502:1",
+			"srcpos":"498:1",
 			"stmts":[]
 		},{
-			"endpos":"509:0",
+			"endpos":"505:0",
 			"kind":"block",
-			"srcpos":"506:1",
+			"srcpos":"502:1",
 			"stmts":[{
-				"endpos":"507:2",
+				"endpos":"503:2",
 				"flags":1,
 				"ident":"i",
 				"kind":"local",
-				"srcpos":"506:11"
+				"srcpos":"502:11"
 			}]
 		}],
 		"type":{
-			"endpos":"494:67",
+			"endpos":"490:67",
 			"kind":"functype",
 			"params":[{
-				"endpos":"494:47",
+				"endpos":"490:47",
 				"flags":1,
 				"ident":"world",
 				"kind":"param",
 				"semtype":"box2d.b2World",
-				"srcpos":"494:34",
+				"srcpos":"490:34",
 				"type":{
-					"endpos":"494:47",
+					"endpos":"490:47",
 					"ident":"b2World",
 					"kind":"ident",
-					"srcpos":"494:40"
+					"srcpos":"490:40"
 				}
 			},{
-				"endpos":"494:66",
+				"endpos":"490:66",
 				"flags":1,
 				"ident":"existingCount",
 				"kind":"param",
 				"semtype":"monkey.types.Int",
-				"srcpos":"494:49",
+				"srcpos":"490:49",
 				"type":{
-					"endpos":"494:66",
+					"endpos":"490:66",
 					"ident":"int",
 					"kind":"ident",
-					"srcpos":"494:63"
+					"srcpos":"490:63"
 				}
 			}],
 			"retType":{
-				"endpos":"494:33",
+				"endpos":"490:33",
 				"kind":"arraytype",
 				"rank":1,
-				"srcpos":"494:25",
+				"srcpos":"490:25",
 				"type":{
-					"endpos":"494:31",
+					"endpos":"490:31",
 					"ident":"b2Body",
 					"kind":"ident",
-					"srcpos":"494:25"
+					"srcpos":"490:25"
 				}
 			},
-			"srcpos":"494:25"
+			"srcpos":"490:25"
 		}
 	},{
-		"endpos":"558:0",
+		"endpos":"554:0",
 		"flags":1,
 		"ident":"GetBodyNameMap",
 		"kind":"function",
-		"srcpos":"514:0",
+		"srcpos":"510:0",
 		"stmts":[{
-			"endpos":"516:35",
+			"endpos":"512:35",
 			"flags":1,
 			"ident":"namesMap",
 			"init":{
 				"args":[],
-				"endpos":"516:35",
+				"endpos":"512:35",
 				"kind":"newobject",
-				"srcpos":"516:17",
+				"srcpos":"512:17",
 				"type":{
 					"args":[{
-						"endpos":"516:34",
+						"endpos":"512:34",
 						"ident":"string",
 						"kind":"ident",
-						"srcpos":"516:28"
+						"srcpos":"512:28"
 					}],
-					"endpos":"516:35",
+					"endpos":"512:35",
 					"expr":{
-						"endpos":"516:27",
+						"endpos":"512:27",
 						"ident":"IntMap",
 						"kind":"ident",
-						"srcpos":"516:21"
+						"srcpos":"512:21"
 					},
 					"kind":"generic",
-					"srcpos":"516:21"
+					"srcpos":"512:21"
 				}
 			},
 			"kind":"local",
 			"semtype":"std.collections.Map<monkey.types.Int,monkey.types.String>",
-			"srcpos":"516:7"
+			"srcpos":"512:7"
 		},{
-			"endpos":"548:0",
+			"endpos":"544:0",
 			"kind":"block",
-			"srcpos":"518:1",
+			"srcpos":"514:1",
 			"stmts":[{
-				"endpos":"520:28",
+				"endpos":"516:28",
 				"flags":1,
 				"ident":"imgval",
 				"init":{
-					"endpos":"520:28",
+					"endpos":"516:28",
 					"kind":"????Expr?????",
-					"srcpos":"520:20"
+					"srcpos":"516:20"
 				},
 				"kind":"local",
 				"semtype":"std.json.JsonValue",
-				"srcpos":"520:8"
+				"srcpos":"516:8"
 			},{
-				"endpos":"521:32",
+				"endpos":"517:32",
 				"flags":1,
 				"ident":"imgarr",
 				"init":{
-					"endpos":"521:32",
+					"endpos":"517:32",
 					"kind":"????Expr?????",
-					"srcpos":"521:30"
+					"srcpos":"517:30"
 				},
 				"kind":"local",
 				"semtype":"std.collections.Stack<std.json.JsonValue>",
-				"srcpos":"521:8"
+				"srcpos":"517:8"
 			},{
-				"endpos":"522:35",
+				"endpos":"518:35",
 				"flags":1,
 				"ident":"imgArraySize",
 				"init":{
-					"endpos":"522:35",
+					"endpos":"518:35",
 					"expr":{
-						"endpos":"522:28",
+						"endpos":"518:28",
 						"ident":"imgarr",
 						"kind":"ident",
-						"srcpos":"522:22"
+						"srcpos":"518:22"
 					},
 					"ident":"Length",
 					"kind":"member",
-					"srcpos":"522:28"
+					"srcpos":"518:28"
 				},
 				"kind":"local",
 				"semtype":"monkey.types.Int",
-				"srcpos":"522:8"
+				"srcpos":"518:8"
 			},{
-				"endpos":"548:0",
+				"endpos":"544:0",
 				"kind":"block",
-				"srcpos":"524:2",
+				"srcpos":"520:2",
 				"stmts":[{
-					"endpos":"525:3",
+					"endpos":"521:3",
 					"flags":1,
 					"ident":"i",
 					"kind":"local",
-					"srcpos":"524:12"
+					"srcpos":"520:12"
 				},{
-					"endpos":"525:30",
+					"endpos":"521:30",
 					"flags":1,
 					"ident":"imgarrelem",
 					"init":{
-						"endpos":"525:30",
+						"endpos":"521:30",
 						"kind":"????Expr?????",
-						"srcpos":"525:27"
+						"srcpos":"521:27"
 					},
 					"kind":"local",
 					"semtype":"std.json.JsonValue",
-					"srcpos":"525:9"
+					"srcpos":"521:9"
 				},{
-					"endpos":"527:42",
+					"endpos":"523:42",
 					"flags":1,
 					"ident":"imgelemobj",
 					"init":{
-						"endpos":"527:42",
+						"endpos":"523:42",
 						"kind":"????Expr?????",
-						"srcpos":"527:40"
+						"srcpos":"523:40"
 					},
 					"kind":"local",
 					"semtype":"std.collections.StringMap<std.json.JsonValue>",
-					"srcpos":"527:9"
+					"srcpos":"523:9"
 				},{
-					"endpos":"542:0",
+					"endpos":"538:0",
 					"kind":"block",
-					"srcpos":"529:3",
+					"srcpos":"525:3",
 					"stmts":[{
-						"endpos":"531:36",
+						"endpos":"527:36",
 						"flags":1,
 						"ident":"imgval",
 						"init":{
-							"endpos":"531:36",
+							"endpos":"527:36",
 							"kind":"????Expr?????",
-							"srcpos":"531:28"
+							"srcpos":"527:28"
 						},
 						"kind":"local",
 						"semtype":"std.json.JsonValue",
-						"srcpos":"531:10"
+						"srcpos":"527:10"
 					},{
-						"endpos":"536:0",
+						"endpos":"532:0",
+						"kind":"block",
+						"srcpos":"529:4",
+						"stmts":[]
+					},{
+						"endpos":"538:0",
 						"kind":"block",
 						"srcpos":"533:4",
 						"stmts":[]
-					},{
-						"endpos":"542:0",
-						"kind":"block",
-						"srcpos":"537:4",
-						"stmts":[]
 					}]
 				},{
-					"endpos":"547:0",
+					"endpos":"543:0",
 					"kind":"block",
-					"srcpos":"542:3",
+					"srcpos":"538:3",
 					"stmts":[]
 				}]
 			}]
 		},{
-			"endpos":"554:0",
+			"endpos":"550:0",
 			"kind":"block",
-			"srcpos":"549:1",
+			"srcpos":"545:1",
 			"stmts":[]
 		}],
 		"type":{
-			"endpos":"514:55",
+			"endpos":"510:55",
 			"kind":"functype",
 			"params":[{
-				"endpos":"514:54",
+				"endpos":"510:54",
 				"flags":1,
 				"ident":"lobj",
 				"kind":"param",
 				"semtype":"std.json.JsonObject",
-				"srcpos":"514:39",
+				"srcpos":"510:39",
 				"type":{
-					"endpos":"514:54",
+					"endpos":"510:54",
 					"ident":"JsonObject",
 					"kind":"ident",
-					"srcpos":"514:44"
+					"srcpos":"510:44"
 				}
 			}],
 			"retType":{
 				"args":[{
-					"endpos":"514:37",
+					"endpos":"510:37",
 					"ident":"string",
 					"kind":"ident",
-					"srcpos":"514:31"
+					"srcpos":"510:31"
 				}],
-				"endpos":"514:38",
+				"endpos":"510:38",
 				"expr":{
-					"endpos":"514:30",
+					"endpos":"510:30",
 					"ident":"IntMap",
 					"kind":"ident",
-					"srcpos":"514:24"
+					"srcpos":"510:24"
 				},
 				"kind":"generic",
-				"srcpos":"514:24"
+				"srcpos":"510:24"
 			},
-			"srcpos":"514:24"
+			"srcpos":"510:24"
 		}
 	},{
-		"endpos":"610:0",
+		"endpos":"606:0",
 		"flags":1,
 		"ident":"GetBodyCustoMaMap",
 		"kind":"function",
-		"srcpos":"559:0",
+		"srcpos":"555:0",
 		"stmts":[{
-			"endpos":"561:49",
+			"endpos":"557:49",
 			"flags":1,
 			"ident":"custoMaMap",
 			"init":{
 				"args":[],
-				"endpos":"561:49",
+				"endpos":"557:49",
 				"kind":"newobject",
-				"srcpos":"561:19",
+				"srcpos":"557:19",
 				"type":{
 					"args":[{
 						"args":[{
-							"endpos":"561:47",
+							"endpos":"557:47",
 							"ident":"variant",
 							"kind":"ident",
-							"srcpos":"561:40"
+							"srcpos":"557:40"
 						}],
-						"endpos":"561:48",
+						"endpos":"557:48",
 						"expr":{
-							"endpos":"561:39",
+							"endpos":"557:39",
 							"ident":"StringMap",
 							"kind":"ident",
-							"srcpos":"561:30"
+							"srcpos":"557:30"
 						},
 						"kind":"generic",
-						"srcpos":"561:30"
+						"srcpos":"557:30"
 					}],
-					"endpos":"561:49",
+					"endpos":"557:49",
 					"expr":{
-						"endpos":"561:29",
+						"endpos":"557:29",
 						"ident":"IntMap",
 						"kind":"ident",
-						"srcpos":"561:23"
+						"srcpos":"557:23"
 					},
 					"kind":"generic",
-					"srcpos":"561:23"
+					"srcpos":"557:23"
 				}
 			},
 			"kind":"local",
 			"semtype":"std.collections.Map<monkey.types.Int,std.collections.StringMap<monkey.types.Variant>>",
-			"srcpos":"561:7"
+			"srcpos":"557:7"
 		},{
-			"endpos":"600:0",
+			"endpos":"596:0",
 			"kind":"block",
-			"srcpos":"563:1",
+			"srcpos":"559:1",
 			"stmts":[{
-				"endpos":"565:28",
+				"endpos":"561:28",
 				"flags":1,
 				"ident":"imgval",
 				"init":{
-					"endpos":"565:28",
+					"endpos":"561:28",
 					"kind":"????Expr?????",
-					"srcpos":"565:20"
+					"srcpos":"561:20"
 				},
 				"kind":"local",
 				"semtype":"std.json.JsonValue",
-				"srcpos":"565:8"
+				"srcpos":"561:8"
 			},{
-				"endpos":"566:32",
+				"endpos":"562:32",
 				"flags":1,
 				"ident":"imgarr",
 				"init":{
-					"endpos":"566:32",
+					"endpos":"562:32",
 					"kind":"????Expr?????",
-					"srcpos":"566:30"
+					"srcpos":"562:30"
 				},
 				"kind":"local",
 				"semtype":"std.collections.Stack<std.json.JsonValue>",
-				"srcpos":"566:8"
+				"srcpos":"562:8"
 			},{
-				"endpos":"567:35",
+				"endpos":"563:35",
 				"flags":1,
 				"ident":"imgArraySize",
 				"init":{
-					"endpos":"567:35",
+					"endpos":"563:35",
 					"expr":{
-						"endpos":"567:28",
+						"endpos":"563:28",
 						"ident":"imgarr",
 						"kind":"ident",
-						"srcpos":"567:22"
+						"srcpos":"563:22"
 					},
 					"ident":"Length",
 					"kind":"member",
-					"srcpos":"567:28"
+					"srcpos":"563:28"
 				},
 				"kind":"local",
 				"semtype":"monkey.types.Int",
-				"srcpos":"567:8"
+				"srcpos":"563:8"
 			},{
-				"endpos":"600:0",
+				"endpos":"596:0",
 				"kind":"block",
-				"srcpos":"569:2",
+				"srcpos":"565:2",
 				"stmts":[{
-					"endpos":"570:3",
+					"endpos":"566:3",
 					"flags":1,
 					"ident":"i",
 					"kind":"local",
-					"srcpos":"569:12"
+					"srcpos":"565:12"
 				},{
-					"endpos":"570:30",
+					"endpos":"566:30",
 					"flags":1,
 					"ident":"imgarrelem",
 					"init":{
-						"endpos":"570:30",
+						"endpos":"566:30",
 						"kind":"????Expr?????",
-						"srcpos":"570:27"
+						"srcpos":"566:27"
 					},
 					"kind":"local",
 					"semtype":"std.json.JsonValue",
-					"srcpos":"570:9"
+					"srcpos":"566:9"
 				},{
-					"endpos":"572:42",
+					"endpos":"568:42",
 					"flags":1,
 					"ident":"imgelemobj",
 					"init":{
-						"endpos":"572:42",
+						"endpos":"568:42",
 						"kind":"????Expr?????",
-						"srcpos":"572:40"
+						"srcpos":"568:40"
 					},
 					"kind":"local",
 					"semtype":"std.collections.StringMap<std.json.JsonValue>",
-					"srcpos":"572:9"
+					"srcpos":"568:9"
 				},{
-					"endpos":"594:0",
+					"endpos":"590:0",
 					"kind":"block",
-					"srcpos":"574:3",
+					"srcpos":"570:3",
 					"stmts":[{
-						"endpos":"576:48",
+						"endpos":"572:48",
 						"flags":1,
 						"ident":"imgval",
 						"init":{
-							"endpos":"576:48",
+							"endpos":"572:48",
 							"kind":"????Expr?????",
-							"srcpos":"576:28"
+							"srcpos":"572:28"
 						},
 						"kind":"local",
 						"semtype":"std.json.JsonValue",
-						"srcpos":"576:10"
+						"srcpos":"572:10"
 					},{
-						"endpos":"587:0",
+						"endpos":"583:0",
 						"kind":"block",
-						"srcpos":"578:4",
+						"srcpos":"574:4",
 						"stmts":[{
-							"endpos":"582:64",
+							"endpos":"578:64",
 							"flags":1,
 							"ident":"custoBodMap",
 							"init":{
-								"endpos":"582:64",
+								"endpos":"578:64",
 								"kind":"????Expr?????",
-								"srcpos":"582:56"
+								"srcpos":"578:56"
 							},
 							"kind":"local",
 							"semtype":"std.collections.StringMap<monkey.types.Variant>",
-							"srcpos":"582:11"
+							"srcpos":"578:11"
 						}]
 					},{
-						"endpos":"594:0",
+						"endpos":"590:0",
 						"kind":"block",
-						"srcpos":"588:4",
+						"srcpos":"584:4",
 						"stmts":[]
 					}]
 				},{
-					"endpos":"599:0",
+					"endpos":"595:0",
 					"kind":"block",
-					"srcpos":"594:3",
+					"srcpos":"590:3",
 					"stmts":[]
 				}]
 			}]
 		},{
-			"endpos":"606:0",
+			"endpos":"602:0",
 			"kind":"block",
-			"srcpos":"601:1",
+			"srcpos":"597:1",
 			"stmts":[]
 		}],
 		"type":{
-			"endpos":"559:70",
+			"endpos":"555:70",
 			"kind":"functype",
 			"params":[{
-				"endpos":"559:69",
+				"endpos":"555:69",
 				"flags":1,
 				"ident":"lobj",
 				"kind":"param",
 				"semtype":"std.json.JsonObject",
-				"srcpos":"559:54",
+				"srcpos":"555:54",
 				"type":{
-					"endpos":"559:69",
+					"endpos":"555:69",
 					"ident":"JsonObject",
 					"kind":"ident",
-					"srcpos":"559:59"
+					"srcpos":"555:59"
 				}
 			}],
 			"retType":{
 				"args":[{
 					"args":[{
-						"endpos":"559:51",
+						"endpos":"555:51",
 						"ident":"variant",
 						"kind":"ident",
-						"srcpos":"559:44"
+						"srcpos":"555:44"
 					}],
-					"endpos":"559:52",
+					"endpos":"555:52",
 					"expr":{
-						"endpos":"559:43",
+						"endpos":"555:43",
 						"ident":"StringMap",
 						"kind":"ident",
-						"srcpos":"559:34"
+						"srcpos":"555:34"
 					},
 					"kind":"generic",
-					"srcpos":"559:34"
+					"srcpos":"555:34"
 				}],
-				"endpos":"559:53",
+				"endpos":"555:53",
 				"expr":{
-					"endpos":"559:33",
+					"endpos":"555:33",
 					"ident":"IntMap",
 					"kind":"ident",
-					"srcpos":"559:27"
+					"srcpos":"555:27"
 				},
 				"kind":"generic",
-				"srcpos":"559:27"
+				"srcpos":"555:27"
 			},
-			"srcpos":"559:27"
+			"srcpos":"555:27"
 		}
 	},{
-		"endpos":"658:0",
+		"endpos":"654:0",
 		"flags":1,
 		"ident":"GetImageCenterMap",
 		"kind":"function",
-		"srcpos":"611:0",
+		"srcpos":"607:0",
 		"stmts":[{
-			"endpos":"613:39",
+			"endpos":"609:39",
 			"flags":1,
 			"ident":"positionsMap",
 			"init":{
 				"args":[],
-				"endpos":"613:39",
+				"endpos":"609:39",
 				"kind":"newobject",
-				"srcpos":"613:21",
+				"srcpos":"609:21",
 				"type":{
 					"args":[{
-						"endpos":"613:38",
+						"endpos":"609:38",
 						"ident":"b2Vec2",
 						"kind":"ident",
-						"srcpos":"613:32"
+						"srcpos":"609:32"
 					}],
-					"endpos":"613:39",
+					"endpos":"609:39",
 					"expr":{
-						"endpos":"613:31",
+						"endpos":"609:31",
 						"ident":"IntMap",
 						"kind":"ident",
-						"srcpos":"613:25"
+						"srcpos":"609:25"
 					},
 					"kind":"generic",
-					"srcpos":"613:25"
+					"srcpos":"609:25"
 				}
 			},
 			"kind":"local",
 			"semtype":"std.collections.Map<monkey.types.Int,box2d.b2Vec2>",
-			"srcpos":"613:7"
+			"srcpos":"609:7"
 		},{
-			"endpos":"648:0",
+			"endpos":"644:0",
 			"kind":"block",
-			"srcpos":"615:1",
+			"srcpos":"611:1",
 			"stmts":[{
-				"endpos":"616:29",
+				"endpos":"612:29",
 				"flags":1,
 				"ident":"imgval",
 				"init":{
-					"endpos":"616:29",
+					"endpos":"612:29",
 					"kind":"????Expr?????",
-					"srcpos":"616:20"
+					"srcpos":"612:20"
 				},
 				"kind":"local",
 				"semtype":"std.json.JsonValue",
-				"srcpos":"616:8"
+				"srcpos":"612:8"
 			},{
-				"endpos":"617:32",
+				"endpos":"613:32",
 				"flags":1,
 				"ident":"imgarr",
 				"init":{
-					"endpos":"617:32",
+					"endpos":"613:32",
 					"kind":"????Expr?????",
-					"srcpos":"617:30"
+					"srcpos":"613:30"
 				},
 				"kind":"local",
 				"semtype":"std.collections.Stack<std.json.JsonValue>",
-				"srcpos":"617:8"
+				"srcpos":"613:8"
 			},{
-				"endpos":"618:35",
+				"endpos":"614:35",
 				"flags":1,
 				"ident":"imgArraySize",
 				"init":{
-					"endpos":"618:35",
+					"endpos":"614:35",
 					"expr":{
-						"endpos":"618:28",
+						"endpos":"614:28",
 						"ident":"imgarr",
 						"kind":"ident",
-						"srcpos":"618:22"
+						"srcpos":"614:22"
 					},
 					"ident":"Length",
 					"kind":"member",
-					"srcpos":"618:28"
+					"srcpos":"614:28"
 				},
 				"kind":"local",
 				"semtype":"monkey.types.Int",
-				"srcpos":"618:8"
+				"srcpos":"614:8"
 			},{
-				"endpos":"648:0",
+				"endpos":"644:0",
 				"kind":"block",
-				"srcpos":"621:2",
+				"srcpos":"617:2",
 				"stmts":[{
-					"endpos":"623:3",
+					"endpos":"619:3",
 					"flags":1,
 					"ident":"i",
 					"kind":"local",
-					"srcpos":"621:12"
+					"srcpos":"617:12"
 				},{
-					"endpos":"623:30",
+					"endpos":"619:30",
 					"flags":1,
 					"ident":"imgarrelem",
 					"init":{
-						"endpos":"623:30",
+						"endpos":"619:30",
 						"kind":"????Expr?????",
-						"srcpos":"623:27"
+						"srcpos":"619:27"
 					},
 					"kind":"local",
 					"semtype":"std.json.JsonValue",
-					"srcpos":"623:9"
+					"srcpos":"619:9"
 				},{
-					"endpos":"624:42",
+					"endpos":"620:42",
 					"flags":1,
 					"ident":"imgelemobj",
 					"init":{
-						"endpos":"624:42",
+						"endpos":"620:42",
 						"kind":"????Expr?????",
-						"srcpos":"624:40"
+						"srcpos":"620:40"
 					},
 					"kind":"local",
 					"semtype":"std.collections.StringMap<std.json.JsonValue>",
-					"srcpos":"624:9"
+					"srcpos":"620:9"
 				},{
-					"endpos":"642:0",
+					"endpos":"638:0",
 					"kind":"block",
-					"srcpos":"626:3",
+					"srcpos":"622:3",
 					"stmts":[{
-						"endpos":"628:38",
+						"endpos":"624:38",
 						"flags":1,
 						"ident":"imgval",
 						"init":{
-							"endpos":"628:38",
+							"endpos":"624:38",
 							"kind":"????Expr?????",
-							"srcpos":"628:28"
+							"srcpos":"624:28"
 						},
 						"kind":"local",
 						"semtype":"std.json.JsonValue",
-						"srcpos":"628:10"
+						"srcpos":"624:10"
 					},{
-						"endpos":"633:0",
+						"endpos":"629:0",
 						"kind":"block",
-						"srcpos":"630:4",
+						"srcpos":"626:4",
 						"stmts":[]
 					},{
-						"endpos":"642:0",
+						"endpos":"638:0",
 						"kind":"block",
-						"srcpos":"634:4",
+						"srcpos":"630:4",
 						"stmts":[{
-							"endpos":"636:39",
+							"endpos":"632:39",
 							"flags":1,
 							"ident":"centerobj",
 							"init":{
-								"endpos":"636:39",
+								"endpos":"632:39",
 								"kind":"????Expr?????",
-								"srcpos":"636:37"
+								"srcpos":"632:37"
 							},
 							"kind":"local",
 							"semtype":"std.collections.StringMap<std.json.JsonValue>",
-							"srcpos":"636:11"
+							"srcpos":"632:11"
 						},{
-							"endpos":"637:40",
+							"endpos":"633:40",
 							"flags":1,
 							"ident":"x",
 							"init":{
-								"endpos":"637:40",
+								"endpos":"633:40",
 								"kind":"????Expr?????",
-								"srcpos":"637:38"
+								"srcpos":"633:38"
 							},
 							"kind":"local",
 							"semtype":"monkey.types.Double",
-							"srcpos":"637:11"
+							"srcpos":"633:11"
 						},{
-							"endpos":"638:40",
+							"endpos":"634:40",
 							"flags":1,
 							"ident":"y",
 							"init":{
-								"endpos":"638:40",
+								"endpos":"634:40",
 								"kind":"????Expr?????",
-								"srcpos":"638:38"
+								"srcpos":"634:38"
 							},
 							"kind":"local",
 							"semtype":"monkey.types.Double",
-							"srcpos":"638:11"
+							"srcpos":"634:11"
 						}]
 					}]
 				},{
-					"endpos":"647:0",
+					"endpos":"643:0",
 					"kind":"block",
-					"srcpos":"642:3",
+					"srcpos":"638:3",
 					"stmts":[]
 				}]
 			}]
 		},{
-			"endpos":"654:0",
+			"endpos":"650:0",
 			"kind":"block",
-			"srcpos":"649:1",
+			"srcpos":"645:1",
 			"stmts":[]
 		}],
 		"type":{
-			"endpos":"611:58",
+			"endpos":"607:58",
 			"kind":"functype",
 			"params":[{
-				"endpos":"611:57",
+				"endpos":"607:57",
 				"flags":1,
 				"ident":"lobj",
 				"kind":"param",
 				"semtype":"std.json.JsonObject",
-				"srcpos":"611:42",
+				"srcpos":"607:42",
 				"type":{
-					"endpos":"611:57",
+					"endpos":"607:57",
 					"ident":"JsonObject",
 					"kind":"ident",
-					"srcpos":"611:47"
+					"srcpos":"607:47"
 				}
 			}],
 			"retType":{
 				"args":[{
-					"endpos":"611:40",
+					"endpos":"607:40",
 					"ident":"b2Vec2",
 					"kind":"ident",
-					"srcpos":"611:34"
+					"srcpos":"607:34"
 				}],
-				"endpos":"611:41",
+				"endpos":"607:41",
 				"expr":{
-					"endpos":"611:33",
+					"endpos":"607:33",
 					"ident":"IntMap",
 					"kind":"ident",
-					"srcpos":"611:27"
+					"srcpos":"607:27"
 				},
 				"kind":"generic",
-				"srcpos":"611:27"
+				"srcpos":"607:27"
 			},
-			"srcpos":"611:27"
+			"srcpos":"607:27"
 		}
 	},{
-		"endpos":"698:0",
+		"endpos":"694:0",
 		"flags":1,
 		"ident":"GetImageRubeNameMap",
 		"kind":"function",
-		"srcpos":"659:0",
+		"srcpos":"655:0",
 		"stmts":[{
-			"endpos":"661:35",
+			"endpos":"657:35",
 			"flags":1,
 			"ident":"namesMap",
 			"init":{
 				"args":[],
-				"endpos":"661:35",
+				"endpos":"657:35",
 				"kind":"newobject",
-				"srcpos":"661:17",
+				"srcpos":"657:17",
 				"type":{
 					"args":[{
-						"endpos":"661:34",
+						"endpos":"657:34",
 						"ident":"string",
 						"kind":"ident",
-						"srcpos":"661:28"
+						"srcpos":"657:28"
 					}],
-					"endpos":"661:35",
+					"endpos":"657:35",
 					"expr":{
-						"endpos":"661:27",
+						"endpos":"657:27",
 						"ident":"IntMap",
 						"kind":"ident",
-						"srcpos":"661:21"
+						"srcpos":"657:21"
 					},
 					"kind":"generic",
-					"srcpos":"661:21"
+					"srcpos":"657:21"
 				}
 			},
 			"kind":"local",
 			"semtype":"std.collections.Map<monkey.types.Int,monkey.types.String>",
-			"srcpos":"661:7"
+			"srcpos":"657:7"
 		},{
-			"endpos":"694:0",
+			"endpos":"690:0",
 			"kind":"block",
-			"srcpos":"663:1",
+			"srcpos":"659:1",
 			"stmts":[{
-				"endpos":"664:29",
+				"endpos":"660:29",
 				"flags":1,
 				"ident":"imgval",
 				"init":{
-					"endpos":"664:29",
+					"endpos":"660:29",
 					"kind":"????Expr?????",
-					"srcpos":"664:20"
+					"srcpos":"660:20"
 				},
 				"kind":"local",
 				"semtype":"std.json.JsonValue",
-				"srcpos":"664:8"
+				"srcpos":"660:8"
 			},{
-				"endpos":"665:32",
+				"endpos":"661:32",
 				"flags":1,
 				"ident":"imgarr",
 				"init":{
-					"endpos":"665:32",
+					"endpos":"661:32",
 					"kind":"????Expr?????",
-					"srcpos":"665:30"
+					"srcpos":"661:30"
 				},
 				"kind":"local",
 				"semtype":"std.collections.Stack<std.json.JsonValue>",
-				"srcpos":"665:8"
+				"srcpos":"661:8"
 			},{
-				"endpos":"666:35",
+				"endpos":"662:35",
 				"flags":1,
 				"ident":"imgArraySize",
 				"init":{
-					"endpos":"666:35",
+					"endpos":"662:35",
 					"expr":{
-						"endpos":"666:28",
+						"endpos":"662:28",
 						"ident":"imgarr",
 						"kind":"ident",
-						"srcpos":"666:22"
+						"srcpos":"662:22"
 					},
 					"ident":"Length",
 					"kind":"member",
-					"srcpos":"666:28"
+					"srcpos":"662:28"
 				},
 				"kind":"local",
 				"semtype":"monkey.types.Int",
-				"srcpos":"666:8"
+				"srcpos":"662:8"
 			},{
-				"endpos":"692:0",
+				"endpos":"688:0",
 				"kind":"block",
-				"srcpos":"669:2",
+				"srcpos":"665:2",
 				"stmts":[{
-					"endpos":"671:3",
+					"endpos":"667:3",
 					"flags":1,
 					"ident":"i",
 					"kind":"local",
-					"srcpos":"669:12"
+					"srcpos":"665:12"
 				},{
-					"endpos":"671:30",
+					"endpos":"667:30",
 					"flags":1,
 					"ident":"imgarrelem",
 					"init":{
-						"endpos":"671:30",
+						"endpos":"667:30",
 						"kind":"????Expr?????",
-						"srcpos":"671:27"
+						"srcpos":"667:27"
 					},
 					"kind":"local",
 					"semtype":"std.json.JsonValue",
-					"srcpos":"671:9"
+					"srcpos":"667:9"
 				},{
-					"endpos":"673:42",
+					"endpos":"669:42",
 					"flags":1,
 					"ident":"imgelemobj",
 					"init":{
-						"endpos":"673:42",
+						"endpos":"669:42",
 						"kind":"????Expr?????",
-						"srcpos":"673:40"
+						"srcpos":"669:40"
 					},
 					"kind":"local",
 					"semtype":"std.collections.StringMap<std.json.JsonValue>",
-					"srcpos":"673:9"
+					"srcpos":"669:9"
 				},{
-					"endpos":"691:0",
+					"endpos":"687:0",
 					"kind":"block",
-					"srcpos":"675:3",
+					"srcpos":"671:3",
 					"stmts":[{
-						"endpos":"677:36",
+						"endpos":"673:36",
 						"flags":1,
 						"ident":"imgval",
 						"init":{
-							"endpos":"677:36",
+							"endpos":"673:36",
 							"kind":"????Expr?????",
-							"srcpos":"677:28"
+							"srcpos":"673:28"
 						},
 						"kind":"local",
 						"semtype":"std.json.JsonValue",
-						"srcpos":"677:10"
+						"srcpos":"673:10"
 					},{
-						"endpos":"682:0",
+						"endpos":"678:0",
+						"kind":"block",
+						"srcpos":"675:4",
+						"stmts":[]
+					},{
+						"endpos":"685:0",
 						"kind":"block",
 						"srcpos":"679:4",
 						"stmts":[]
-					},{
-						"endpos":"689:0",
-						"kind":"block",
-						"srcpos":"683:4",
-						"stmts":[]
 					}]
 				}]
 			}]
 		}],
 		"type":{
-			"endpos":"659:60",
+			"endpos":"655:60",
 			"kind":"functype",
 			"params":[{
-				"endpos":"659:59",
+				"endpos":"655:59",
 				"flags":1,
 				"ident":"lobj",
 				"kind":"param",
 				"semtype":"std.json.JsonObject",
-				"srcpos":"659:44",
+				"srcpos":"655:44",
 				"type":{
-					"endpos":"659:59",
+					"endpos":"655:59",
 					"ident":"JsonObject",
 					"kind":"ident",
-					"srcpos":"659:49"
+					"srcpos":"655:49"
 				}
 			}],
 			"retType":{
 				"args":[{
-					"endpos":"659:42",
+					"endpos":"655:42",
 					"ident":"string",
 					"kind":"ident",
-					"srcpos":"659:36"
+					"srcpos":"655:36"
 				}],
-				"endpos":"659:43",
+				"endpos":"655:43",
 				"expr":{
-					"endpos":"659:35",
+					"endpos":"655:35",
 					"ident":"IntMap",
 					"kind":"ident",
-					"srcpos":"659:29"
+					"srcpos":"655:29"
 				},
 				"kind":"generic",
-				"srcpos":"659:29"
+				"srcpos":"655:29"
 			},
-			"srcpos":"659:29"
+			"srcpos":"655:29"
 		}
 	},{
-		"endpos":"738:0",
+		"endpos":"734:0",
 		"flags":1,
 		"ident":"GetImageFileNameMap",
 		"kind":"function",
-		"srcpos":"699:0",
+		"srcpos":"695:0",
 		"stmts":[{
-			"endpos":"701:35",
+			"endpos":"697:35",
 			"flags":1,
 			"ident":"namesMap",
 			"init":{
 				"args":[],
-				"endpos":"701:35",
+				"endpos":"697:35",
 				"kind":"newobject",
-				"srcpos":"701:17",
+				"srcpos":"697:17",
 				"type":{
 					"args":[{
-						"endpos":"701:34",
+						"endpos":"697:34",
 						"ident":"string",
 						"kind":"ident",
-						"srcpos":"701:28"
+						"srcpos":"697:28"
 					}],
-					"endpos":"701:35",
+					"endpos":"697:35",
 					"expr":{
-						"endpos":"701:27",
+						"endpos":"697:27",
 						"ident":"IntMap",
 						"kind":"ident",
-						"srcpos":"701:21"
+						"srcpos":"697:21"
 					},
 					"kind":"generic",
-					"srcpos":"701:21"
+					"srcpos":"697:21"
 				}
 			},
 			"kind":"local",
 			"semtype":"std.collections.Map<monkey.types.Int,monkey.types.String>",
-			"srcpos":"701:7"
+			"srcpos":"697:7"
 		},{
-			"endpos":"734:0",
+			"endpos":"730:0",
 			"kind":"block",
-			"srcpos":"703:1",
+			"srcpos":"699:1",
 			"stmts":[{
-				"endpos":"704:29",
+				"endpos":"700:29",
 				"flags":1,
 				"ident":"imgval",
 				"init":{
-					"endpos":"704:29",
+					"endpos":"700:29",
 					"kind":"????Expr?????",
-					"srcpos":"704:20"
+					"srcpos":"700:20"
 				},
 				"kind":"local",
 				"semtype":"std.json.JsonValue",
-				"srcpos":"704:8"
+				"srcpos":"700:8"
 			},{
-				"endpos":"705:32",
+				"endpos":"701:32",
 				"flags":1,
 				"ident":"imgarr",
 				"init":{
-					"endpos":"705:32",
+					"endpos":"701:32",
 					"kind":"????Expr?????",
-					"srcpos":"705:30"
+					"srcpos":"701:30"
 				},
 				"kind":"local",
 				"semtype":"std.collections.Stack<std.json.JsonValue>",
-				"srcpos":"705:8"
+				"srcpos":"701:8"
 			},{
-				"endpos":"706:35",
+				"endpos":"702:35",
 				"flags":1,
 				"ident":"imgArraySize",
 				"init":{
-					"endpos":"706:35",
+					"endpos":"702:35",
 					"expr":{
-						"endpos":"706:28",
+						"endpos":"702:28",
 						"ident":"imgarr",
 						"kind":"ident",
-						"srcpos":"706:22"
+						"srcpos":"702:22"
 					},
 					"ident":"Length",
 					"kind":"member",
-					"srcpos":"706:28"
+					"srcpos":"702:28"
 				},
 				"kind":"local",
 				"semtype":"monkey.types.Int",
-				"srcpos":"706:8"
+				"srcpos":"702:8"
 			},{
-				"endpos":"732:0",
+				"endpos":"728:0",
 				"kind":"block",
-				"srcpos":"709:2",
+				"srcpos":"705:2",
 				"stmts":[{
-					"endpos":"711:3",
+					"endpos":"707:3",
 					"flags":1,
 					"ident":"i",
 					"kind":"local",
-					"srcpos":"709:12"
+					"srcpos":"705:12"
 				},{
-					"endpos":"711:30",
+					"endpos":"707:30",
 					"flags":1,
 					"ident":"imgarrelem",
 					"init":{
-						"endpos":"711:30",
+						"endpos":"707:30",
 						"kind":"????Expr?????",
-						"srcpos":"711:27"
+						"srcpos":"707:27"
 					},
 					"kind":"local",
 					"semtype":"std.json.JsonValue",
-					"srcpos":"711:9"
+					"srcpos":"707:9"
 				},{
-					"endpos":"713:42",
+					"endpos":"709:42",
 					"flags":1,
 					"ident":"imgelemobj",
 					"init":{
-						"endpos":"713:42",
+						"endpos":"709:42",
 						"kind":"????Expr?????",
-						"srcpos":"713:40"
+						"srcpos":"709:40"
 					},
 					"kind":"local",
 					"semtype":"std.collections.StringMap<std.json.JsonValue>",
-					"srcpos":"713:9"
+					"srcpos":"709:9"
 				},{
-					"endpos":"731:0",
+					"endpos":"727:0",
 					"kind":"block",
-					"srcpos":"715:3",
+					"srcpos":"711:3",
 					"stmts":[{
-						"endpos":"717:36",
+						"endpos":"713:36",
 						"flags":1,
 						"ident":"imgval",
 						"init":{
-							"endpos":"717:36",
+							"endpos":"713:36",
 							"kind":"????Expr?????",
-							"srcpos":"717:28"
+							"srcpos":"713:28"
 						},
 						"kind":"local",
 						"semtype":"std.json.JsonValue",
-						"srcpos":"717:10"
+						"srcpos":"713:10"
 					},{
-						"endpos":"722:0",
+						"endpos":"718:0",
 						"kind":"block",
-						"srcpos":"719:4",
+						"srcpos":"715:4",
 						"stmts":[]
 					},{
-						"endpos":"729:0",
+						"endpos":"725:0",
 						"kind":"block",
-						"srcpos":"723:4",
+						"srcpos":"719:4",
 						"stmts":[]
 					}]
 				}]
 			}]
 		}],
 		"type":{
-			"endpos":"699:60",
+			"endpos":"695:60",
 			"kind":"functype",
 			"params":[{
-				"endpos":"699:59",
+				"endpos":"695:59",
 				"flags":1,
 				"ident":"lobj",
 				"kind":"param",
 				"semtype":"std.json.JsonObject",
-				"srcpos":"699:44",
+				"srcpos":"695:44",
 				"type":{
-					"endpos":"699:59",
+					"endpos":"695:59",
 					"ident":"JsonObject",
 					"kind":"ident",
-					"srcpos":"699:49"
+					"srcpos":"695:49"
 				}
 			}],
 			"retType":{
 				"args":[{
-					"endpos":"699:42",
+					"endpos":"695:42",
 					"ident":"string",
 					"kind":"ident",
-					"srcpos":"699:36"
+					"srcpos":"695:36"
 				}],
-				"endpos":"699:43",
+				"endpos":"695:43",
 				"expr":{
-					"endpos":"699:35",
+					"endpos":"695:35",
 					"ident":"IntMap",
 					"kind":"ident",
-					"srcpos":"699:29"
+					"srcpos":"695:29"
 				},
 				"kind":"generic",
-				"srcpos":"699:29"
+				"srcpos":"695:29"
 			},
-			"srcpos":"699:29"
+			"srcpos":"695:29"
 		}
 	},{
-		"endpos":"774:0",
+		"endpos":"770:0",
 		"flags":1,
 		"ident":"GetimageAspectScaleMap",
 		"kind":"function",
-		"srcpos":"739:0",
+		"srcpos":"735:0",
 		"stmts":[{
-			"endpos":"741:35",
+			"endpos":"737:35",
 			"flags":1,
 			"ident":"scalesMap",
 			"init":{
 				"args":[],
-				"endpos":"741:35",
+				"endpos":"737:35",
 				"kind":"newobject",
-				"srcpos":"741:18",
+				"srcpos":"737:18",
 				"type":{
 					"args":[{
-						"endpos":"741:34",
+						"endpos":"737:34",
 						"ident":"float",
 						"kind":"ident",
-						"srcpos":"741:29"
+						"srcpos":"737:29"
 					}],
-					"endpos":"741:35",
+					"endpos":"737:35",
 					"expr":{
-						"endpos":"741:28",
+						"endpos":"737:28",
 						"ident":"IntMap",
 						"kind":"ident",
-						"srcpos":"741:22"
+						"srcpos":"737:22"
 					},
 					"kind":"generic",
-					"srcpos":"741:22"
+					"srcpos":"737:22"
 				}
 			},
 			"kind":"local",
 			"semtype":"std.collections.Map<monkey.types.Int,monkey.types.Float>",
-			"srcpos":"741:7"
+			"srcpos":"737:7"
 		},{
-			"endpos":"767:0",
+			"endpos":"763:0",
 			"kind":"block",
-			"srcpos":"743:1",
+			"srcpos":"739:1",
 			"stmts":[{
-				"endpos":"744:29",
+				"endpos":"740:29",
 				"flags":1,
 				"ident":"imgval",
 				"init":{
-					"endpos":"744:29",
+					"endpos":"740:29",
 					"kind":"????Expr?????",
-					"srcpos":"744:20"
+					"srcpos":"740:20"
 				},
 				"kind":"local",
 				"semtype":"std.json.JsonValue",
-				"srcpos":"744:8"
+				"srcpos":"740:8"
 			},{
-				"endpos":"745:32",
+				"endpos":"741:32",
 				"flags":1,
 				"ident":"imgarr",
 				"init":{
-					"endpos":"745:32",
+					"endpos":"741:32",
 					"kind":"????Expr?????",
-					"srcpos":"745:30"
+					"srcpos":"741:30"
 				},
 				"kind":"local",
 				"semtype":"std.collections.Stack<std.json.JsonValue>",
-				"srcpos":"745:8"
+				"srcpos":"741:8"
 			},{
-				"endpos":"746:35",
+				"endpos":"742:35",
 				"flags":1,
 				"ident":"imgArraySize",
 				"init":{
-					"endpos":"746:35",
+					"endpos":"742:35",
 					"expr":{
-						"endpos":"746:28",
+						"endpos":"742:28",
 						"ident":"imgarr",
 						"kind":"ident",
-						"srcpos":"746:22"
+						"srcpos":"742:22"
 					},
 					"ident":"Length",
 					"kind":"member",
-					"srcpos":"746:28"
+					"srcpos":"742:28"
 				},
 				"kind":"local",
 				"semtype":"monkey.types.Int",
-				"srcpos":"746:8"
+				"srcpos":"742:8"
 			},{
-				"endpos":"767:0",
+				"endpos":"763:0",
 				"kind":"block",
-				"srcpos":"749:2",
+				"srcpos":"745:2",
 				"stmts":[{
-					"endpos":"751:3",
+					"endpos":"747:3",
 					"flags":1,
 					"ident":"i",
 					"kind":"local",
-					"srcpos":"749:12"
+					"srcpos":"745:12"
 				},{
-					"endpos":"751:30",
+					"endpos":"747:30",
 					"flags":1,
 					"ident":"imgarrelem",
 					"init":{
-						"endpos":"751:30",
+						"endpos":"747:30",
 						"kind":"????Expr?????",
-						"srcpos":"751:27"
+						"srcpos":"747:27"
 					},
 					"kind":"local",
 					"semtype":"std.json.JsonValue",
-					"srcpos":"751:9"
+					"srcpos":"747:9"
 				},{
-					"endpos":"753:42",
+					"endpos":"749:42",
 					"flags":1,
 					"ident":"imgelemobj",
 					"init":{
-						"endpos":"753:42",
+						"endpos":"749:42",
 						"kind":"????Expr?????",
-						"srcpos":"753:40"
+						"srcpos":"749:40"
 					},
 					"kind":"local",
 					"semtype":"std.collections.StringMap<std.json.JsonValue>",
-					"srcpos":"753:9"
+					"srcpos":"749:9"
 				},{
-					"endpos":"764:0",
+					"endpos":"760:0",
 					"kind":"block",
-					"srcpos":"755:3",
+					"srcpos":"751:3",
 					"stmts":[{
-						"endpos":"757:43",
+						"endpos":"753:43",
 						"flags":1,
 						"ident":"imgval",
 						"init":{
-							"endpos":"757:43",
+							"endpos":"753:43",
 							"kind":"????Expr?????",
-							"srcpos":"757:28"
+							"srcpos":"753:28"
 						},
 						"kind":"local",
 						"semtype":"std.json.JsonValue",
-						"srcpos":"757:10"
+						"srcpos":"753:10"
 					},{
-						"endpos":"764:0",
+						"endpos":"760:0",
 						"kind":"block",
-						"srcpos":"759:4",
+						"srcpos":"755:4",
 						"stmts":[]
 					}]
 				},{
-					"endpos":"766:0",
+					"endpos":"762:0",
 					"kind":"block",
-					"srcpos":"764:3",
+					"srcpos":"760:3",
 					"stmts":[]
 				}]
 			}]
 		},{
-			"endpos":"770:0",
+			"endpos":"766:0",
 			"kind":"block",
-			"srcpos":"768:1",
+			"srcpos":"764:1",
 			"stmts":[]
 		}],
 		"type":{
-			"endpos":"739:62",
+			"endpos":"735:62",
 			"kind":"functype",
 			"params":[{
-				"endpos":"739:61",
+				"endpos":"735:61",
 				"flags":1,
 				"ident":"lobj",
 				"kind":"param",
 				"semtype":"std.json.JsonObject",
-				"srcpos":"739:46",
+				"srcpos":"735:46",
 				"type":{
-					"endpos":"739:61",
+					"endpos":"735:61",
 					"ident":"JsonObject",
 					"kind":"ident",
-					"srcpos":"739:51"
+					"srcpos":"735:51"
 				}
 			}],
 			"retType":{
 				"args":[{
-					"endpos":"739:44",
+					"endpos":"735:44",
 					"ident":"float",
 					"kind":"ident",
-					"srcpos":"739:39"
+					"srcpos":"735:39"
 				}],
-				"endpos":"739:45",
+				"endpos":"735:45",
 				"expr":{
-					"endpos":"739:38",
+					"endpos":"735:38",
 					"ident":"IntMap",
 					"kind":"ident",
-					"srcpos":"739:32"
+					"srcpos":"735:32"
 				},
 				"kind":"generic",
-				"srcpos":"739:32"
+				"srcpos":"735:32"
 			},
-			"srcpos":"739:32"
+			"srcpos":"735:32"
 		}
 	},{
-		"endpos":"814:0",
+		"endpos":"810:0",
 		"flags":1,
 		"ident":"GetimageLocalAngleMap",
 		"kind":"function",
-		"srcpos":"775:0",
+		"srcpos":"771:0",
 		"stmts":[{
-			"endpos":"777:35",
+			"endpos":"773:35",
 			"flags":1,
 			"ident":"anglesMap",
 			"init":{
 				"args":[],
-				"endpos":"777:35",
+				"endpos":"773:35",
 				"kind":"newobject",
-				"srcpos":"777:18",
+				"srcpos":"773:18",
 				"type":{
 					"args":[{
-						"endpos":"777:34",
+						"endpos":"773:34",
 						"ident":"float",
 						"kind":"ident",
-						"srcpos":"777:29"
+						"srcpos":"773:29"
 					}],
-					"endpos":"777:35",
+					"endpos":"773:35",
 					"expr":{
-						"endpos":"777:28",
+						"endpos":"773:28",
 						"ident":"IntMap",
 						"kind":"ident",
-						"srcpos":"777:22"
+						"srcpos":"773:22"
 					},
 					"kind":"generic",
-					"srcpos":"777:22"
+					"srcpos":"773:22"
 				}
 			},
 			"kind":"local",
 			"semtype":"std.collections.Map<monkey.types.Int,monkey.types.Float>",
-			"srcpos":"777:7"
+			"srcpos":"773:7"
 		},{
-			"endpos":"810:0",
+			"endpos":"806:0",
 			"kind":"block",
-			"srcpos":"779:1",
+			"srcpos":"775:1",
 			"stmts":[{
-				"endpos":"780:29",
+				"endpos":"776:29",
 				"flags":1,
 				"ident":"imgval",
 				"init":{
-					"endpos":"780:29",
+					"endpos":"776:29",
 					"kind":"????Expr?????",
-					"srcpos":"780:20"
+					"srcpos":"776:20"
 				},
 				"kind":"local",
 				"semtype":"std.json.JsonValue",
-				"srcpos":"780:8"
+				"srcpos":"776:8"
 			},{
-				"endpos":"781:32",
+				"endpos":"777:32",
 				"flags":1,
 				"ident":"imgarr",
 				"init":{
-					"endpos":"781:32",
+					"endpos":"777:32",
 					"kind":"????Expr?????",
-					"srcpos":"781:30"
+					"srcpos":"777:30"
 				},
 				"kind":"local",
 				"semtype":"std.collections.Stack<std.json.JsonValue>",
-				"srcpos":"781:8"
+				"srcpos":"777:8"
 			},{
-				"endpos":"782:35",
+				"endpos":"778:35",
 				"flags":1,
 				"ident":"imgArraySize",
 				"init":{
-					"endpos":"782:35",
+					"endpos":"778:35",
 					"expr":{
-						"endpos":"782:28",
+						"endpos":"778:28",
 						"ident":"imgarr",
 						"kind":"ident",
-						"srcpos":"782:22"
+						"srcpos":"778:22"
 					},
 					"ident":"Length",
 					"kind":"member",
-					"srcpos":"782:28"
+					"srcpos":"778:28"
 				},
 				"kind":"local",
 				"semtype":"monkey.types.Int",
-				"srcpos":"782:8"
+				"srcpos":"778:8"
 			},{
-				"endpos":"808:0",
+				"endpos":"804:0",
 				"kind":"block",
-				"srcpos":"785:2",
+				"srcpos":"781:2",
 				"stmts":[{
-					"endpos":"787:3",
+					"endpos":"783:3",
 					"flags":1,
 					"ident":"i",
 					"kind":"local",
-					"srcpos":"785:12"
+					"srcpos":"781:12"
 				},{
-					"endpos":"787:30",
+					"endpos":"783:30",
 					"flags":1,
 					"ident":"imgarrelem",
 					"init":{
-						"endpos":"787:30",
+						"endpos":"783:30",
 						"kind":"????Expr?????",
-						"srcpos":"787:27"
+						"srcpos":"783:27"
 					},
 					"kind":"local",
 					"semtype":"std.json.JsonValue",
-					"srcpos":"787:9"
+					"srcpos":"783:9"
 				},{
-					"endpos":"789:42",
+					"endpos":"785:42",
 					"flags":1,
 					"ident":"imgelemobj",
 					"init":{
-						"endpos":"789:42",
+						"endpos":"785:42",
 						"kind":"????Expr?????",
-						"srcpos":"789:40"
+						"srcpos":"785:40"
 					},
 					"kind":"local",
 					"semtype":"std.collections.StringMap<std.json.JsonValue>",
-					"srcpos":"789:9"
+					"srcpos":"785:9"
 				},{
-					"endpos":"804:0",
+					"endpos":"800:0",
 					"kind":"block",
-					"srcpos":"791:3",
+					"srcpos":"787:3",
 					"stmts":[{
-						"endpos":"793:37",
+						"endpos":"789:37",
 						"flags":1,
 						"ident":"imgval",
 						"init":{
-							"endpos":"793:37",
+							"endpos":"789:37",
 							"kind":"????Expr?????",
-							"srcpos":"793:28"
+							"srcpos":"789:28"
 						},
 						"kind":"local",
 						"semtype":"std.json.JsonValue",
-						"srcpos":"793:10"
+						"srcpos":"789:10"
 					},{
-						"endpos":"798:0",
+						"endpos":"794:0",
+						"kind":"block",
+						"srcpos":"791:4",
+						"stmts":[]
+					},{
+						"endpos":"800:0",
 						"kind":"block",
 						"srcpos":"795:4",
 						"stmts":[]
-					},{
-						"endpos":"804:0",
-						"kind":"block",
-						"srcpos":"799:4",
-						"stmts":[]
 					}]
 				},{
-					"endpos":"807:0",
+					"endpos":"803:0",
 					"kind":"block",
-					"srcpos":"804:3",
+					"srcpos":"800:3",
 					"stmts":[]
 				}]
 			}]
 		}],
 		"type":{
-			"endpos":"775:61",
+			"endpos":"771:61",
 			"kind":"functype",
 			"params":[{
-				"endpos":"775:60",
+				"endpos":"771:60",
 				"flags":1,
 				"ident":"lobj",
 				"kind":"param",
 				"semtype":"std.json.JsonObject",
-				"srcpos":"775:45",
+				"srcpos":"771:45",
 				"type":{
-					"endpos":"775:60",
+					"endpos":"771:60",
 					"ident":"JsonObject",
 					"kind":"ident",
-					"srcpos":"775:50"
+					"srcpos":"771:50"
 				}
 			}],
 			"retType":{
 				"args":[{
-					"endpos":"775:43",
+					"endpos":"771:43",
 					"ident":"float",
 					"kind":"ident",
-					"srcpos":"775:38"
+					"srcpos":"771:38"
 				}],
-				"endpos":"775:44",
+				"endpos":"771:44",
 				"expr":{
-					"endpos":"775:37",
+					"endpos":"771:37",
 					"ident":"IntMap",
 					"kind":"ident",
-					"srcpos":"775:31"
+					"srcpos":"771:31"
 				},
 				"kind":"generic",
-				"srcpos":"775:31"
+				"srcpos":"771:31"
 			},
-			"srcpos":"775:31"
+			"srcpos":"771:31"
 		}
 	},{
-		"endpos":"854:0",
+		"endpos":"850:0",
 		"flags":1,
 		"ident":"GetimageOpacityMap",
 		"kind":"function",
-		"srcpos":"815:0",
+		"srcpos":"811:0",
 		"stmts":[{
-			"endpos":"817:31",
+			"endpos":"813:31",
 			"flags":1,
 			"ident":"opMap",
 			"init":{
 				"args":[],
-				"endpos":"817:31",
+				"endpos":"813:31",
 				"kind":"newobject",
-				"srcpos":"817:14",
+				"srcpos":"813:14",
 				"type":{
 					"args":[{
-						"endpos":"817:30",
+						"endpos":"813:30",
 						"ident":"float",
 						"kind":"ident",
-						"srcpos":"817:25"
+						"srcpos":"813:25"
 					}],
-					"endpos":"817:31",
+					"endpos":"813:31",
 					"expr":{
-						"endpos":"817:24",
+						"endpos":"813:24",
 						"ident":"IntMap",
 						"kind":"ident",
-						"srcpos":"817:18"
+						"srcpos":"813:18"
 					},
 					"kind":"generic",
-					"srcpos":"817:18"
+					"srcpos":"813:18"
 				}
 			},
 			"kind":"local",
 			"semtype":"std.collections.Map<monkey.types.Int,monkey.types.Float>",
-			"srcpos":"817:7"
+			"srcpos":"813:7"
 		},{
-			"endpos":"850:0",
+			"endpos":"846:0",
 			"kind":"block",
-			"srcpos":"819:1",
+			"srcpos":"815:1",
 			"stmts":[{
-				"endpos":"820:29",
+				"endpos":"816:29",
 				"flags":1,
 				"ident":"imgval",
 				"init":{
-					"endpos":"820:29",
+					"endpos":"816:29",
 					"kind":"????Expr?????",
-					"srcpos":"820:20"
+					"srcpos":"816:20"
 				},
 				"kind":"local",
 				"semtype":"std.json.JsonValue",
-				"srcpos":"820:8"
+				"srcpos":"816:8"
 			},{
-				"endpos":"821:32",
+				"endpos":"817:32",
 				"flags":1,
 				"ident":"imgarr",
 				"init":{
-					"endpos":"821:32",
+					"endpos":"817:32",
 					"kind":"????Expr?????",
-					"srcpos":"821:30"
+					"srcpos":"817:30"
 				},
 				"kind":"local",
 				"semtype":"std.collections.Stack<std.json.JsonValue>",
-				"srcpos":"821:8"
+				"srcpos":"817:8"
 			},{
-				"endpos":"822:35",
+				"endpos":"818:35",
 				"flags":1,
 				"ident":"imgArraySize",
 				"init":{
-					"endpos":"822:35",
+					"endpos":"818:35",
 					"expr":{
-						"endpos":"822:28",
+						"endpos":"818:28",
 						"ident":"imgarr",
 						"kind":"ident",
-						"srcpos":"822:22"
+						"srcpos":"818:22"
 					},
 					"ident":"Length",
 					"kind":"member",
-					"srcpos":"822:28"
+					"srcpos":"818:28"
 				},
 				"kind":"local",
 				"semtype":"monkey.types.Int",
-				"srcpos":"822:8"
+				"srcpos":"818:8"
 			},{
-				"endpos":"848:0",
+				"endpos":"844:0",
 				"kind":"block",
-				"srcpos":"825:2",
+				"srcpos":"821:2",
 				"stmts":[{
-					"endpos":"827:3",
+					"endpos":"823:3",
 					"flags":1,
 					"ident":"i",
 					"kind":"local",
-					"srcpos":"825:12"
+					"srcpos":"821:12"
 				},{
-					"endpos":"827:30",
+					"endpos":"823:30",
 					"flags":1,
 					"ident":"imgarrelem",
 					"init":{
-						"endpos":"827:30",
+						"endpos":"823:30",
 						"kind":"????Expr?????",
-						"srcpos":"827:27"
+						"srcpos":"823:27"
 					},
 					"kind":"local",
 					"semtype":"std.json.JsonValue",
-					"srcpos":"827:9"
+					"srcpos":"823:9"
 				},{
-					"endpos":"829:42",
+					"endpos":"825:42",
 					"flags":1,
 					"ident":"imgelemobj",
 					"init":{
-						"endpos":"829:42",
+						"endpos":"825:42",
 						"kind":"????Expr?????",
-						"srcpos":"829:40"
+						"srcpos":"825:40"
 					},
 					"kind":"local",
 					"semtype":"std.collections.StringMap<std.json.JsonValue>",
-					"srcpos":"829:9"
+					"srcpos":"825:9"
 				},{
-					"endpos":"844:0",
+					"endpos":"840:0",
 					"kind":"block",
-					"srcpos":"831:3",
+					"srcpos":"827:3",
 					"stmts":[{
-						"endpos":"833:39",
+						"endpos":"829:39",
 						"flags":1,
 						"ident":"imgval",
 						"init":{
-							"endpos":"833:39",
+							"endpos":"829:39",
 							"kind":"????Expr?????",
-							"srcpos":"833:28"
+							"srcpos":"829:28"
 						},
 						"kind":"local",
 						"semtype":"std.json.JsonValue",
-						"srcpos":"833:10"
+						"srcpos":"829:10"
 					},{
-						"endpos":"838:0",
+						"endpos":"834:0",
+						"kind":"block",
+						"srcpos":"831:4",
+						"stmts":[]
+					},{
+						"endpos":"840:0",
 						"kind":"block",
 						"srcpos":"835:4",
 						"stmts":[]
-					},{
-						"endpos":"844:0",
-						"kind":"block",
-						"srcpos":"839:4",
-						"stmts":[]
 					}]
 				},{
-					"endpos":"847:0",
+					"endpos":"843:0",
 					"kind":"block",
-					"srcpos":"844:3",
+					"srcpos":"840:3",
 					"stmts":[]
 				}]
 			}]
 		}],
 		"type":{
-			"endpos":"815:58",
+			"endpos":"811:58",
 			"kind":"functype",
 			"params":[{
-				"endpos":"815:57",
+				"endpos":"811:57",
 				"flags":1,
 				"ident":"lobj",
 				"kind":"param",
 				"semtype":"std.json.JsonObject",
-				"srcpos":"815:42",
+				"srcpos":"811:42",
 				"type":{
-					"endpos":"815:57",
+					"endpos":"811:57",
 					"ident":"JsonObject",
 					"kind":"ident",
-					"srcpos":"815:47"
+					"srcpos":"811:47"
 				}
 			}],
 			"retType":{
 				"args":[{
-					"endpos":"815:40",
+					"endpos":"811:40",
 					"ident":"float",
 					"kind":"ident",
-					"srcpos":"815:35"
+					"srcpos":"811:35"
 				}],
-				"endpos":"815:41",
+				"endpos":"811:41",
 				"expr":{
-					"endpos":"815:34",
+					"endpos":"811:34",
 					"ident":"IntMap",
 					"kind":"ident",
-					"srcpos":"815:28"
+					"srcpos":"811:28"
 				},
 				"kind":"generic",
-				"srcpos":"815:28"
+				"srcpos":"811:28"
 			},
-			"srcpos":"815:28"
+			"srcpos":"811:28"
 		}
 	},{
-		"endpos":"897:0",
+		"endpos":"893:0",
 		"flags":1,
 		"ident":"GetimageFlipMap",
 		"kind":"function",
-		"srcpos":"855:0",
+		"srcpos":"851:0",
 		"stmts":[{
-			"endpos":"857:31",
+			"endpos":"853:31",
 			"flags":1,
 			"ident":"flipMap",
 			"init":{
 				"args":[],
-				"endpos":"857:31",
+				"endpos":"853:31",
 				"kind":"newobject",
-				"srcpos":"857:16",
+				"srcpos":"853:16",
 				"type":{
 					"args":[{
-						"endpos":"857:30",
+						"endpos":"853:30",
 						"ident":"int",
 						"kind":"ident",
-						"srcpos":"857:27"
+						"srcpos":"853:27"
 					}],
-					"endpos":"857:31",
+					"endpos":"853:31",
 					"expr":{
-						"endpos":"857:26",
+						"endpos":"853:26",
 						"ident":"IntMap",
 						"kind":"ident",
-						"srcpos":"857:20"
+						"srcpos":"853:20"
 					},
 					"kind":"generic",
-					"srcpos":"857:20"
+					"srcpos":"853:20"
 				}
 			},
 			"kind":"local",
 			"semtype":"std.collections.Map<monkey.types.Int,monkey.types.Int>",
-			"srcpos":"857:7"
+			"srcpos":"853:7"
 		},{
-			"endpos":"893:0",
+			"endpos":"889:0",
 			"kind":"block",
-			"srcpos":"859:1",
+			"srcpos":"855:1",
 			"stmts":[{
-				"endpos":"860:29",
+				"endpos":"856:29",
 				"flags":1,
 				"ident":"imgval",
 				"init":{
-					"endpos":"860:29",
+					"endpos":"856:29",
 					"kind":"????Expr?????",
-					"srcpos":"860:20"
+					"srcpos":"856:20"
 				},
 				"kind":"local",
 				"semtype":"std.json.JsonValue",
-				"srcpos":"860:8"
+				"srcpos":"856:8"
 			},{
-				"endpos":"861:32",
+				"endpos":"857:32",
 				"flags":1,
 				"ident":"imgarr",
 				"init":{
-					"endpos":"861:32",
+					"endpos":"857:32",
 					"kind":"????Expr?????",
-					"srcpos":"861:30"
+					"srcpos":"857:30"
 				},
 				"kind":"local",
 				"semtype":"std.collections.Stack<std.json.JsonValue>",
-				"srcpos":"861:8"
+				"srcpos":"857:8"
 			},{
-				"endpos":"862:35",
+				"endpos":"858:35",
 				"flags":1,
 				"ident":"imgArraySize",
 				"init":{
-					"endpos":"862:35",
+					"endpos":"858:35",
 					"expr":{
-						"endpos":"862:28",
+						"endpos":"858:28",
 						"ident":"imgarr",
 						"kind":"ident",
-						"srcpos":"862:22"
+						"srcpos":"858:22"
 					},
 					"ident":"Length",
 					"kind":"member",
-					"srcpos":"862:28"
+					"srcpos":"858:28"
 				},
 				"kind":"local",
 				"semtype":"monkey.types.Int",
-				"srcpos":"862:8"
+				"srcpos":"858:8"
 			},{
-				"endpos":"891:0",
+				"endpos":"887:0",
 				"kind":"block",
-				"srcpos":"865:2",
+				"srcpos":"861:2",
 				"stmts":[{
-					"endpos":"867:3",
+					"endpos":"863:3",
 					"flags":1,
 					"ident":"i",
 					"kind":"local",
-					"srcpos":"865:12"
+					"srcpos":"861:12"
 				},{
-					"endpos":"867:30",
+					"endpos":"863:30",
 					"flags":1,
 					"ident":"imgarrelem",
 					"init":{
-						"endpos":"867:30",
+						"endpos":"863:30",
 						"kind":"????Expr?????",
-						"srcpos":"867:27"
+						"srcpos":"863:27"
 					},
 					"kind":"local",
 					"semtype":"std.json.JsonValue",
-					"srcpos":"867:9"
+					"srcpos":"863:9"
 				},{
-					"endpos":"869:42",
+					"endpos":"865:42",
 					"flags":1,
 					"ident":"imgelemobj",
 					"init":{
-						"endpos":"869:42",
+						"endpos":"865:42",
 						"kind":"????Expr?????",
-						"srcpos":"869:40"
+						"srcpos":"865:40"
 					},
 					"kind":"local",
 					"semtype":"std.collections.StringMap<std.json.JsonValue>",
-					"srcpos":"869:9"
+					"srcpos":"865:9"
 				},{
-					"endpos":"887:0",
+					"endpos":"883:0",
 					"kind":"block",
-					"srcpos":"871:3",
+					"srcpos":"867:3",
 					"stmts":[{
-						"endpos":"873:36",
+						"endpos":"869:36",
 						"flags":1,
 						"ident":"imgval",
 						"init":{
-							"endpos":"873:36",
+							"endpos":"869:36",
 							"kind":"????Expr?????",
-							"srcpos":"873:28"
+							"srcpos":"869:28"
 						},
 						"kind":"local",
 						"semtype":"std.json.JsonValue",
-						"srcpos":"873:10"
+						"srcpos":"869:10"
 					},{
-						"endpos":"882:0",
+						"endpos":"878:0",
 						"kind":"block",
-						"srcpos":"875:4",
+						"srcpos":"871:4",
 						"stmts":[{
-							"endpos":"879:0",
+							"endpos":"875:0",
 							"kind":"block",
-							"srcpos":"877:5",
+							"srcpos":"873:5",
 							"stmts":[]
 						},{
-							"endpos":"882:0",
+							"endpos":"878:0",
 							"kind":"block",
-							"srcpos":"879:5",
+							"srcpos":"875:5",
 							"stmts":[]
 						}]
 					},{
-						"endpos":"887:0",
+						"endpos":"883:0",
 						"kind":"block",
-						"srcpos":"882:4",
+						"srcpos":"878:4",
 						"stmts":[]
 					}]
 				},{
-					"endpos":"890:0",
+					"endpos":"886:0",
 					"kind":"block",
-					"srcpos":"887:3",
+					"srcpos":"883:3",
 					"stmts":[]
 				}]
 			}]
 		}],
 		"type":{
-			"endpos":"855:53",
+			"endpos":"851:53",
 			"kind":"functype",
 			"params":[{
-				"endpos":"855:52",
+				"endpos":"851:52",
 				"flags":1,
 				"ident":"lobj",
 				"kind":"param",
 				"semtype":"std.json.JsonObject",
-				"srcpos":"855:37",
+				"srcpos":"851:37",
 				"type":{
-					"endpos":"855:52",
+					"endpos":"851:52",
 					"ident":"JsonObject",
 					"kind":"ident",
-					"srcpos":"855:42"
+					"srcpos":"851:42"
 				}
 			}],
 			"retType":{
 				"args":[{
-					"endpos":"855:35",
+					"endpos":"851:35",
 					"ident":"int",
 					"kind":"ident",
-					"srcpos":"855:32"
+					"srcpos":"851:32"
 				}],
-				"endpos":"855:36",
+				"endpos":"851:36",
 				"expr":{
-					"endpos":"855:31",
+					"endpos":"851:31",
 					"ident":"IntMap",
 					"kind":"ident",
-					"srcpos":"855:25"
+					"srcpos":"851:25"
 				},
 				"kind":"generic",
-				"srcpos":"855:25"
+				"srcpos":"851:25"
 			},
-			"srcpos":"855:25"
+			"srcpos":"851:25"
 		}
 	},{
-		"endpos":"937:0",
+		"endpos":"933:0",
 		"flags":1,
 		"ident":"GetimageRenderOrderMap",
 		"kind":"function",
-		"srcpos":"898:0",
+		"srcpos":"894:0",
 		"stmts":[{
-			"endpos":"900:32",
+			"endpos":"896:32",
 			"flags":1,
 			"ident":"orderMap",
 			"init":{
 				"args":[],
-				"endpos":"900:32",
+				"endpos":"896:32",
 				"kind":"newobject",
-				"srcpos":"900:17",
+				"srcpos":"896:17",
 				"type":{
 					"args":[{
-						"endpos":"900:31",
+						"endpos":"896:31",
 						"ident":"int",
 						"kind":"ident",
-						"srcpos":"900:28"
+						"srcpos":"896:28"
 					}],
-					"endpos":"900:32",
+					"endpos":"896:32",
 					"expr":{
-						"endpos":"900:27",
+						"endpos":"896:27",
 						"ident":"IntMap",
 						"kind":"ident",
-						"srcpos":"900:21"
+						"srcpos":"896:21"
 					},
 					"kind":"generic",
-					"srcpos":"900:21"
+					"srcpos":"896:21"
 				}
 			},
 			"kind":"local",
 			"semtype":"std.collections.Map<monkey.types.Int,monkey.types.Int>",
-			"srcpos":"900:7"
+			"srcpos":"896:7"
 		},{
-			"endpos":"933:0",
+			"endpos":"929:0",
 			"kind":"block",
-			"srcpos":"902:1",
+			"srcpos":"898:1",
 			"stmts":[{
-				"endpos":"903:29",
+				"endpos":"899:29",
 				"flags":1,
 				"ident":"imgval",
 				"init":{
-					"endpos":"903:29",
+					"endpos":"899:29",
 					"kind":"????Expr?????",
-					"srcpos":"903:20"
+					"srcpos":"899:20"
 				},
 				"kind":"local",
 				"semtype":"std.json.JsonValue",
-				"srcpos":"903:8"
+				"srcpos":"899:8"
 			},{
-				"endpos":"904:32",
+				"endpos":"900:32",
 				"flags":1,
 				"ident":"imgarr",
 				"init":{
-					"endpos":"904:32",
+					"endpos":"900:32",
 					"kind":"????Expr?????",
-					"srcpos":"904:30"
+					"srcpos":"900:30"
 				},
 				"kind":"local",
 				"semtype":"std.collections.Stack<std.json.JsonValue>",
-				"srcpos":"904:8"
+				"srcpos":"900:8"
 			},{
-				"endpos":"905:35",
+				"endpos":"901:35",
 				"flags":1,
 				"ident":"imgArraySize",
 				"init":{
-					"endpos":"905:35",
+					"endpos":"901:35",
 					"expr":{
-						"endpos":"905:28",
+						"endpos":"901:28",
 						"ident":"imgarr",
 						"kind":"ident",
-						"srcpos":"905:22"
+						"srcpos":"901:22"
 					},
 					"ident":"Length",
 					"kind":"member",
-					"srcpos":"905:28"
+					"srcpos":"901:28"
 				},
 				"kind":"local",
 				"semtype":"monkey.types.Int",
-				"srcpos":"905:8"
+				"srcpos":"901:8"
 			},{
-				"endpos":"931:0",
+				"endpos":"927:0",
 				"kind":"block",
-				"srcpos":"908:2",
+				"srcpos":"904:2",
 				"stmts":[{
-					"endpos":"910:3",
+					"endpos":"906:3",
 					"flags":1,
 					"ident":"i",
 					"kind":"local",
-					"srcpos":"908:12"
+					"srcpos":"904:12"
 				},{
-					"endpos":"910:30",
+					"endpos":"906:30",
 					"flags":1,
 					"ident":"imgarrelem",
 					"init":{
-						"endpos":"910:30",
+						"endpos":"906:30",
 						"kind":"????Expr?????",
-						"srcpos":"910:27"
+						"srcpos":"906:27"
 					},
 					"kind":"local",
 					"semtype":"std.json.JsonValue",
-					"srcpos":"910:9"
+					"srcpos":"906:9"
 				},{
-					"endpos":"912:42",
+					"endpos":"908:42",
 					"flags":1,
 					"ident":"imgelemobj",
 					"init":{
-						"endpos":"912:42",
+						"endpos":"908:42",
 						"kind":"????Expr?????",
-						"srcpos":"912:40"
+						"srcpos":"908:40"
 					},
 					"kind":"local",
 					"semtype":"std.collections.StringMap<std.json.JsonValue>",
-					"srcpos":"912:9"
+					"srcpos":"908:9"
 				},{
-					"endpos":"927:0",
+					"endpos":"923:0",
 					"kind":"block",
-					"srcpos":"914:3",
+					"srcpos":"910:3",
 					"stmts":[{
-						"endpos":"916:43",
+						"endpos":"912:43",
 						"flags":1,
 						"ident":"imgval",
 						"init":{
-							"endpos":"916:43",
+							"endpos":"912:43",
 							"kind":"????Expr?????",
-							"srcpos":"916:28"
+							"srcpos":"912:28"
 						},
 						"kind":"local",
 						"semtype":"std.json.JsonValue",
-						"srcpos":"916:10"
+						"srcpos":"912:10"
 					},{
-						"endpos":"921:0",
+						"endpos":"917:0",
+						"kind":"block",
+						"srcpos":"914:4",
+						"stmts":[]
+					},{
+						"endpos":"923:0",
 						"kind":"block",
 						"srcpos":"918:4",
 						"stmts":[]
-					},{
-						"endpos":"927:0",
-						"kind":"block",
-						"srcpos":"922:4",
-						"stmts":[]
 					}]
 				},{
-					"endpos":"930:0",
+					"endpos":"926:0",
 					"kind":"block",
-					"srcpos":"927:3",
+					"srcpos":"923:3",
 					"stmts":[]
 				}]
 			}]
 		}],
 		"type":{
-			"endpos":"898:60",
+			"endpos":"894:60",
 			"kind":"functype",
 			"params":[{
-				"endpos":"898:59",
+				"endpos":"894:59",
 				"flags":1,
 				"ident":"lobj",
 				"kind":"param",
 				"semtype":"std.json.JsonObject",
-				"srcpos":"898:44",
+				"srcpos":"894:44",
 				"type":{
-					"endpos":"898:59",
+					"endpos":"894:59",
 					"ident":"JsonObject",
 					"kind":"ident",
-					"srcpos":"898:49"
+					"srcpos":"894:49"
 				}
 			}],
 			"retType":{
 				"args":[{
-					"endpos":"898:42",
+					"endpos":"894:42",
 					"ident":"int",
 					"kind":"ident",
-					"srcpos":"898:39"
+					"srcpos":"894:39"
 				}],
-				"endpos":"898:43",
+				"endpos":"894:43",
 				"expr":{
-					"endpos":"898:38",
+					"endpos":"894:38",
 					"ident":"IntMap",
 					"kind":"ident",
-					"srcpos":"898:32"
+					"srcpos":"894:32"
 				},
 				"kind":"generic",
-				"srcpos":"898:32"
+				"srcpos":"894:32"
 			},
-			"srcpos":"898:32"
+			"srcpos":"894:32"
 		}
 	},{
-		"endpos":"973:0",
+		"endpos":"969:0",
 		"flags":1,
 		"ident":"GetimageWorldHeightMap",
 		"kind":"function",
-		"srcpos":"938:0",
+		"srcpos":"934:0",
 		"stmts":[{
-			"endpos":"940:35",
+			"endpos":"936:35",
 			"flags":1,
 			"ident":"scalesMap",
 			"init":{
 				"args":[],
-				"endpos":"940:35",
+				"endpos":"936:35",
 				"kind":"newobject",
-				"srcpos":"940:18",
+				"srcpos":"936:18",
 				"type":{
 					"args":[{
-						"endpos":"940:34",
+						"endpos":"936:34",
 						"ident":"float",
 						"kind":"ident",
-						"srcpos":"940:29"
+						"srcpos":"936:29"
 					}],
-					"endpos":"940:35",
+					"endpos":"936:35",
 					"expr":{
-						"endpos":"940:28",
+						"endpos":"936:28",
 						"ident":"IntMap",
 						"kind":"ident",
-						"srcpos":"940:22"
+						"srcpos":"936:22"
 					},
 					"kind":"generic",
-					"srcpos":"940:22"
+					"srcpos":"936:22"
 				}
 			},
 			"kind":"local",
 			"semtype":"std.collections.Map<monkey.types.Int,monkey.types.Float>",
-			"srcpos":"940:7"
+			"srcpos":"936:7"
 		},{
-			"endpos":"966:0",
+			"endpos":"962:0",
 			"kind":"block",
-			"srcpos":"942:1",
+			"srcpos":"938:1",
 			"stmts":[{
-				"endpos":"943:29",
+				"endpos":"939:29",
 				"flags":1,
 				"ident":"imgval",
 				"init":{
-					"endpos":"943:29",
+					"endpos":"939:29",
 					"kind":"????Expr?????",
-					"srcpos":"943:20"
+					"srcpos":"939:20"
 				},
 				"kind":"local",
 				"semtype":"std.json.JsonValue",
-				"srcpos":"943:8"
+				"srcpos":"939:8"
 			},{
-				"endpos":"944:32",
+				"endpos":"940:32",
 				"flags":1,
 				"ident":"imgarr",
 				"init":{
-					"endpos":"944:32",
+					"endpos":"940:32",
 					"kind":"????Expr?????",
-					"srcpos":"944:30"
+					"srcpos":"940:30"
 				},
 				"kind":"local",
 				"semtype":"std.collections.Stack<std.json.JsonValue>",
-				"srcpos":"944:8"
+				"srcpos":"940:8"
 			},{
-				"endpos":"945:35",
+				"endpos":"941:35",
 				"flags":1,
 				"ident":"imgArraySize",
 				"init":{
-					"endpos":"945:35",
+					"endpos":"941:35",
 					"expr":{
-						"endpos":"945:28",
+						"endpos":"941:28",
 						"ident":"imgarr",
 						"kind":"ident",
-						"srcpos":"945:22"
+						"srcpos":"941:22"
 					},
 					"ident":"Length",
 					"kind":"member",
-					"srcpos":"945:28"
+					"srcpos":"941:28"
 				},
 				"kind":"local",
 				"semtype":"monkey.types.Int",
-				"srcpos":"945:8"
+				"srcpos":"941:8"
 			},{
-				"endpos":"966:0",
+				"endpos":"962:0",
 				"kind":"block",
-				"srcpos":"948:2",
+				"srcpos":"944:2",
 				"stmts":[{
-					"endpos":"950:3",
+					"endpos":"946:3",
 					"flags":1,
 					"ident":"i",
 					"kind":"local",
-					"srcpos":"948:12"
+					"srcpos":"944:12"
 				},{
-					"endpos":"950:30",
+					"endpos":"946:30",
 					"flags":1,
 					"ident":"imgarrelem",
 					"init":{
-						"endpos":"950:30",
+						"endpos":"946:30",
 						"kind":"????Expr?????",
-						"srcpos":"950:27"
+						"srcpos":"946:27"
 					},
 					"kind":"local",
 					"semtype":"std.json.JsonValue",
-					"srcpos":"950:9"
+					"srcpos":"946:9"
 				},{
-					"endpos":"952:42",
+					"endpos":"948:42",
 					"flags":1,
 					"ident":"imgelemobj",
 					"init":{
-						"endpos":"952:42",
+						"endpos":"948:42",
 						"kind":"????Expr?????",
-						"srcpos":"952:40"
+						"srcpos":"948:40"
 					},
 					"kind":"local",
 					"semtype":"std.collections.StringMap<std.json.JsonValue>",
-					"srcpos":"952:9"
+					"srcpos":"948:9"
 				},{
-					"endpos":"963:0",
+					"endpos":"959:0",
 					"kind":"block",
-					"srcpos":"954:3",
+					"srcpos":"950:3",
 					"stmts":[{
-						"endpos":"956:37",
+						"endpos":"952:37",
 						"flags":1,
 						"ident":"imgval",
 						"init":{
-							"endpos":"956:37",
+							"endpos":"952:37",
 							"kind":"????Expr?????",
-							"srcpos":"956:28"
+							"srcpos":"952:28"
 						},
 						"kind":"local",
 						"semtype":"std.json.JsonValue",
-						"srcpos":"956:10"
+						"srcpos":"952:10"
 					},{
-						"endpos":"963:0",
+						"endpos":"959:0",
 						"kind":"block",
-						"srcpos":"958:4",
+						"srcpos":"954:4",
 						"stmts":[]
 					}]
 				},{
-					"endpos":"965:0",
+					"endpos":"961:0",
 					"kind":"block",
-					"srcpos":"963:3",
+					"srcpos":"959:3",
 					"stmts":[]
 				}]
 			}]
 		},{
-			"endpos":"969:0",
+			"endpos":"965:0",
 			"kind":"block",
-			"srcpos":"967:1",
+			"srcpos":"963:1",
 			"stmts":[]
 		}],
 		"type":{
-			"endpos":"938:62",
+			"endpos":"934:62",
 			"kind":"functype",
 			"params":[{
-				"endpos":"938:61",
+				"endpos":"934:61",
 				"flags":1,
 				"ident":"lobj",
 				"kind":"param",
 				"semtype":"std.json.JsonObject",
-				"srcpos":"938:46",
+				"srcpos":"934:46",
 				"type":{
-					"endpos":"938:61",
+					"endpos":"934:61",
 					"ident":"JsonObject",
 					"kind":"ident",
-					"srcpos":"938:51"
+					"srcpos":"934:51"
 				}
 			}],
 			"retType":{
 				"args":[{
-					"endpos":"938:44",
+					"endpos":"934:44",
 					"ident":"float",
 					"kind":"ident",
-					"srcpos":"938:39"
+					"srcpos":"934:39"
 				}],
-				"endpos":"938:45",
+				"endpos":"934:45",
 				"expr":{
-					"endpos":"938:38",
+					"endpos":"934:38",
 					"ident":"IntMap",
 					"kind":"ident",
-					"srcpos":"938:32"
+					"srcpos":"934:32"
 				},
 				"kind":"generic",
-				"srcpos":"938:32"
+				"srcpos":"934:32"
 			},
-			"srcpos":"938:32"
+			"srcpos":"934:32"
 		}
 	}],
 	"namespace":"box2dxt",
