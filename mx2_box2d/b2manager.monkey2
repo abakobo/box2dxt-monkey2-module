@@ -100,6 +100,33 @@ Class b2Manager Extends Resource
 		
 	End
 	
+	Method DestroyBody(body:b2Body)
+		#rem
+		Local l:=Self.bodyInfos.Length
+		Self.bodyInfos=Self.bodyInfos.Resize(l+1)
+		Self.bodyInfos[l]=New b2BodyImageInfo()
+		Local bii:=Self.bodyInfos[l]
+		bii.index=l
+		bii.bodyName=name
+		bii.body=Self.world.CreateBody(bd)
+		bii.bodyUserData=New StringMap<Variant>
+		bii.bodyUserData["b2ManagerBodyInfo"]=bii
+		bii.body.SetUserData(Cast<Void Ptr>(bii.bodyUserData))
+		
+		Return bii.body
+		#End
+		'trouver les joints associés et les virer du stack de b2Manager
+		Local jointStack:=New Stack<b2Joint>
+		'trouver les shapes et fixtures et les virer du stack b2Manager
+		
+		'Virer le body du stack b2Manager
+		
+		Self.world.DestroyBody(body)
+		
+	End
+	
+	
+	
 	Method CreateFixture:b2Fixture(b:b2Body,fd:b2FixtureDef,name:String="")
 		
 		If name="" Then name=Self.GetBodyName(b)+"_Fixture"
@@ -550,6 +577,23 @@ Class b2Manager Extends Resource
 	
 		#If __DEBUG__
 			Print "No joint with name "+name+" !!!!!!!!!!!!!!!"
+		#End
+		
+		Return Null
+	
+	End
+	
+	Method GetJointInfo:b2JointInfo(joint:b2Joint)
+
+		For Local jo:=Eachin jointInfos
+			If jo.theb2Joint=joint
+				Return jo
+			End
+			
+		Next
+	
+		#If __DEBUG__
+			Print "No jointInfo found with given joint  for GetJointInfo !!!!!!!!!!!!!!!"
 		#End
 		
 		Return Null
