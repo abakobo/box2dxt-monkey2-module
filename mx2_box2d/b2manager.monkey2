@@ -101,28 +101,75 @@ Class b2Manager Extends Resource
 	End
 	
 	Method DestroyBody(body:b2Body)
-		#rem
-		Local l:=Self.bodyInfos.Length
-		Self.bodyInfos=Self.bodyInfos.Resize(l+1)
-		Self.bodyInfos[l]=New b2BodyImageInfo()
-		Local bii:=Self.bodyInfos[l]
-		bii.index=l
-		bii.bodyName=name
-		bii.body=Self.world.CreateBody(bd)
-		bii.bodyUserData=New StringMap<Variant>
-		bii.bodyUserData["b2ManagerBodyInfo"]=bii
-		bii.body.SetUserData(Cast<Void Ptr>(bii.bodyUserData))
-		
-		Return bii.body
-		#End
 		'trouver les joints associés et les virer du stack de b2Manager
-		Local jointStack:=New Stack<b2Joint>
-		'trouver les shapes et fixtures et les virer du stack b2Manager
+		Local jointEdge:b2JointEdge Ptr=body.GetJointList()
 		
-		'Virer le body du stack b2Manager
+		Local getOut:=False
+		Repeat
+			If jointEdge<>Null
+				If jointEdge->joint<>Null
+					Self.jointInfos.Remove(Self.GetJointInfo(jointEdge->joint))'on peut enlever pendant l'iteration car on destroy pas les joints
+					jointEdge=jointEdge->nextt
+				Else
+					getOut=True 'ceci ne devrait pas arriver..
+				End
+			Else
+				getOut=True
+			End
+		Until getOut=True
 		
-		Self.world.DestroyBody(body)
+		'trouver les fixtures et les virer du stack b2Manager
 		
+		Local fixtureInfoStack:=New Stack<b2FixtureInfo>
+		Local currentFixture:b2Fixture=body.GetFixtureList()
+		
+		getOut=False
+		Repeat
+			If currentFixture<>Null
+				Self.fixtureInfos.Remove(Self.GetFixtureInfo(currentFixture))
+				currentFixture=currentFixture.GetNext()
+			Else
+				getOut=True
+			End
+		Until getOut=True
+		
+		'virer les bodies et leurs imges
+		
+		Local bi:=Self.GetBodyInfo(body)
+		bi.deleted=True 'flag comme effacé mais faut cleaner avec Self.CleanBodyInfos()
+		Self.bodyImageMap.Remove(bi.index)
+		
+		Self.world.DestroyBody(body) 'ce qui vire les fixtures et joints associés dans b2world
+		'Self.CleanBodyInfos()
+		Self.SortRenderOrderToBodyDrawStack()
+		
+	End
+	
+	Method DestroyBodyClean(body:b2Body)
+		DestroyBody(body)
+		CleanBodyInfos()
+	End
+	
+	Method CleanBodyInfos()
+		
+		Local count:=0
+		For Local bi:=Eachin bodyInfos
+			If bi.deleted=False Then count+=1
+		Next
+		Local newBodyInfos:=New b2BodyImageInfo[count]
+		Local newBodyImageMap:=New IntMap<Image>
+		count=0
+		For Local i:=0 Until bodyInfos.Length
+			If bodyInfos[i].deleted=False
+				newBodyInfos[count]=bodyInfos[i]
+				newBodyInfos[count].index=count
+				If bodyImageMap.Contains(i) Then newBodyImageMap[count]=bodyImageMap[i]
+				count+=1
+			End
+		Next
+		bodyInfos=newBodyInfos
+		bodyImageMap=newBodyImageMap
+		'est-ce qu'il ne faut pas cleaner le UserData et Images (resource), je pense que non, le GC devrait s'en occuper vu que c'est un objet mx2
 	End
 	
 	

@@ -223,6 +223,7 @@ Class b2BodyImageInfo
 	
 	Field body:b2Body
 	Field index:Int
+	Field deleted:=False
 	
 	Field bodyName:String
 	
