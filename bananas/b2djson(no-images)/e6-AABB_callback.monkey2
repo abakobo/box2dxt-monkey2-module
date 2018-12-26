@@ -93,7 +93,7 @@ Class Box2DgfxTest Extends Window
 
 		Local mousePhysicsLocation:=DDrawer.ToPhysicsLocation(-transfoMat*MouseLocation)
 		
-		Local rayLength:=250.0
+		
 		canvas.Color=Color.Red
 		
 		If Mouse.ButtonPressed(MouseButton.Left)

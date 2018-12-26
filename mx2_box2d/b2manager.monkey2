@@ -42,6 +42,11 @@ Class b2Manager Extends Resource
 	
 	'Public
 	
+		'
+	'
+	' Methodes 'Manuelles'
+	'
+	'
 	Method New(gravity:b2Vec2,pScale:Float=15,yAxisInvert:Bool=True)
 		
 		physScale=pScale
@@ -56,31 +61,7 @@ Class b2Manager Extends Resource
 			
 	End
 	
-	Method New (jsonPath:String,pScale:Float=15,yAxisInvert:Bool=True,offset:b2Vec2=New b2Vec2(0,0))
-		
-		physScale=pScale
-		yAxisInversion=yAxisInvert
-		
-		b2dJsons[0]=New mx2b2dJson.b2dJson()
-		
-		
-		world=Loadb2dJsonWithb2dJsonRef(b2dJsons[0] , jsonPath, Null, offset) 'offset TODO!
-		
-		debugDrawer=New b2DebugDraw(physScale,yAxisInversion)
-		
-		world.SetDebugDraw( debugDrawer  )
-		debugDrawer.SetFlags( e_shapeBit|e_jointBit )
-		
-		bodyInfos=Createb2BodyImageInfoArray(world,jsonPath )
-		bodyImageMap=Createb2BodyImageMap(bodyInfos)
-		
-		fixtureInfos=Createb2FixtureInfoStack(world,jsonPath)
-		
-		jointInfos=Createb2JointInfoStack(world,jsonPath)',b2dJsons[0])
-		
-		SortRenderOrderToBodyDrawStack()
-		
-	End
+	
 	
 	Method CreateBody:b2Body(bd:b2BodyDef,name:String="nonamebody")
 		
@@ -100,48 +81,58 @@ Class b2Manager Extends Resource
 		
 	End
 	
-	Method DestroyBody(body:b2Body)
+	Method DestroyBody:Bool(body:b2Body)
 		'trouver les joints associés et les virer du stack de b2Manager
-		Local jointEdge:b2JointEdge Ptr=body.GetJointList()
-		
-		Local getOut:=False
-		Repeat
-			If jointEdge<>Null
-				If jointEdge->joint<>Null
-					Self.jointInfos.Remove(Self.GetJointInfo(jointEdge->joint))'on peut enlever pendant l'iteration car on destroy pas les joints
-					jointEdge=jointEdge->nextt
+		If body<>Null
+			Local jointEdge:b2JointEdge Ptr=body.GetJointList()
+			
+			Local getOut:=False
+			Repeat
+				If jointEdge<>Null
+					If jointEdge->joint<>Null
+						Self.jointInfos.Remove(Self.GetJointInfo(jointEdge->joint))'on peut enlever pendant l'iteration car on destroy pas les joints
+						jointEdge=jointEdge->nextt
+					Else
+						getOut=True 'ceci ne devrait pas arriver..
+					End
 				Else
-					getOut=True 'ceci ne devrait pas arriver..
+					getOut=True
 				End
-			Else
-				getOut=True
-			End
-		Until getOut=True
-		
-		'trouver les fixtures et les virer du stack b2Manager
-		
-		Local fixtureInfoStack:=New Stack<b2FixtureInfo>
-		Local currentFixture:b2Fixture=body.GetFixtureList()
-		
-		getOut=False
-		Repeat
-			If currentFixture<>Null
-				Self.fixtureInfos.Remove(Self.GetFixtureInfo(currentFixture))
-				currentFixture=currentFixture.GetNext()
-			Else
-				getOut=True
-			End
-		Until getOut=True
-		
-		'virer les bodies et leurs imges
-		
-		Local bi:=Self.GetBodyInfo(body)
-		bi.deleted=True 'flag comme effacé mais faut cleaner avec Self.CleanBodyInfos()
-		Self.bodyImageMap.Remove(bi.index)
-		
-		Self.world.DestroyBody(body) 'ce qui vire les fixtures et joints associés dans b2world
-		'Self.CleanBodyInfos()
-		Self.SortRenderOrderToBodyDrawStack()
+			Until getOut=True
+			
+			'trouver les fixtures et les virer du stack b2Manager
+			
+			Local fixtureInfoStack:=New Stack<b2FixtureInfo>
+			Local currentFixture:b2Fixture=body.GetFixtureList()
+			
+			getOut=False
+			Repeat
+				If currentFixture<>Null
+					Self.fixtureInfos.Remove(Self.GetFixtureInfo(currentFixture))
+					currentFixture=currentFixture.GetNext()
+				Else
+					getOut=True
+				End
+			Until getOut=True
+			
+			'virer les bodies et leurs imges
+			
+			Local bi:=Self.GetBodyInfo(body)
+			bi.deleted=True 'flag comme effacé mais faut cleaner avec Self.CleanBodyInfos()
+			Self.bodyImageMap.Remove(bi.index)
+			
+			Self.world.DestroyBody(body) 'ce qui vire les fixtures et joints associés dans b2world
+			'Self.CleanBodyInfos()
+			Self.SortRenderOrderToBodyDrawStack()
+			
+			Return True
+		Else
+			
+			#If __DEBUG__
+				Print "body is Null for destroyBody()"
+			#End
+			Return False
+		End
 		
 	End
 	
@@ -172,7 +163,56 @@ Class b2Manager Extends Resource
 		'est-ce qu'il ne faut pas cleaner le UserData et Images (resource), je pense que non, le GC devrait s'en occuper vu que c'est un objet mx2
 	End
 	
+	Method AddImageToBody (bi:b2BodyImageInfo,img:Image , worldHeight:Float=1.0,renderOrder:Int=1,opacity:Float=1.0,flip:Int=1,locPos:Vec2f=New Vec2f(0,0),locAngle:Float=0.0,aspectScale:Float=1.0)
+
+		If img<>Null
+			bi.image=img
+			bi.imageRubeName="manually_Added_from_mojo.graphics.Image"
+			bi.imageFileName="manually_Added_from_mojo.graphics.Image"
+			bi.imageLocalPosition=locPos
+			bi.imageLocalAngle=locAngle
+			bi.imageAspectScale=aspectScale
+			bi.imageWorldHeight=worldHeight
+			Local fact:=bi.imageWorldHeight/bi.image.Height
+			bi.imageRenderScale=New Vec2f(fact*bi.imageAspectScale,fact)
+			bi.imageRenderOrder=renderOrder
+			bi.imageOpacity=opacity
+			bi.imageFlip=flip
+			Self.bodyImageMap[bi.index]=img
+			Self.SortRenderOrderToBodyDrawStack()
+		Else
+			#If __DEBUG__
+					Print "Image is Null for b2Manager.AddImage()"
+			#End
+		End
+			
+	End
 	
+	Method AddImageToBody (body:b2Body,img:Image , worldHeight:Float=1.0,renderOrder:Int=1,opacity:Float=1.0,flip:Int=1,locPos:Vec2f=New Vec2f(0,0),locAngle:Float=0.0,aspectScale:Float=1.0)
+
+		Local bi:=Self.GetBodyInfo(body)
+		If bi<>Null
+			Self.AddImageToBody (bi,img , worldHeight,renderOrder,opacity,flip,locPos,locAngle,aspectScale)
+		Else
+			#If __DEBUG__
+				Print "body is not defined in b2Manager for b2Manager.AddImage()"
+			#End	
+		End
+			
+	End
+	
+	Method AddImageToBody (name:String,img:Image , worldHeight:Float=1.0,renderOrder:Int=1,opacity:Float=1.0,flip:Int=1,locPos:Vec2f=New Vec2f(0,0),locAngle:Float=0.0,aspectScale:Float=1.0)
+
+		Local bi:=Self.GetBodyInfo(Self.GetBody(name))
+		If bi<>Null
+			Self.AddImageToBody (bi,img , worldHeight,renderOrder,opacity,flip,locPos,locAngle,aspectScale)
+		Else
+			#If __DEBUG__
+				Print "no body found with name or body is not defined in b2Manager for b2Manager.AddImage()"
+			#End	
+		End
+			
+	End
 	
 	Method CreateFixture:b2Fixture(b:b2Body,fd:b2FixtureDef,name:String="")
 		
@@ -188,6 +228,39 @@ Class b2Manager Extends Resource
 		Self.fixtureInfos.Add(fi)
 		
 		Return fi.fixture
+		
+	End
+	
+	
+	'
+	'
+	' Methodes 'Classiques'
+	'
+	'
+	
+	Method New (jsonPath:String,pScale:Float=15,yAxisInvert:Bool=True,offset:b2Vec2=New b2Vec2(0,0))
+		
+		physScale=pScale
+		yAxisInversion=yAxisInvert
+		
+		b2dJsons[0]=New mx2b2dJson.b2dJson()
+		
+		
+		world=Loadb2dJsonWithb2dJsonRef(b2dJsons[0] , jsonPath, Null, offset) 'offset TODO!
+		
+		debugDrawer=New b2DebugDraw(physScale,yAxisInversion)
+		
+		world.SetDebugDraw( debugDrawer  )
+		debugDrawer.SetFlags( e_shapeBit|e_jointBit )
+		
+		bodyInfos=Createb2BodyImageInfoArray(world,jsonPath )
+		bodyImageMap=Createb2BodyImageMap(bodyInfos)
+		
+		fixtureInfos=Createb2FixtureInfoStack(world,jsonPath)
+		
+		jointInfos=Createb2JointInfoStack(world,jsonPath)',b2dJsons[0])
+		
+		SortRenderOrderToBodyDrawStack()
 		
 	End
 	
@@ -284,10 +357,11 @@ Class b2Manager Extends Resource
 	End
 
 	
-	
+	#rem	
 	Method UpdateInfos()
 		'usefull?
 	End
+	#end
 	
 	Method GetBodies:b2Body[](name:String)
 		
@@ -878,9 +952,11 @@ Class b2Manager Extends Resource
 	End
 	
 	Method GetBodyName:String(b:b2Body)
-		
-		Return GetBodyInfo(b).bodyName
-		
+		If b<>Null
+			Return GetBodyInfo(b).bodyName
+		Else
+			Return ""
+		End
 	End
 	
 	Method GetFixtureInfo:b2FixtureInfo(f:b2Fixture)
