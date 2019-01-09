@@ -263,6 +263,7 @@ Class b2Body Extension
 End
 
 Class b2Fixture Extension
+	
 	Method GetUserDataToMap:StringMap<Variant>()
 		
 		
@@ -498,7 +499,9 @@ Class b2Fixture Extension
 	
 	End
 	
-
+	Method GetName:String()
+		Return Self?.GetUserDataFixtureInfo()?.fixtureName
+	End
 
 End
 
@@ -737,6 +740,10 @@ Class b2Joint Extension
 		
 			Return Null
 		
+		End
+		
+		Method GetName:String()
+			Return Self?.GetUserDataJointInfo()?.jointName
 		End
 
 End
