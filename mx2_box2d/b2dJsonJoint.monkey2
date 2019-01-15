@@ -15,8 +15,7 @@ Class b2JointInfo
 	Field theb2Joint:b2Joint
 	Field jointName:String
 	Field jointType:String
-	Field jointUserData:StringMap<Variant>
-	
+	Field jointUserData:StringMap<Variant>	
 End
 
 '-----------

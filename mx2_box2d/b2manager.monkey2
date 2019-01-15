@@ -15,7 +15,6 @@ Using mojo..
 Using box2d..
 Using mx2b2dJson..
 
-
 Class b2Manager Extends Resource
 	
 	Field world:b2World
@@ -42,11 +41,12 @@ Class b2Manager Extends Resource
 	
 	'Public
 	
-		'
-	'
-	' Methodes 'Manuelles'
 	'
 	'
+	' Manual Body Creation
+	'
+	'
+	
 	Method New(gravity:b2Vec2,pScale:Float=15,yAxisInvert:Bool=True)
 		
 		physScale=pScale
@@ -58,6 +58,11 @@ Class b2Manager Extends Resource
 		
 		world.SetDebugDraw( debugDrawer  )
 		debugDrawer.SetFlags( e_shapeBit|e_jointBit )
+		
+		bodyInfos=New b2BodyImageInfo[0]
+		bodyImageMap=New IntMap<Image>
+		fixtureInfos=New Stack<b2FixtureInfo>
+		jointInfos=New Stack<b2JointInfo>
 			
 	End
 	
@@ -81,7 +86,44 @@ Class b2Manager Extends Resource
 		
 	End
 	
-	Method DestroyBody:Bool(body:b2Body)
+	Method CreateBox:b2Body(width:Float,height:Float,initialPosition:b2Vec2,initialAngle:Float=0 , name:String="UnnamedBox" ,  density:Float=1.0 , friction:Float=1.0 , restitution:Float=0.3 , type:b2BodyType=b2BodyType.b2_dynamicBody ,image:Image=Null , imageHeigth:Float=0.0 , imageStrech:Float=1.0 , imageHandle:Vec2f=New Vec2f(0.5,0.5) )
+	
+			Local bd:b2BodyDef
+			bd.type = type
+			bd.position=initialPosition
+			bd.angle = initialAngle
+			Local body:=Self.CreateBody(bd,name)
+			
+			Local fd:b2FixtureDef
+			fd.friction = friction
+			fd.restitution = restitution
+			fd.density = density
+			
+			Local pshape:=New b2PolygonShape()
+			Local vs:=New b2Vec2[4]
+			
+			vs[0].Set(0.5*width, 0.5*height)
+			vs[1].Set(-0.5*width, 0.5*height)
+			vs[2].Set(-0.5*width, -0.5*height)
+			vs[3].Set(0.5*width, -0.5*height)
+			pshape.Set(vs.Data, 4)
+			
+			fd.shape = pshape
+			
+			Self.CreateFixture(body,fd,name+"Fixture")
+			
+			If image<>Null
+				If imageHeigth=0.0 Then imageHeigth=height
+				image.Handle=imageHandle
+				'ici add Image
+			End
+			
+			Return body
+		
+	End
+	
+	
+	Method DestroyBodyNotClean:Bool(body:b2Body)
 		'trouver les joints associés et les virer du stack de b2Manager
 		If body<>Null
 			Local jointEdge:b2JointEdge Ptr=body.GetJointList()
@@ -137,7 +179,7 @@ Class b2Manager Extends Resource
 	End
 	
 	Method DestroyBodyClean(body:b2Body)
-		DestroyBody(body)
+		DestroyBodyNotClean(body)
 		CleanBodyInfos()
 	End
 	
@@ -163,7 +205,7 @@ Class b2Manager Extends Resource
 		'est-ce qu'il ne faut pas cleaner le UserData et Images (resource), je pense que non, le GC devrait s'en occuper vu que c'est un objet mx2
 	End
 	
-	Method AddImageToBody (bi:b2BodyImageInfo,img:Image , worldHeight:Float=1.0,renderOrder:Int=1,opacity:Float=1.0,flip:Int=1,locPos:Vec2f=New Vec2f(0,0),locAngle:Float=0.0,aspectScale:Float=1.0)
+	Method SetBodyImage (bi:b2BodyImageInfo,img:Image , worldHeight:Float=1.0,renderOrder:Int=1,opacity:Float=1.0,flip:Int=1,locPos:Vec2f=New Vec2f(0,0),locAngle:Float=0.0,aspectScale:Float=1.0)
 
 		If img<>Null
 			bi.image=img
@@ -188,24 +230,24 @@ Class b2Manager Extends Resource
 			
 	End
 	
-	Method AddImageToBody (body:b2Body,img:Image , worldHeight:Float=1.0,renderOrder:Int=1,opacity:Float=1.0,flip:Int=1,locPos:Vec2f=New Vec2f(0,0),locAngle:Float=0.0,aspectScale:Float=1.0)
+	Method SetBodyImage (body:b2Body,img:Image , worldHeight:Float=1.0,renderOrder:Int=1,opacity:Float=1.0,flip:Int=1,locPos:Vec2f=New Vec2f(0,0),locAngle:Float=0.0,aspectScale:Float=1.0)
 
 		Local bi:=Self.GetBodyInfo(body)
 		If bi<>Null
-			Self.AddImageToBody (bi,img , worldHeight,renderOrder,opacity,flip,locPos,locAngle,aspectScale)
+			Self.SetBodyImage (bi,img , worldHeight,renderOrder,opacity,flip,locPos,locAngle,aspectScale)
 		Else
 			#If __DEBUG__
-				Print "body is not defined in b2Manager for b2Manager.AddImage()"
+				Print "body is not defined in b2Manager for b2Manager.AddImageToBody()"
 			#End	
 		End
 			
 	End
 	
-	Method AddImageToBody (name:String,img:Image , worldHeight:Float=1.0,renderOrder:Int=1,opacity:Float=1.0,flip:Int=1,locPos:Vec2f=New Vec2f(0,0),locAngle:Float=0.0,aspectScale:Float=1.0)
+	Method SetBodyImage (name:String,img:Image , worldHeight:Float=1.0,renderOrder:Int=1,opacity:Float=1.0,flip:Int=1,locPos:Vec2f=New Vec2f(0,0),locAngle:Float=0.0,aspectScale:Float=1.0)
 
 		Local bi:=Self.GetBodyInfo(Self.GetBody(name))
 		If bi<>Null
-			Self.AddImageToBody (bi,img , worldHeight,renderOrder,opacity,flip,locPos,locAngle,aspectScale)
+			Self.SetBodyImage (bi,img , worldHeight,renderOrder,opacity,flip,locPos,locAngle,aspectScale)
 		Else
 			#If __DEBUG__
 				Print "no body found with name or body is not defined in b2Manager for b2Manager.AddImage()"
@@ -213,6 +255,14 @@ Class b2Manager Extends Resource
 		End
 			
 	End
+	
+	'
+	'
+	'
+	' 	Manual Fixture creation
+	'
+	'
+	
 	
 	Method CreateFixture:b2Fixture(b:b2Body,fd:b2FixtureDef,name:String="")
 		
@@ -230,6 +280,102 @@ Class b2Manager Extends Resource
 		Return fi.fixture
 		
 	End
+	
+	
+	'----------------------------
+	'
+	' Manual Shapes
+	'
+	'--------------------------
+	
+	
+	Method CreatePolygonShape:b2PolygonShape(vertices:b2Vec2[])
+		
+		If vertices.Length<3
+			#If __DEBUG__
+				Print "ERROR less than 3 vertices for CreatePolygonShape . "
+			#End
+			Return Null
+		End
+		If vertices.Length>8
+			#If __DEBUG__
+				Print "ERROR: too much vertices(v>8) for b2Manager.CreatePolygonShape(verts[]). Use CreatePolygonShapes(verts[]) instead."
+			#End
+			Return Null
+		End
+		 
+		Local pshape:=New b2PolygonShape()
+		pshape.Set(vertices.Data, vertices.Length)
+		
+		If Not pshape.Validate()
+			#If __DEBUG__
+				Print "ERROR vertices create a concave poly for b2Manager.CreatePolygonShape(verts[]) . Use CreatePolygonShapes(verts[]) instead."
+			#End
+			Return Null
+		End
+		
+		Return pshape
+		
+	End
+	
+	Method CreatePolygonShapes:b2PolygonShape[](vertices:b2Vec2[])
+		Return Null	
+	End
+	
+	
+	
+	
+	
+	'
+	'------------------------
+	'
+	' Manual Joints creation
+	'
+	'-------------------------
+	'
+		
+	
+	Method CreateRevoluteJoint:b2Joint(bodyA:b2Body,bodyB:b2Body,localAnchorA:b2Vec2=New b2Vec2(0,0) , localAnchorB:b2Vec2=New b2Vec2(0,0) , name:String="" , collideConnected:Bool=False , enableMotor:Bool=False, motorSpeed:Float=0.0 , maxMotorTorque:Float=10.0 , enableLimit:Bool=False , referenceAngle:Float=0.0 , lowerAngle:Float=-0.7 , upperAngle:Float=0.7 )
+			
+
+		Local jdRe:b2RevoluteJointDef
+		jdRe.bodyA = bodyA
+		jdRe.bodyB = bodyB
+		jdRe.collideConnected = collideConnected
+		jdRe.localAnchorA = localAnchorA
+		jdRe.localAnchorB = localAnchorB
+		jdRe.referenceAngle = referenceAngle
+		jdRe.enableLimit = enableLimit
+		jdRe.lowerAngle = lowerAngle
+		jdRe.upperAngle = upperAngle
+		jdRe.enableMotor = enableMotor
+		jdRe.motorSpeed = motorSpeed
+		jdRe.maxMotorTorque = maxMotorTorque
+		
+		Return Self.CreateRevoluteJoint(jdRe,name)
+			
+	End
+	
+
+	
+	Method CreateRevoluteJoint:b2Joint(revoluteJointDef:b2RevoluteJointDef,name:String="")
+		
+		If name="" Then name=revoluteJointDef.bodyA.GetName()+"-"+revoluteJointDef.bodyB.GetName()+"_revoluteJoint"
+
+		Local ji:=New b2JointInfo()
+		ji.theb2Joint=world.CreateJoint( revoluteJointDef )
+		ji.jointName=name
+		ji.jointType="revolute"
+		ji.jointUserData=New StringMap<Variant>
+		ji.jointUserData["b2ManagerJointInfo"]=ji
+		ji.theb2Joint.SetUserData(Cast<Void Ptr>(ji.jointUserData))
+		
+		Self.jointInfos.Add(ji)
+		
+		Return ji.theb2Joint
+			
+	End
+	
 	
 	
 	'
@@ -1277,5 +1423,17 @@ Class b2Manager Extends Resource
 	End
 	
 End
+
+
+
+'
+'
+'
+'  Polygon functions
+'
+'
+'
+
+
 
 
