@@ -68,13 +68,28 @@ Struct Line2D
 		End
 	End
 	
+	Method IsOkToIntersect:Bool(line:Line2D)
+
+		Local divisor:Double=1.0*(1.0*line.d.y*Self.d.x*1.0)-1.0*(1.0*Self.d.y*1.0*line.d.x)
+		
+		If divisor<1.0e-35 And divisor>-1.0e-35
+			Return False
+			Print "not ok to intersect"+divisor
+		End
+		
+		Return True
+
+		
+	End
+	
 	Method Intersection:Vec2<Double>(line:Line2D)
 
 		'Print "parall: "+Self.IsParallel(line)
 
-		Local divisor:Double=(line.d.y*Self.d.x)-(Self.d.y*line.d.x)
-		If divisor=0
-			Print "Error: divisor=0 returning Vec2 Null(0,0)! You should use Line2D.IsParallel before calling Line2D.intersection!"
+		Local divisor:Double=1.0*(1.0*line.d.y*Self.d.x*1.0)-1.0*(1.0*Self.d.y*1.0*line.d.x)
+		Print "div--: "+divisor
+		If divisor=0.0
+			Print "Error: divisor=0 returning Vec2 Null(0,0)! You should use Line2D.Parallel before calling Line2D.intersection!"
 			Return Null
 		End
 		
@@ -91,7 +106,10 @@ Struct Line2D
 	
 	'donne false pour ligne égales même si en vrai elles on infinité d'intersections et false si touche le bord
 	Method SegmentIntersects:Bool(line:Line2D)
-		If Self.IsParallel(line) Then Return False
+		
+		'If Self.IsParallel(line) Then Return False
+		If Not Self.IsOkToIntersect(line) Then Return False
+		
 		Local inter:=Self.Intersection(line)
 		Local o2:=o+d
 		Local selfMinx:=Min(o.x,o2.x)

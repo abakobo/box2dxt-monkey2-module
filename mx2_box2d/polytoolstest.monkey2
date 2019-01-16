@@ -2,7 +2,7 @@ Namespace myapp
 
 #Import "<box2dxt>"
 #Import "polytools.monkey2"
-#Import "akofw.monkey2"
+'#Import "akofw.monkey2"
 
 
 Using std..
@@ -10,7 +10,7 @@ Using mojo..
 Using box2d..
 Using box2dxt..
 Using polytools..
-Using akofw..
+'Using akofw..
 
 Class MyWindow Extends Window
 	
@@ -28,29 +28,34 @@ Class MyWindow Extends Window
 		
 		'pm=New b2Manager(New b2Vec2(0,-10))
 		
-		poly=New b2Vec2[8]
+		poly=New b2Vec2[5]
 		
 		
 		tpoly=New Stack<b2Vec2>
 		
 		currentV=0
 		
-		#rem
+		
 		poly[0]=New b2Vec2(10,10)
 		poly[1]=New b2Vec2(100,10)
-		poly[2]=New b2Vec2(100,100)
+		poly[2]=New b2Vec2(100,120)
 		poly[3]=New b2Vec2(300,10)
 		poly[4]=New b2Vec2(400,400)
-		poly[5]=New b2Vec2(350,460)
-		poly[6]=New b2Vec2(600,200)
-		poly[7]=New b2Vec2(10,10)
-		#end
+		'poly[5]=New b2Vec2(350,460)
+		'poly[6]=New b2Vec2(600,460)
+		'poly[7]=New b2Vec2(10,10)
 		
-		Local l1:=New Line2D(New Vec2f(0,0),New Vec2f(1,0))
-		Local l2:=New Line2D(New Vec2f(2,0),New Vec2f(0,1))
+		state="init"
+	
 		
+		Local l1:=New Line2D(poly[0],poly[4]-poly[0])
+		Local l2:=New Line2D(poly[2],poly[1]-poly[2])
+
+		Print "test"
 		Print l1.Intersection(l2)
 		Print l1.SegmentIntersects(l2)
+		
+		poly2=cleanPolygon(poly)
 		
 		
 	End
@@ -114,7 +119,24 @@ Class MyWindow Extends Window
 				currentV-=1
 			End
 			If currentV>poly2.Length-1 Then currentV=0
-			If currentV<0 Then currentV=poly.Length-1
+			If currentV<0 Then currentV=poly2.Length-1
+			
+			Local v1:=poly2[currentV+1]-poly2[currentV] 'inversion du Vect pour faire angle "intuitivement visible"
+			Local v2:=poly2[currentV+1]-poly2[currentV+2]
+			Local origin:=New b2Vec2 (320,240)
+			
+			
+			
+			
+			canvas.Color=Color.Green
+	
+			canvas.DrawLine(origin,origin+v1)
+			canvas.DrawLine(origin,origin+v2)
+		
+			
+	
+	
+			canvas.Color=Color.Blue
 			canvas.DrawCircle(poly2[currentV].x,poly2[currentV].y,3)
 			
 		End
