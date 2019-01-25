@@ -73,6 +73,7 @@ Class Stack<T> Extension
 			Self.Swap(i,Int(Rnd(0,Self.Length-0.00000001)))
 		Next
 	End
+
 End
 
 '---------------------------------------
@@ -133,7 +134,7 @@ Struct Line2D
 	End
 	
 	'donne false pour ligne égales même si en vrai elles on infinité d'intersections et false si touche le bord
-	Method SegmentIntersects:Bool(line:Line2D)
+	Method SegmentIntersectsLimitsExcluded:Bool(line:Line2D)
 		
 		If Not Self.IsOkToIntersect(line) Then Return False
 		
@@ -174,6 +175,31 @@ Struct Line2D
 		
 	End
 	
+	Method IsCollinearPointInside:Bool(p:Vec2d)
+		
+			Local inter:=p
+			
+			Local o2:=o+d
+			
+			Local selfMinx:=Min(o.x,o2.x)
+			Local selfMaxx:=Max(o.x,o2.x)
+			Local selfMiny:=Min(o.y,o2.y)
+			Local selfMaxy:=Max(o.y,o2.y)
+			
+			Local insideSelf:=False
+			
+			If ((selfMinx<=inter.x) And (inter.x<=selfMaxx)) Or ((selfMinx=selfMaxx) And (selfMinx=inter.x))
+				If ((selfMiny<=inter.y) And (inter.y<=selfMaxy)) Or ((selfMiny=selfMaxy) And (selfMiny=inter.y))
+					Return True
+				Else
+					Return False
+				End
+			End
+			
+			Return False
+			
+	End
+	
 	Method SegmentIntersectsPAB:PointAndBool(line:Line2D)
 			
 			If Not Self.IsOkToIntersect(line)
@@ -181,8 +207,8 @@ Struct Line2D
 			End
 			
 			Local inter:=Self.Intersection(line)
-			Local intx:=inter.x
-			Local inty:=inter.y
+			'Local intx:=inter.x
+			'Local inty:=inter.y
 			Local o2:=o+d
 			Local selfMinx:=Min(o.x,o2.x)
 			Local selfMaxx:=Max(o.x,o2.x)
@@ -191,8 +217,8 @@ Struct Line2D
 			
 			Local insideSelf:=False
 			
-			If ((selfMinx<inter.x) And (inter.x<selfMaxx)) Or ((selfMinx=selfMaxx) And (selfMinx=inter.x))
-				If ((selfMiny<inter.y) And (inter.y<selfMaxy)) Or ((selfMiny=selfMaxy) And (selfMiny=inter.y))
+			If ((selfMinx<=inter.x) And (inter.x<=selfMaxx)) Or ((selfMinx=selfMaxx) And (selfMinx=inter.x))
+				If ((selfMiny<=inter.y) And (inter.y<=selfMaxy)) Or ((selfMiny=selfMaxy) And (selfMiny=inter.y))
 					insideSelf=True
 				Else
 					New PointAndBool(inter,False)
@@ -205,8 +231,8 @@ Struct Line2D
 			Local lineMiny:=Min(line.o.y,lineo2.y)
 			Local lineMaxy:=Max(line.o.y,lineo2.y)
 			Local insideLine:=False
-			If ((lineMinx<inter.x) And (inter.x<lineMaxx)) Or ((lineMinx=lineMaxx) And (lineMinx=inter.x))
-				If ((lineMiny<inter.y) And (inter.y<lineMaxy)) Or ((lineMiny=lineMaxy) And (lineMiny=inter.y))
+			If ((lineMinx<=inter.x) And (inter.x<=lineMaxx)) Or ((lineMinx=lineMaxx) And (lineMinx=inter.x))
+				If ((lineMiny<=inter.y) And (inter.y<=lineMaxy)) Or ((lineMiny=lineMaxy) And (lineMiny=inter.y))
 					insideLine=True
 				End
 			End
@@ -216,6 +242,19 @@ Struct Line2D
 			End
 			
 			Return New PointAndBool(inter,False)
+			
+		End
+		
+		Method IsCollinear:Bool(l:Line2D) 
+			
+			If Self.IsParallel(l)
+				Local p2:=Self.o+Self.d
+				If ((l.o.y - p2.y) * (p2.x - Self.o.x) = (p2.y - Self.o.y) * (l.o.x - p2.x))
+					Return True
+				End
+			End
+			
+			Return False
 			
 		End
 
@@ -229,6 +268,17 @@ Struct PointAndBool
 	Method New(point:Vec2d,bol:Bool)
 		p=point
 		b=bol
+	End
+End
+
+Struct PointAndInt
+	
+	Field p:Vec2d
+	Field i:Int
+	
+	Method New(point:Vec2d,in:Int)
+		p=point
+		i=in
 	End
 End
 
@@ -246,10 +296,10 @@ Struct SegmentPWI
 		Local line1:=pp1.ToLine2D()
 		Local line2:=pp2.ToLine2D()
 		
-		Local pwi:PointAndBool=line1.SegmentIntersectsPAB(line2)
+		Local pabool:PointAndBool=line1.SegmentIntersectsPAB(line2)
 		
-		hasIntersection=pwi.b
-		intersection=pwi.p
+		hasIntersection=pabool.b
+		intersection=pabool.p
 				
 	End
 	
@@ -316,4 +366,20 @@ Function ArrayToStack<T>:Stack<T>(arr:T[])
 		Next
 	End
 	Return retStack
+End
+
+Function b2Vec2ArrayToVec2dArray:Vec2d[](inArr:b2Vec2[])
+	Local retArr:=New Vec2d[inArr.Length]
+	For Local i:=0 Until inArr.Length
+		retArr[i]=inArr[i]
+	Next
+	Return retArr
+End
+
+Function Vec2dArrayTob2Vec2Array:b2Vec2[](inArr:Vec2d[])
+	Local retArr:=New b2Vec2[inArr.Length]
+	For Local i:=0 Until inArr.Length
+		retArr[i]=inArr[i]
+	Next
+	Return retArr
 End
