@@ -3,15 +3,27 @@ Namespace box2dxt.extsandfuncs
 #Import "<std>"
 #Import "<mojo>"
 #Import "<box2d>"
-'#Import "<box2dxt>"
 
 Using std..
 
 
 
-'camera
 
-'Matrix reverse trans
+Class Canvas Extension
+	
+	Method SetCameraByCenter(point:Vec2f,zoom:Float=1.0,rotation:Float=0)
+	
+		Translate(Viewport.Width/2,Viewport.Height/2)
+		Scale(zoom,zoom)
+		Rotate(rotation)
+		Translate(-point)
+	
+	End
+	
+End
+
+'to add: Matrix reverse trans
+
 
 '-------------------------------------------
 '
