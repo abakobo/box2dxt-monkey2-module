@@ -10,6 +10,7 @@ Namespace box2dxt
 
 #Import "UserDataExtensions.monkey2"
 
+#Import "complexpoly.monkey2"
 #Import "extsandfuncs.monkey2"
 
 Using std..

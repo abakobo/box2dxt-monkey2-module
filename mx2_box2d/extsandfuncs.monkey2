@@ -2,28 +2,79 @@ Namespace box2dxt.extsandfuncs
 
 #Import "<std>"
 #Import "<mojo>"
-#Import "<box2d>"
 
 Using std..
-
+Using mojo..
+Using box2d..
+Using box2dxt..
 
 
 
 Class Canvas Extension
-	
-	Method SetCameraByCenter(point:Vec2f,zoom:Float=1.0,rotation:Float=0)
-	
-		Translate(Viewport.Width/2,Viewport.Height/2)
+	Method SetCameraByCenter(point:Vec2f,zoom:Float=1.0,rotation:Float=0.0)
+		Translate(Viewport.Width/2.0,Viewport.Height/2.0)
 		Scale(zoom,zoom)
 		Rotate(rotation)
 		Translate(-point)
+	End
+	Method SetCameraByVisibleBottomAndCenter(bottom:Vec2f,center:Vec2f,height:Int ,rotation:Float=0)
+		Local dheight:=bottom.y-center.y
+		Local zoom:=(height/2.0)/dheight
+		SetCameraByCenter(center,zoom,rotation)	
+	End
 	
+	Method SetCameraByBottomAndCenterXAndZoom(bottom:Float,centerx:Float,zoom:Float , screenHeight :Int ,rotation:Float=0)
+		Local center:=New Vec2f(centerx,0)
+		Local canvasHeight:=screenHeight/zoom
+		center.y=bottom-canvasHeight/2.0
+		SetCameraByCenter(center,zoom,rotation)	
+	End
+	
+	Method GetCenterViewPoint:Vec2f()
+		Return -Self.Matrix*New Vec2f(Viewport.Width/2,Viewport.Height/2)
+	End
+	
+	Method GetRect:Rectf()
+		Local c1:=-Self.Matrix*New Vec2f(0,0)
+		Local c2:=-Self.Matrix*New Vec2f(Viewport.Width,Viewport.Height)
+		Return New Rectf(c1,c2)
 	End
 	
 End
 
-'to add: Matrix reverse trans
 
+Struct AffineMat3<T> Extension
+
+	Method GetScale:Vec2f()
+	
+		Local sxsq:=Pow(Self.i.x,2)+Pow(Self.i.y,2)
+		Local sysq:=Pow(Self.j.x,2)+Pow(Self.j.y,2)
+		
+		If sxsq=sysq 'to gain calculation time because I generaly use 1:1 scales
+			Local sc:=Sqrt(sxsq)
+			Return New Vec2f (sc,sc)
+		Else
+			Return New Vec2f (Sqrt(sxsq),Sqrt(sysq))
+		Endif
+	
+	End
+	
+	Method GetRotation:Float()
+		Local f:Float=Self.j.y 'to prevent integer division giving integer
+		If Self.j.y <>0
+			Return ATan(-Self.i.y/f)	
+		Else
+			Print "Matrix is not a valid transform, could not get Rotation" 'should throw instead of print ..?
+			Return 0.0
+		Endif
+	End
+	
+	Method GetTranslation:Vec2<T>()
+		Return Self.t
+	End
+
+
+End
 
 '-------------------------------------------
 '
@@ -378,20 +429,4 @@ Function ArrayToStack<T>:Stack<T>(arr:T[])
 		Next
 	End
 	Return retStack
-End
-
-Function b2Vec2ArrayToVec2dArray:Vec2d[](inArr:b2Vec2[])
-	Local retArr:=New Vec2d[inArr.Length]
-	For Local i:=0 Until inArr.Length
-		retArr[i]=inArr[i]
-	Next
-	Return retArr
-End
-
-Function Vec2dArrayTob2Vec2Array:b2Vec2[](inArr:Vec2d[])
-	Local retArr:=New b2Vec2[inArr.Length]
-	For Local i:=0 Until inArr.Length
-		retArr[i]=inArr[i]
-	Next
-	Return retArr
 End
