@@ -108,7 +108,7 @@ Function IsPolyCollinearOrLessThan3Bayazit:Bool(p:Stack<Vec2d>)
 			Local v2:=pb-pc
 			
 			Local angle:=Abs(v1.SignedAngleWith(v2))
-			Print "angle: "+angle
+			'Print "angle: "+angle
 			#rem
 			v1=v1.Normalize()
 			v2=v2.Normalize()

@@ -362,7 +362,8 @@ namespace p2bayazit
 		p2bayazit::Decomposer dec;
 		auto result = dec.Decompose(poly);
 
-	 	bbArray<bbArray<p2bayazit::Point>> returnArr (result.size());
+		int siz=result.size(); //sinon emscrptem veut pas
+	 	bbArray<bbArray<p2bayazit::Point>> returnArr (siz);
 	 	returnArr.retain();
 	 	
 		p2bayazit::Polygon *resultarr = new p2bayazit::Polygon[result.size()];
@@ -370,8 +371,11 @@ namespace p2bayazit
 	 	
 	 	for (int pi=0;pi<result.size();pi++) {
 	 	
-				bbArray<p2bayazit::Point> tempArr (resultarr[pi].size());
+	 	
+	 			int sizbis=resultarr[pi].size(); //sinon emscrptem veut pas
+				bbArray<p2bayazit::Point> tempArr (sizbis);
 				tempArr.retain();
+				
 				for (int j=0;j<resultarr[pi].size();j++ ) {
 					tempArr[j].x=resultarr[pi].at(j).x;
 					tempArr[j].y=resultarr[pi].at(j).y;
