@@ -131,9 +131,15 @@ End
 '--------------------------------------
 
 Class Stack<T> Extension
+	
 	Method Shuffle()
 		For Local i:=0 Until Self.Length
 			Self.Swap(i,Int(Rnd(0,Self.Length-0.00000001)))
+		Next
+	End
+	Method Reverse()
+		For Local i:=0 Until Self.Length/2
+			Self.Swap(i,Self.Length-1-i)
 		Next
 	End
 
@@ -414,19 +420,178 @@ Struct PointsPair
 	
 End
 
-
-'-----------------------------------------
-'
-'    Small Funcs
-'
-'---------------------------------------
-
-Function ArrayToStack<T>:Stack<T>(arr:T[])
-	Local retStack:=New Stack<T>
-	If arr.Length>0
-		For Local i:=arr.Length-1 To 0 Step -1
-			retStack.Add(arr[i])
-		Next
+Function MakeCCW<T>:Stack<Vec2<T>>(poly:Stack<Vec2<T>>)
+	
+	If poly.Top=poly[0] Then poly.Pop()
+	
+	Local maxLeftPoint:=poly[0]
+	Local maxLeftPointIndex:=0
+	For Local i:=0 Until poly.Length
+		If poly[i].x<maxLeftPoint.x
+			maxLeftPoint=poly[i]
+			maxLeftPointIndex=i
+		End
+	Next
+	Local pa:Vec2<T>
+	Local pb:Vec2<T>
+	Local pc:Vec2<T>
+	
+	If maxLeftPointIndex=0
+		pa=poly[poly.Length-1]
+		pb=poly[0]
+		pc=poly[1]
+	Elseif maxLeftPointIndex=poly.Length-1
+		pa=poly[poly.Length-2]
+		pb=poly[poly.Length-1]
+		pc=poly[0]
+	Else
+		pa=poly[maxLeftPointIndex-1]
+		pb=poly[maxLeftPointIndex]
+		pc=poly[maxLeftPointIndex+1]
 	End
-	Return retStack
+	
+	Local vBegin:=pa-pb
+	vBegin=vBegin.Normalize() '! normalize de Vec2d return Float et pas vect nomalisé
+	Local vEndin:=pc-pb
+	vEndin=vEndin.Normalize()
+	
+	If vBegin.y=vEndin.y
+		#If __DEBUG__
+			Print "ERROR: exterior zero-angle: extreme left vertices are parallel and same direction (in MakeCCW) returning NULL"
+		#End
+		Return Null
+	End
+	If vBegin.y>vEndin.y
+	 ' Print "CCW"
+	  
+	Else
+	'	Print "not CCW"
+		poly.Reverse()
+	End
+	
+	Return poly
+	
 End
+
+Function IsPolyCollinearOrLessThan3:Bool(p:Stack<Vec2d>)
+	
+	If p.Length>2
+		If p.Top<>p[0] Then p.Add(p[0])
+	End
+	
+	If p.Length>3
+		
+		For Local i:=0 Until p.Length-2
+		
+			Local line1:=New Line2D(p[i],p[i+1]-p[i])
+			Local line2:=New Line2D(p[i+1],p[i+2]-p[i+1])
+		
+			If line1.IsCollinear(line2)=False Then Return False
+					
+		Next
+		
+	End
+	
+	Return True
+	
+End
+
+Function IsPolyCollinearOrLessThan3:Bool(p:Stack<b2Vec2>)
+	
+	If p.Length>2
+		If p.Top<>p[0] Then p.Add(p[0])
+	End
+	
+	If p.Length>3
+		
+		For Local i:=0 Until p.Length-2
+		
+			Local line1:=New Line2D(p[i],p[i+1]-p[i])
+			Local line2:=New Line2D(p[i+1],p[i+2]-p[i+1])
+		
+			If line1.IsCollinear(line2)=False Then Return False
+					
+		Next
+		
+	End
+	
+	Return True
+	
+End
+
+'-----------------------
+'
+' convert funcs
+'
+'---------------------
+
+
+Function b2StackToV2dStack:Stack<Vec2d>(in:Stack<b2Vec2>)
+	Local out:=New Stack<Vec2d>
+	For Local i:=0 Until in.Length
+		out.Add(New Vec2d(in[i].x,in[i].y))
+	Next
+	Return out
+End
+
+Function b2StackToV2fStack:Stack<Vec2f>(in:Stack<b2Vec2>)
+	Local out:=New Stack<Vec2f>
+	For Local i:=0 Until in.Length
+		out.Add(New Vec2d(in[i].x,in[i].y))
+	Next
+	Return out
+End
+
+Function b2StastackToV2dStastack:Stack<Stack<Vec2d>>(in:Stack<Stack<b2Vec2>>)
+	Local out:=New Stack<Stack<Vec2d>>
+	For Local i:=0 Until in.Length
+		out.Add(b2StackToV2dStack(in[i]))
+	Next
+	Return out
+End
+
+Function b2StastackToV2fStastack:Stack<Stack<Vec2f>>(in:Stack<Stack<b2Vec2>>)
+	Local out:=New Stack<Stack<Vec2f>>
+	For Local i:=0 Until in.Length
+		out.Add(b2StackToV2fStack(in[i]))
+	Next
+	Return out
+End
+' -----------
+Function V2dStackTob2Stack:Stack<b2Vec2>(in:Stack<Vec2d>)
+	Local out:=New Stack<b2Vec2>
+	For Local i:=0 Until in.Length
+		out.Add(New b2Vec2(in[i].x,in[i].y))
+	Next
+	Return out
+End
+
+Function V2fStackTob2Stack:Stack<b2Vec2>(in:Stack<Vec2f>)
+	Local out:=New Stack<b2Vec2>
+	For Local i:=0 Until in.Length
+		out.Add(New b2Vec2(in[i].x,in[i].y))
+	Next
+	Return out
+End
+
+Function V2dStastackTob2Stastack:Stack<Stack<b2Vec2>>(in:Stack<Stack<Vec2d>>)
+	Local out:=New Stack<Stack<b2Vec2>>
+	For Local i:=0 Until in.Length
+		out.Add(V2dStackTob2Stack(in[i]))
+	Next
+	Return out
+End
+
+Function V2fStastackTob2Stastack:Stack<Stack<b2Vec2>>(in:Stack<Stack<Vec2f>>)
+	Local out:=New Stack<Stack<b2Vec2>>
+	For Local i:=0 Until in.Length
+		out.Add(V2fStackTob2Stack(in[i]))
+	Next
+	Return out
+End
+
+
+
+
+
+

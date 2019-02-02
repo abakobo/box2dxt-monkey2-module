@@ -2,6 +2,7 @@ Namespace box2dxt.polytools
 
 #Import "<std>"
 #Import "extsandfuncs.monkey2"
+#Import "concavepoly.monkey2"
 
 Using std..
 Using box2d..
@@ -9,47 +10,48 @@ Using box2dxt..
 
 Public
 
-Function cleanDuples:Stack<Vec2d>(tCopy:Stack<Vec2d>)
+Function FullPartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
 	
-		Local CleanIntersectionPass1Stack:=New Stack<Vec2d>
-		
-		If tCopy.Top=tCopy[0] Then tCopy.Pop()
-		
-		While tCopy.Length>0
-			
-			If CleanIntersectionPass1Stack.Length=0 'premier point est pris d'office
-			
-				CleanIntersectionPass1Stack.Add(tCopy.Pop())
-		
-			Elseif CleanIntersectionPass1Stack.Length=1 'deuxiemme point a une seule condition (<>précédent)
+	Local polyStack:=SimplePartition(b2StackToV2dStack(poly))
+	If polyStack=Null Then Return Null
+	If polyStack.Length=0 Then Return Null
 	
-				If Not (tCopy.Top=CleanIntersectionPass1Stack.Top)
-					
-					CleanIntersectionPass1Stack.Add(tCopy.Pop())
+	Local convexPolys:=New Stack<Stack<Vec2d>>
+	
+	For Local i:=0 Until polyStack.Length
+		MakeCCW(polyStack[i])	
+		Local tconvPolys:=ConvexPartition(polyStack[i])
+		convexPolys.AddAll(tconvPolys)
+	Next
 
-				Else
-					tCopy.Pop()
-				End
-				
-			Elseif CleanIntersectionPass1Stack.Length>1 'troisièmme+ a deux conditions (<>précédent et <>antéprécédent)
-				
-				If (Not (tCopy.Top=CleanIntersectionPass1Stack.Top)) And (Not (tCopy.Top=CleanIntersectionPass1Stack[CleanIntersectionPass1Stack.Length-2])) '1 avant .Top
 	
-					CleanIntersectionPass1Stack.Add(tCopy.Pop())
-					 					
-				Else
-					tCopy.Pop()
-				End
+	Return V2dStastackTob2Stastack(convexPolys)
 	
-			End
-			
-		Wend
-				
-		Return CleanIntersectionPass1Stack
-		
 End
 
-Function cleanPolygon:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
+Function FullPartition:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
+	
+	Local polyStack:=SimplePartition(poly)
+	If polyStack=Null Then Return Null
+	If polyStack.Length=0 Then Return Null
+	
+	Local convexPolys:=New Stack<Stack<Vec2d>>
+	
+	For Local i:=0 Until polyStack.Length
+		MakeCCW(polyStack[i])	
+		Local tconvPolys:=ConvexPartition(polyStack[i])
+		convexPolys.AddAll(tconvPolys)
+	Next
+	
+	Return convexPolys
+	
+End
+
+Function SimplePartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
+	Return V2dStastackTob2Stastack(SimplePartition(b2StackToV2dStack(poly)))
+End
+
+Function SimplePartition:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 
 	If vertices.Length<3
 		#If __DEBUG__
@@ -117,7 +119,7 @@ Function cleanPolygon:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 	
 	If vBegin.y=vEndin.y
 		#If __DEBUG__
-			Print "ERROR: exterior zero-angle: extreme left vertices are parallel (in cleanPoly) returning NULL"
+			Print "ERROR: exterior zero-angle: extreme left vertices are parallel and have same direction (in cleanPoly) returning NULL"
 		#End
 		Return Null
 	End
@@ -285,10 +287,12 @@ Function cleanPolygon:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 		End
 		cleanPoly=tCleanPoly
 		antiBugCount+=1
-	Until antiBugCount>10+(vertices.Length/3)
+	Until antiBugCount>10+(vertices.Length/2)
 	
 	Return retStack
 End
+
+Private
 
 Function HasPolyZeroAngleOrLessThan3:Bool(p:Stack<Vec2d>)
 	
@@ -311,7 +315,7 @@ Function HasPolyZeroAngleOrLessThan3:Bool(p:Stack<Vec2d>)
 		Return False
 		
 End
-
+#rem
 Function IsPolyCollinearOrLessThan3:Bool(p:Stack<Vec2d>)
 	
 	If p.Length>2
@@ -334,6 +338,7 @@ Function IsPolyCollinearOrLessThan3:Bool(p:Stack<Vec2d>)
 	Return True
 	
 End
+#end
 
 Function GetAdjacentPointsInPoly:Stack<Vec2d>(point:Vec2d,poly:Stack<Vec2d>)
 	
@@ -427,4 +432,46 @@ Function CreatePABIntersectionArray:PointAndBool[,](verts:Stack<Vec2d>)
 	Return retArr
 	
 End
+
+
+Function cleanDuples:Stack<Vec2d>(tCopy:Stack<Vec2d>)
+	
+		Local CleanIntersectionPass1Stack:=New Stack<Vec2d>
+		
+		If tCopy.Top=tCopy[0] Then tCopy.Pop()
+		
+		While tCopy.Length>0
+			
+			If CleanIntersectionPass1Stack.Length=0 'premier point est pris d'office
+			
+				CleanIntersectionPass1Stack.Add(tCopy.Pop())
+		
+			Elseif CleanIntersectionPass1Stack.Length=1 'deuxiemme point a une seule condition (<>précédent)
+	
+				If Not (tCopy.Top=CleanIntersectionPass1Stack.Top)
+					
+					CleanIntersectionPass1Stack.Add(tCopy.Pop())
+
+				Else
+					tCopy.Pop()
+				End
+				
+			Elseif CleanIntersectionPass1Stack.Length>1 'troisièmme+ a deux conditions (<>précédent et <>antéprécédent)
+				
+				If (Not (tCopy.Top=CleanIntersectionPass1Stack.Top)) And (Not (tCopy.Top=CleanIntersectionPass1Stack[CleanIntersectionPass1Stack.Length-2])) '1 avant .Top
+	
+					CleanIntersectionPass1Stack.Add(tCopy.Pop())
+					 					
+				Else
+					tCopy.Pop()
+				End
+	
+			End
+			
+		Wend
+				
+		Return CleanIntersectionPass1Stack
+		
+End
+
 

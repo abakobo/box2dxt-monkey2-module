@@ -11,6 +11,7 @@ Namespace box2dxt
 #Import "UserDataExtensions.monkey2"
 
 #Import "complexpoly.monkey2"
+#Import "concavepoly.monkey2"
 #Import "extsandfuncs.monkey2"
 
 Using std..
@@ -50,7 +51,7 @@ Class b2Manager Extends Resource
 	'
 	'
 	
-	Method New(gravity:b2Vec2,pScale:Float=15,yAxisInvert:Bool=True)
+	Method New(gravity:b2Vec2=New b2Vec2(0,-9.81),pScale:Float=15,yAxisInvert:Bool=True)
 		
 		physScale=pScale
 		yAxisInversion=yAxisInvert
@@ -71,7 +72,7 @@ Class b2Manager Extends Resource
 	
 	
 	
-	Method CreateBody:b2Body(bd:b2BodyDef,name:String="nonamebody")
+	Method CreateBody:b2Body(name:String="nonamebody",bd:b2BodyDef)
 		
 		Local l:=Self.bodyInfos.Length
 		
@@ -89,13 +90,19 @@ Class b2Manager Extends Resource
 		
 	End
 	
-	Method CreateBox:b2Body(width:Float,height:Float,initialPosition:b2Vec2,initialAngle:Float=0 , name:String="UnnamedBox" ,  density:Float=1.0 , friction:Float=1.0 , restitution:Float=0.3 , type:b2BodyType=b2BodyType.b2_dynamicBody ,image:Image=Null , imageHeigth:Float=0.0 , imageStrech:Float=1.0 , imageHandle:Vec2f=New Vec2f(0.5,0.5) )
+	Method CreateStaticBox:b2Body( name:String="UnnamedBox" , width:Float,height:Float,initialPosition:b2Vec2,initialAngle:Float=0 ,  density:Float=1.0 , friction:Float=1.0 , restitution:Float=0.3 ,image:Image=Null , imageHeigth:Float=0.0 , imageStrech:Float=1.0 , imageHandle:Vec2f=New Vec2f(0.5,0.5) )
+		
+		Return Self.CreateBox(name,width,height,initialPosition,initialAngle,density,friction,restitution,image,imageHeigth,imageStrech,imageHandle,b2BodyType.b2_staticBody)
+		
+	End
+	
+	Method CreateBox:b2Body( name:String="UnnamedBox" , width:Float,height:Float,initialPosition:b2Vec2,initialAngle:Float=0 ,  density:Float=1.0 , friction:Float=1.0 , restitution:Float=0.3 ,image:Image=Null , imageHeigth:Float=0.0 , imageStrech:Float=1.0 , imageHandle:Vec2f=New Vec2f(0.5,0.5) , type:b2BodyType=b2BodyType.b2_dynamicBody)
 	
 			Local bd:b2BodyDef
 			bd.type = type
 			bd.position=initialPosition
 			bd.angle = initialAngle
-			Local body:=Self.CreateBody(bd,name)
+			Local body:=Self.CreateBody(name,bd)
 			
 			Local fd:b2FixtureDef
 			fd.friction = friction
@@ -113,7 +120,106 @@ Class b2Manager Extends Resource
 			
 			fd.shape = pshape
 			
-			Self.CreateFixture(body,fd,name+"Fixture")
+			Self.CreateFixture(name+"BoxFixture",body,fd)
+			
+			If image<>Null
+				If imageHeigth=0.0 Then imageHeigth=height
+				image.Handle=imageHandle
+				'ici add Image
+			End
+			
+			Return body
+		
+	End
+	
+	Method CreateBall:b2Body( name:String="UnnamedBall" , radius:Float,initialPosition:b2Vec2,initialAngle:Float=0 ,  density:Float=1.0 , friction:Float=1.0 , restitution:Float=0.3 , type:b2BodyType=b2BodyType.b2_dynamicBody ,image:Image=Null , imageHeigth:Float=0.0 , imageStrech:Float=1.0 , imageHandle:Vec2f=New Vec2f(0.5,0.5) )
+	
+			Local bd:b2BodyDef
+			bd.type = type
+			bd.position=initialPosition
+			bd.angle = initialAngle
+			Local body:=Self.CreateBody(name,bd)
+			
+			Local fd:b2FixtureDef
+			fd.friction = friction
+			fd.restitution = restitution
+			fd.density = density
+			
+			Local cshape:=New b2CircleShape()
+			cshape.m_radius = 0.5
+			cshape.m_p.Set(0.0, 0.0)
+			
+			fd.shape = cshape
+			
+			Self.CreateFixture(name+"BallFixture",body,fd)
+			
+			If image<>Null
+				If imageHeigth=0.0 Then imageHeigth=2*radius
+				image.Handle=imageHandle
+				'ici add Image
+			End
+			
+			Return body
+		
+	End
+	
+	Method CreatePolyBody:b2Body( name:String="UnnamedPolyBody" , poly:b2Vec2[] ,initialPosition:b2Vec2,initialAngle:Float=0 ,  density:Float=1.0 , friction:Float=1.0 , restitution:Float=0.3 , type:b2BodyType=b2BodyType.b2_dynamicBody ,image:Image=Null , imageHeigth:Float=0.0 , imageStrech:Float=1.0 , imageHandle:Vec2f=New Vec2f(0.5,0.5) )
+	
+			Local tStack:=New Stack<b2Vec2>(poly)
+			Local Stastack:=FullPartition(tStack)
+			Local fixtureCreated:=False
+			If Stastack=Null
+				Return Null
+			End
+			
+			Local numFixtures:=Stastack.Length
+			
+			If numFixtures=0
+				#If __DEBUG__
+					Print "no Valid poly//fixtures for CreatePolyBody returning Null"
+				#End
+				Return Null
+			End
+	
+			Local bd:b2BodyDef
+			bd.type = type
+			bd.position=initialPosition
+			bd.angle = initialAngle
+			Local body:=Self.CreateBody(name,bd)
+			
+			
+			Local fd:=New b2FixtureDef[numFixtures]
+			For Local i:=0 Until numFixtures
+				fd[i].friction = friction
+				fd[i].restitution = restitution
+				fd[i].density = density
+				Local pshape:=New b2PolygonShape()
+				Local vs:=Stastack[i].ToArray()
+
+				pshape.Set(vs.Data, vs.Length)
+				fd[i].shape = pshape
+				
+				Self.CreateFixture(name+"Fixture_"+i,body,fd[i])
+				fixtureCreated=True
+			Next
+			
+			If fixtureCreated=False
+				Self.DestroyBodyClean(body)
+				#If __DEBUG__
+					Print "no Valid poly/fixtures for CreatePolyBody returning Null"
+				#End
+				Return Null
+			End
+			
+			Local minHeight:=poly[0].y
+			Local maxHeight:=poly[0].y
+			
+			For Local i:=0 Until poly.Length
+				If poly[i].y>maxHeight Then maxHeight=poly[i].y
+				If poly[i].y<minHeight Then minHeight=poly[i].y
+			Next
+			
+			Local height:=maxHeight-minHeight
 			
 			If image<>Null
 				If imageHeigth=0.0 Then imageHeigth=height
@@ -267,7 +373,7 @@ Class b2Manager Extends Resource
 	'
 	
 	
-	Method CreateFixture:b2Fixture(b:b2Body,fd:b2FixtureDef,name:String="")
+	Method CreateFixture:b2Fixture(name:String="",b:b2Body,fd:b2FixtureDef)
 		
 		If name="" Then name=Self.GetBodyName(b)+"_Fixture"
 		
@@ -338,7 +444,7 @@ Class b2Manager Extends Resource
 	'
 		
 	
-	Method CreateRevoluteJoint:b2Joint(bodyA:b2Body,bodyB:b2Body,localAnchorA:b2Vec2=New b2Vec2(0,0) , localAnchorB:b2Vec2=New b2Vec2(0,0) , name:String="" , collideConnected:Bool=False , enableMotor:Bool=False, motorSpeed:Float=0.0 , maxMotorTorque:Float=10.0 , enableLimit:Bool=False , referenceAngle:Float=0.0 , lowerAngle:Float=-0.7 , upperAngle:Float=0.7 )
+	Method CreateRevoluteJoint:b2Joint(name:String="",bodyA:b2Body,bodyB:b2Body,localAnchorA:b2Vec2=New b2Vec2(0,0) , localAnchorB:b2Vec2=New b2Vec2(0,0) , collideConnected:Bool=False , enableMotor:Bool=False, motorSpeed:Float=0.0 , maxMotorTorque:Float=10.0 , enableLimit:Bool=False , referenceAngle:Float=0.0 , lowerAngle:Float=-0.7 , upperAngle:Float=0.7 )
 			
 
 		Local jdRe:b2RevoluteJointDef
@@ -355,13 +461,13 @@ Class b2Manager Extends Resource
 		jdRe.motorSpeed = motorSpeed
 		jdRe.maxMotorTorque = maxMotorTorque
 		
-		Return Self.CreateRevoluteJoint(jdRe,name)
+		Return Self.CreateRevoluteJoint(name,jdRe)
 			
 	End
 	
 
 	
-	Method CreateRevoluteJoint:b2Joint(revoluteJointDef:b2RevoluteJointDef,name:String="")
+	Method CreateRevoluteJoint:b2Joint(name:String="",revoluteJointDef:b2RevoluteJointDef)
 		
 		If name="" Then name=revoluteJointDef.bodyA.GetName()+"-"+revoluteJointDef.bodyB.GetName()+"_revoluteJoint"
 
