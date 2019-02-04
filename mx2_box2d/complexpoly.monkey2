@@ -20,7 +20,7 @@ Function FullPartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
 	
 	For Local i:=0 Until polyStack.Length
 		MakeCCW(polyStack[i])	
-		Local tconvPolys:=ConvexPartition(polyStack[i])
+		Local tconvPolys:=ConvexPartitionOpt(polyStack[i])
 		convexPolys.AddAll(tconvPolys)
 	Next
 
@@ -39,7 +39,7 @@ Function FullPartition:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
 	
 	For Local i:=0 Until polyStack.Length
 		MakeCCW(polyStack[i])	
-		Local tconvPolys:=ConvexPartition(polyStack[i])
+		Local tconvPolys:=ConvexPartitionOpt(polyStack[i])
 		convexPolys.AddAll(tconvPolys)
 	Next
 	
@@ -66,6 +66,8 @@ Function SimplePartition:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 	Next
 	
 	Local CleanIntersectionPass1Stack:=cleanDuples(tCopy)
+	CleanIntersectionPass1Stack=cleanStraigths(CleanIntersectionPass1Stack)
+	
 	If CleanIntersectionPass1Stack.Top<>CleanIntersectionPass1Stack[0] Then CleanIntersectionPass1Stack.Add(CleanIntersectionPass1Stack[0])
 	
 	If CleanIntersectionPass1Stack.Length<4
@@ -474,4 +476,29 @@ Function cleanDuples:Stack<Vec2d>(tCopy:Stack<Vec2d>)
 		
 End
 
-
+Function cleanStraigths:Stack<Vec2d>(poly:Stack<Vec2d>,maxAngle:Double=0.001)
+	
+	If poly.Length<3 Then Return Null
+	If poly.Top<>poly[0] Then poly.Add(poly[0])
+	poly.Add(poly[1])
+	
+	Local retPoly:=New Stack<Vec2d>
+	retPoly.Add(poly[0])
+	retPoly.Add(poly[1])
+	
+	For Local i:=0 Until poly.Length-2
+		Local va:=retPoly.Top-retPoly[retPoly.Length-2]
+		Local vb:=poly[i+2]-retPoly.Top
+		If Abs(va.SignedAngleWith(vb))>maxAngle Then retPoly.Add(poly[i+2])
+	Next
+	
+	poly.Pop()
+	poly.Pop()
+	If retPoly.Top=retPoly[1] Then retPoly.Pop()
+	If retPoly.Top=retPoly[0] Then retPoly.Pop()
+	
+	If retPoly.Length>2 Then Return retPoly
+	
+	Return Null
+		
+End

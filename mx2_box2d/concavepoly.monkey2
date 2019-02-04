@@ -3,6 +3,8 @@ Namespace box2dxt.polytools
 #Import "<std>"
 #Import "extsandfuncs.monkey2"
 #Import "bayazit_src/bayazit.h"
+#Import "hmconvex_src/polypartition.h"
+#Import "hmconvex_src/polypartition.cpp"
 
 Using std..
 Using box2d..
@@ -13,6 +15,13 @@ Extern
 Function OptConvexor:BayazitPoint[][](BayazitPoint[])="p2bayazit::BayazitConvexor"
 	
 Struct BayazitPoint="p2bayazit::Point"
+	Field x:Double
+	Field y:Double
+End
+
+Function NOptConvexor:TPPLPoint[][](TPPLPoint[])
+	
+Struct TPPLPoint
 	Field x:Double
 	Field y:Double
 End
@@ -39,12 +48,31 @@ Function BayazitConvexor:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
 		Return convertedResult
 End
 
-Function ConvexPartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
-	Return V2dStastackTob2Stastack(ConvexPartition(b2StackToV2dStack(poly)))
+Function HMConvexor:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
+	
+		If poly.Top=poly[0] Then poly.Pop()
+		Local tpoly:=New TPPLPoint[poly.Length]
+		For Local i:=0 Until poly.Length
+			tpoly[i].x=poly[i].x
+			tpoly[i].y=poly[i].y
+		Next
+		Local convexResult:=NOptConvexor(tpoly)
+
+		Local convertedResult:=New Stack<Stack<Vec2d>>
+		
+		For Local i:=0 Until convexResult.Length
+			convertedResult.Add(TPPLPArrToV2dStack(convexResult[i]))
+		Next
+
+		
+		Return convertedResult
 End
 
-Function ConvexPartition:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
+Function ConvexPartitionOpt:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
+	Return V2dStastackTob2Stastack(ConvexPartitionOpt(b2StackToV2dStack(poly)))
+End
 
+Function ConvexPartitionOpt:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
 
 	Local convexResult:=BayazitConvexor(poly)
 	
@@ -62,6 +90,41 @@ Function ConvexPartition:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
 			tStack.Add(v2d)
 		Next
 		retStack.Add(tStack)
+	Next
+	
+	Return retStack
+	
+End
+
+Function ConvexPartitionNOpt:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
+
+	Local convexResult:=HMConvexor(poly)
+	
+	Local tStastack:=New Stack<Stack<Vec2d>>
+	
+	For Local convPoly:=Eachin convexResult
+		
+		If convPoly=Null Then Continue
+		'Print "l: "+convPoly.Length
+		If convPoly.Length<3 Then Continue
+		'convPoly=CleanMinSlopes(convPoly)
+		'If IsPolyCollinearOrLessThan3Bayazit(convPoly) Then Continue
+		Local tStack:=New Stack<Vec2d>
+		For Local pt:=Eachin convPoly
+			Local v2d:=New Vec2d(pt.x,pt.y)
+			tStack.Add(v2d)
+		Next
+		tStastack.Add(tStack)
+	Next
+	
+	tStastack=Max8Polys(tStastack)
+	Local retStack:=New Stack<Stack<Vec2d>>
+	
+	For Local convPoly:=Eachin tStastack
+		If convPoly.Length<3 Then Continue
+		convPoly=CleanMinSlopes(convPoly)
+		If IsPolyCollinearOrLessThan3Bayazit(convPoly) Then Continue
+		retStack.Add(convPoly)
 	Next
 	
 	Return retStack
@@ -156,5 +219,50 @@ Function BayaPArrToV2dStack:Stack<Vec2d>(in:BayazitPoint[])
 	Return out
 End
 
+Function TPPLPArrToV2dStack:Stack<Vec2d>(in:TPPLPoint[])
+	Local out:=New Stack<Vec2d>
+	For Local i:=0 Until in.Length
+		out.Add(New Vec2d(in[i].x,in[i].y))
+	Next
+	Return out
+End
 
+Function Max8Poly:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
+	
+	Local tPoly:=poly
+	Local retStastack:=New Stack<Stack<Vec2d>>	
+	
+	While tPoly.Length>8
+		Local splitPoly:=New Stack<Vec2d>
+		For Local i:=0 To 7
+			splitPoly.Add(tPoly[i])
+		Next
+		retStastack.Add(splitPoly)
+		
+		Local ntPoly:=New Stack<Vec2d>
+		ntPoly.Add(tPoly[0])
+		ntPoly.Add(tPoly[7])
+		For Local i:=8 Until tPoly.Length
+			ntPoly.Add(tPoly[i])
+		Next
+		tPoly=ntPoly
+	Wend
+	retStastack.Add(tPoly)
+	
+	Return retStastack
+	
+End
+
+Function Max8Polys:Stack<Stack<Vec2d>>(polys:Stack<Stack<Vec2d>>)
+	
+	Local retStastack:=New Stack<Stack<Vec2d>>
+	
+	For Local p:=Eachin polys
+		Local splitPolys:=Max8Poly(p)
+		retStastack.AddAll(splitPolys)	
+	Next
+	
+	Return retStastack
+	
+End
 

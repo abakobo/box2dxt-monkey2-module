@@ -12,6 +12,7 @@ Namespace box2dxt
 
 #Import "complexpoly.monkey2"
 #Import "concavepoly.monkey2"
+#Import "polycutter.monkey2"
 #Import "extsandfuncs.monkey2"
 
 Using std..
@@ -173,7 +174,7 @@ Class b2Manager Extends Resource
 			End
 			
 			Local numFixtures:=Stastack.Length
-			
+			Print "numFixt: "+numFixtures
 			If numFixtures=0
 				#If __DEBUG__
 					Print "no Valid poly//fixtures for CreatePolyBody returning Null"
@@ -195,7 +196,7 @@ Class b2Manager Extends Resource
 				fd[i].density = density
 				Local pshape:=New b2PolygonShape()
 				Local vs:=Stastack[i].ToArray()
-
+				'Print "vsl:"+vs.Length
 				pshape.Set(vs.Data, vs.Length)
 				fd[i].shape = pshape
 				

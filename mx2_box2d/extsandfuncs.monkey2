@@ -451,7 +451,7 @@ Function MakeCCW<T>:Stack<Vec2<T>>(poly:Stack<Vec2<T>>)
 	End
 	
 	Local vBegin:=pa-pb
-	vBegin=vBegin.Normalize() '! normalize de Vec2d return Float et pas vect nomalisé
+	vBegin=vBegin.Normalize() 
 	Local vEndin:=pc-pb
 	vEndin=vEndin.Normalize()
 	
