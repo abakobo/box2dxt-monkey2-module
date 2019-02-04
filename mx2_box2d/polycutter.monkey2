@@ -8,7 +8,7 @@ Using box2d..
 Using box2dxt..
 
 
-Function polyCutter:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>,cutEdges:Stack<Vec2d>,canvas:Canvas)
+Function polyCutter:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>,cutEdges:Stack<Vec2d>)
 	'poly must be convex
 	'poly must be CCW
 	'poly may not contain straigths (consecutive parallel edges)
@@ -41,6 +41,7 @@ Function polyCutter:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>,cutEdges:Stack<Vec2
 	
 	Local retPolys:=New Stack<Stack<Vec2d>>
 	If knife.Length<2
+		Print "miniknifeInput"
 		retPolys.Add(polygon)
 		Return retPolys
 	End
@@ -48,17 +49,17 @@ Function polyCutter:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>,cutEdges:Stack<Vec2
 	
 	Local poly:=ExtremeLeftise(polygon)
 	poly.Add(poly[0])
-
+	Print "preInter"
 	Local interKnife:=New Stack<PIP>
+	Local totInts:=0
 	For Local i:=0 Until poly.Length-1
 		Local pline:=New Line2D(poly[i],poly[i+1]-poly[i])
-		Local totInts:=0
 		For Local j:=0 Until knife.Length-1
 			Local kline:=New Line2D(knife[j],knife[j+1]-knife[j])
 			Local pab:=pline.SegmentIntersectsPAB(kline)
 			If pab.b=True
-				'Print "interrrr: "+i+" "+j
-				'Print pab.p
+				Print "interrrr: "+i+" "+j
+				Print pab.p
 				totInts+=1
 				interKnife.Add(New PIP(pab.p,j,i))
 			End
@@ -66,13 +67,17 @@ Function polyCutter:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>,cutEdges:Stack<Vec2
 		Next
 		If totInts=2 Then Exit
 	Next
+	
+	Print "preknifeChain"
+	Print "interL: "+interKnife.Length
+	Print "knifeL: "+knife.Length
 	Local pleft:=New Stack<Vec2d>
 	Local pright:=New Stack<Vec2d>
 	If interKnife.Length=2
 		Local knifeChain:=New Stack<Vec2d>
 
 		If interKnife[0].polyi>interKnife[1].polyi Then interKnife.Reverse()
-		
+		Print "what?"
 		knifeChain.Add(interKnife[0].intPoint)
 		Local diff:=interKnife[1].knifi-interKnife[0].knifi
 		If diff=0
@@ -98,8 +103,8 @@ Function polyCutter:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>,cutEdges:Stack<Vec2
 		'For Local p:=Eachin knifeChain
 		'	Print p
 		'Next
-
-		'faie poly left
+		Print "preLR"
+		'faire poly left
 		For Local i:=0 To interKnife[0].polyi
 			pleft.Add(poly[i])
 		Next
@@ -119,9 +124,27 @@ Function polyCutter:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>,cutEdges:Stack<Vec2
 		Next
 	End
 	
+	'Virer premier "knife"
+	Local kIndex:=interKnife[0].knifi
+	If kIndex<interKnife[1].knifi Then kIndex=interKnife[1].knifi
+	Local tknife:=New Stack<Vec2d>
+	For Local i:=kIndex Until knife.Length
+		tknife.Add(knife[i])
+	Next
+	knife=tknife
 	Local retSta:=New Stack<Stack<Vec2d>>
-	retSta.Add(pleft)
-	retSta.Add(pright)
+	'If knife.Length<2
+		retSta.Add(pleft)
+		retSta.Add(pright)
+	'Else
+	'	Print "Recurse"
+	'	Print "r"+knife.Length
+	'	retSta.AddAll(polyCutter(pleft,knife))
+	'	Print "r"+knife.Length
+	'	retSta.AddAll(polyCutter(pright,knife))
+	'	Print "r"+knife.Length
+		
+	'End
 	
 	Return retSta
 	
