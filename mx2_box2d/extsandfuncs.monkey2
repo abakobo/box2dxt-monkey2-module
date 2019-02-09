@@ -120,6 +120,19 @@ Struct Vec2<T> Extension
 	Method Cross:Double(v:Vec2<T>)
 		Return x * v.y - y * v.x
 	End
+	
+	Method SqLength:Double()
+		
+		Return (x*x)+(y*y)
+		
+	End
+	
+	Method SqDistance:Double(v:Vec2<T>)
+		
+		Local tv:=v-Self
+		Return (tv.x*tv.x)+(tv.y*tv.y)
+		
+	End
 		
 End
 
@@ -276,35 +289,23 @@ Struct Line2D
 			End
 			
 			Local inter:=Self.Intersection(line)
-			'Local intx:=inter.x
-			'Local inty:=inter.y
-			Local o2:=o+d
-			Local selfMinx:=Min(o.x,o2.x)
-			Local selfMaxx:=Max(o.x,o2.x)
-			Local selfMiny:=Min(o.y,o2.y)
-			Local selfMaxy:=Max(o.y,o2.y)
+			Local dSelf:=inter-Self.o
+			Local dLine:=inter-line.o
 			
 			Local insideSelf:=False
-			
-			If ((selfMinx<=inter.x) And (inter.x<=selfMaxx)) Or ((selfMinx=selfMaxx) And (selfMinx=inter.x))
-				If ((selfMiny<=inter.y) And (inter.y<=selfMaxy)) Or ((selfMiny=selfMaxy) And (selfMiny=inter.y))
+			If Abs(dSelf.SignedAngleWith(Self.d))<0.001
+				If dSelf.Length<=Self.d.Length
 					insideSelf=True
-				Else
-					New PointAndBool(inter,False)
 				End
 			End
-		
-			Local lineo2:=line.o+line.d
-			Local lineMinx:=Min(line.o.x,lineo2.x)
-			Local lineMaxx:=Max(line.o.x,lineo2.x)
-			Local lineMiny:=Min(line.o.y,lineo2.y)
-			Local lineMaxy:=Max(line.o.y,lineo2.y)
+			
 			Local insideLine:=False
-			If ((lineMinx<=inter.x) And (inter.x<=lineMaxx)) Or ((lineMinx=lineMaxx) And (lineMinx=inter.x))
-				If ((lineMiny<=inter.y) And (inter.y<=lineMaxy)) Or ((lineMiny=lineMaxy) And (lineMiny=inter.y))
+			If Abs(dLine.SignedAngleWith(line.d))<0.001
+				If dLine.Length<=line.d.Length
 					insideLine=True
 				End
 			End
+			
 			
 			If insideSelf And insideLine
 				Return New PointAndBool(inter,True)

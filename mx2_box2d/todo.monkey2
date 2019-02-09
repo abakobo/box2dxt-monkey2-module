@@ -18,6 +18,8 @@ Et voir avec pulley et l autre qui est pas RUBE si ça sauve et lis bien
 
 vérifier que b2Shapes sont bien memory cleaned (Structs?)
 
+optimiser le methodes de Line2D
+
 voir pour message d'erreur qui a foiré avec b2Manager.GetBody(body pas enregistré dans b2Manager)
 
 tester fixture.getname et joint.getName
@@ -40,7 +42,6 @@ checker que ça ce passe bien avec onDiscard/on Finalize et que la ressource b2M
 virer m_blah? ou ajouter getters et Setters pour les m_blah attributes qui sont des bbArray (direct dans box2d .h et . cpps)
 
 AABB box pour dessiner que ce qui sera à l écran (debugdraw compris?)
-
 
 
 TODO
