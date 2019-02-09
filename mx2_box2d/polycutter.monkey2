@@ -99,7 +99,6 @@ Function polyCutter:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>,cutEdges:Stack<Vec2
 	Print "knifeL: "+knife.Length
 	Local pleft:=New Stack<Vec2d>
 	Local pright:=New Stack<Vec2d>
-	Local toutPlat:=False
 	
 	If interKnife.Length>2
 		#If __DEBUG__
@@ -121,8 +120,6 @@ Function polyCutter:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>,cutEdges:Stack<Vec2
 			Print "CCCUUUUUUTING ON THE SAME LINE !!!!!!!!!!!!!!!"
 			If poly[interKnife[0].polyi].SqDistance(interKnife[0].intPoint)>poly[interKnife[0].polyi].SqDistance(interKnife[1].intPoint)
 				interKnife.Reverse()
-			Elseif poly[interKnife[0].polyi].SqDistance(interKnife[0].intPoint)=poly[interKnife[0].polyi].SqDistance(interKnife[1].intPoint)
-				toutPlat=True
 			End
 		Elseif interKnife[0].polyi>interKnife[1].polyi
 			interKnife.Reverse()
@@ -187,20 +184,14 @@ Function polyCutter:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>,cutEdges:Stack<Vec2
 	Next
 	knife=tknife
 	Local retSta:=New Stack<Stack<Vec2d>>
-	If knife.Length<2 And toutPlat=False
+	If knife.Length<2 
 		retSta.Add(pleft)
 		retSta.Add(pright)
-	Elseif toutPlat=False
+	Else
 		Print "rFirestRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"+knife.Length
 		retSta.AddAll(polyCutter(pleft,knife))
 		Print "rSecondRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"+knife.Length
 		retSta.AddAll(polyCutter(pright,knife))
-	Elseif toutPlat=True
-		Print "toutPlattttttttttttttttttt"
-		If knife.Length<2 Then retSta.Add(poly)
-		If knife.Length>=2
-			retSta.AddAll(polyCutter(poly,knife))
-		End
 	End
 	
 	Return retSta
