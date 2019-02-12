@@ -90,7 +90,7 @@ Struct Vec2<T> Extension
 	Method SignedAngleWith:Double(v:Vec2<T>)
 		If (Self.Length=0) Or (v.Length=0)
 			#If __DEBUG__
-				Print"ERROR: null Vec2<T> for angle, returning zero"
+				Print"Warning: null Vec2<T> for angle, returning zero"
 			#End
 			Return 0
 		End
@@ -104,7 +104,7 @@ Struct Vec2<T> Extension
 	Method PositiveAngleWith:Double(v:Vec2<T>)
 		If (Self.Length=0) Or (v.Length=0)
 			#If __DEBUG__
-				Print"ERROR: null Vec2<T> for angle, returning zero"
+				Print"Warning: null Vec2<T> for angle, returning zero"
 			#End
 			Return 0
 		End
@@ -121,7 +121,7 @@ Struct Vec2<T> Extension
 		Return x * v.y - y * v.x
 	End
 	
-	Method SqLength:Double()
+	Property SqLength:Double()
 		
 		Return (x*x)+(y*y)
 		
@@ -257,28 +257,19 @@ Struct Line2D
 		
 	End
 	
-	Method IsCollinearPointInside:Bool(p:Vec2d)
+	Method IsCollinearAndInsideSegment:Bool(p:Vec2d)
 		
-			Local inter:=p
-			
-			Local o2:=o+d
-			
-			Local selfMinx:=Min(o.x,o2.x)
-			Local selfMaxx:=Max(o.x,o2.x)
-			Local selfMiny:=Min(o.y,o2.y)
-			Local selfMaxy:=Max(o.y,o2.y)
+			Local dp:=p-Self.o
 			
 			Local insideSelf:=False
 			
-			If ((selfMinx<=inter.x) And (inter.x<=selfMaxx)) Or ((selfMinx=selfMaxx) And (selfMinx=inter.x))
-				If ((selfMiny<=inter.y) And (inter.y<=selfMaxy)) Or ((selfMiny=selfMaxy) And (selfMiny=inter.y))
-					Return True
-				Else
-					Return False
+			If Abs(dp.SignedAngleWith(Self.d))<0.001
+				If dp.SqLength<=Self.d.SqLength
+					insideSelf=True
 				End
 			End
 			
-			Return False
+			Return insideSelf
 			
 	End
 	
@@ -294,18 +285,17 @@ Struct Line2D
 			
 			Local insideSelf:=False
 			If Abs(dSelf.SignedAngleWith(Self.d))<0.001
-				If dSelf.Length<=Self.d.Length
+				If dSelf.SqLength<=Self.d.SqLength
 					insideSelf=True
 				End
 			End
 			
 			Local insideLine:=False
 			If Abs(dLine.SignedAngleWith(line.d))<0.001
-				If dLine.Length<=line.d.Length
+				If dLine.SqLength<=line.d.SqLength
 					insideLine=True
 				End
 			End
-			
 			
 			If insideSelf And insideLine
 				Return New PointAndBool(inter,True)

@@ -1,8 +1,7 @@
 doing:
 ------
 
-create polygonShapes qui retourne un Array de b2Polygonshpes de taille<max sans points les même et CCW
-=>déconstruction et test CCW et accepter les croisements svp!
+polycut gauche droite (vérifier quand knife passe par extrème gauche)
 
 
 
@@ -18,7 +17,7 @@ Et voir avec pulley et l autre qui est pas RUBE si ça sauve et lis bien
 
 vérifier que b2Shapes sont bien memory cleaned (Structs?)
 
-optimiser le methodes de Line2D
+optimiser les methodes de Line2D (segmentIntersectionPAB principalement)
 
 voir pour message d'erreur qui a foiré avec b2Manager.GetBody(body pas enregistré dans b2Manager)
 
