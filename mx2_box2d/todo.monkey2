@@ -3,7 +3,9 @@ doing:
 
 polycut gauche droite (vérifier quand knife passe par extrème gauche)
 
+Créer fonction Validate polyStack
 
+Créer fonction qui slice même si c'est completement dedans
 
 todo:
 -----

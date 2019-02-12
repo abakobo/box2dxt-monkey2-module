@@ -31,8 +31,6 @@ Function PolyCutSided:Stack<Stack<Stack<Vec2d>>>(poly:Stack<Vec2d>,cutEdges:Stac
 
 End
 
-Private
-
 Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 	'poly must be convex
 	'poly must be CCW
@@ -55,7 +53,14 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 	While knife.Length>1 And InPolyExclLim(knife.Top,polygon.poly)
 		knife.Pop()
 	End
-
+	'enlever multi externes
+	'While (knife.Length>1) And (Not InPoly(knife.Top,polygon)) And (Not InPoly(knife[knife.Length-2],polygon))
+	'	knife.Pop()
+	'End
+	'knife.Reverse()
+	'While (knife.Length>1) And (Not InPoly(knife.Top,polygon)) And (Not InPoly(knife[knife.Length-2],polygon))
+	'	knife.Pop()
+	'End
 	Print "knifeé"+knife.Length
 	For Local p:=Eachin knife
 		Print p
@@ -257,8 +262,6 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 	
 End
 
-Public
-
 Function polyCutter:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>,cutEdges:Stack<Vec2d>)
 	'poly must be convex
 	'poly must be CCW
@@ -270,17 +273,24 @@ Function polyCutter:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>,cutEdges:Stack<Vec2
 					Print p
 				Next
 	For Local p:=Eachin cutEdges
-		If InPolyExclLim(p,polygon) And knife.Length>0
+		If InPoly(p,polygon) And knife.Length>0
 			knife.Add(p)
-		Elseif Not InPolyExclLim(p,polygon)
+		Elseif Not InPoly(p,polygon)
 			knife.Add(p)
 		End
 	End
 		
-	While knife.Length>1 And InPolyExclLim(knife.Top,polygon)
+	While knife.Length>1 And InPoly(knife.Top,polygon)
 		knife.Pop()
 	End
-	
+	'enlever multi externes
+	'While (knife.Length>1) And (Not InPoly(knife.Top,polygon)) And (Not InPoly(knife[knife.Length-2],polygon))
+	'	knife.Pop()
+	'End
+	'knife.Reverse()
+	'While (knife.Length>1) And (Not InPoly(knife.Top,polygon)) And (Not InPoly(knife[knife.Length-2],polygon))
+	'	knife.Pop()
+	'End
 	Print "knifeé"+knife.Length
 	For Local p:=Eachin knife
 		Print p
@@ -326,8 +336,8 @@ Function polyCutter:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>,cutEdges:Stack<Vec2
 			If totInts=2 Then Exit
 			
 		Next
-		Local kIn:=InPolyExclLim(knife[i],poly)
-		Local kpIn:=InPolyExclLim(knife[i+1],poly)
+		Local kIn:=InPoly(knife[i],poly)
+		Local kpIn:=InPoly(knife[i+1],poly)
 		If (Not kIn) And (Not kpIn)
 			If totInts=1 'tangeant compte pas
 				Print "removing single out-out intersection"
