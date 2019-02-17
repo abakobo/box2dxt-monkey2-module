@@ -338,10 +338,10 @@ Function PolyHole:Stack<Stack<Stack<Vec2d>>>(polygon:Stack<Vec2d>,cutPoly:Stack<
 		
 		Local vda:=cutPoly[2]-cutPoly[1]
 		Local vdb:=cutPoly[1]-cutPoly[0]
-		vda=vda*Pi/4.0 '(pour éviter que ça tombe pile sur les vertices de polygones réguliers)
-		vdb=vdb*Pi/4.0
-		pa=cutPoly[0]+vda
-		pb=cutPoly[1]+vdb
+		vda=vda*(Pi/7.0) '(pour éviter que ça tombe pile sur les vertices de polygones réguliers)
+		vdb=vdb*(Pi/6.0)
+		pa=cutPoly[1]+vda
+		pb=cutPoly[0]+vdb
 	
 
 		
