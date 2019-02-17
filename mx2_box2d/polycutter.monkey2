@@ -18,9 +18,15 @@ Function PolyCutSided:Stack<Stack<Stack<Vec2d>>>(poly:Stack<Vec2d>,cutEdges:Stac
 	
 	For Local pail:=Eachin LRStack
 		If pail.isLeft=True
-			left.Add(pail.poly)
+			Local tleft:=cleanStraigths(pail.poly)
+			If tleft<>Null
+				left.Add(tleft)
+			End
 		Else
-			right.Add(pail.poly)
+			Local tright:=cleanStraigths(pail.poly)
+			If tright<>Null
+				right.Add(tright)
+			End
 		End
 	Next
 	
@@ -89,19 +95,25 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 			If pab.b=True
 				Print "interrrr: "+i+" "+j
 				Print pab.p
-				If totInts=1 
+				If totInts=1
+					Print "TotInts=1 "+interKnife.Length
 					If pab.p<>interKnife[0].intPoint 'si lintersection est juste la jonction entre deux edges
 						Print "same???: "+pab.p+" "+interKnife[0].intPoint
 						totInts+=1
 						interKnife.Add(New PIP(pab.p,i,j))
+						Print "interknifeAdd: "+interKnife.Length
 					Else
 						Print "intersection is edge extreme, skipping one"
 						isEdgeExtreme=True
 					End
 				Else
+					Print "TotInts- "+totInts+" interkL"+interKnife.Length
 					totInts+=1
 					interKnife.Add(New PIP(pab.p,i,j))
+					Print "interknifeAdd: "+interKnife.Length
 				End
+			Else
+				Print "No Intersection"
 			End
 
 			If totInts=2 Then Exit
@@ -111,6 +123,7 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 		Local kpIn:=InPolyExclLim(knife[i+1],poly)
 		If (Not kIn) And (Not kpIn)
 			If totInts=1 
+				Print "PasRESSET intTOTDS"
 				totInts=0
 				interKnife.Pop()
 			End
@@ -259,9 +272,195 @@ End
 
 Public
 
-Function polyCutter:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>,cutEdges:Stack<Vec2d>)
+Function PolyHole:Stack<Stack<Stack<Vec2d>>>(polygon:Stack<Vec2d>,cutPoly:Stack<Vec2d>)
+	
+	'cutPoly must be simple (non-self intersecting)
+	'polygon must be convex
+	
+	cutPoly=MakeCCW(cutPoly)
+	If cutPoly.Top<>cutPoly[0] Then cutPoly.Add(cutPoly[0])
+	If cutPoly.Length<4
+		#If __DEBUG__
+				Print"Warning: poly Length<3 for PolyHole returning empty Stack"
+		#End
+		Return New Stack<Stack<Stack<Vec2d>>>
+	End
+	
+	If polygon.Top<>polygon[0] Then polygon.Add(polygon[0])
+	If polygon.Length<4
+		#If __DEBUG__
+				Print"Warning: poly Length<3 for PolyHole returning empty Stack"
+		#End
+		Return New Stack<Stack<Stack<Vec2d>>>
+	End
+	
+	
+	
+	Local outPointIndex:=-1 'si un point est strictement à l'extérieur
+	For Local i:=0 Until cutPoly.Length-1
+		If InPolyInclLim(cutPoly[i],polygon)=False
+				outPointIndex=i
+		End
+	Next
+	'Local doubleLimOutPoint:=0 'si deux point sont non-strictement à l'extérieur
+	
+	'For Local i:=0 Until cutPoly.Length-1
+	'	If InPolyExclLim(cutPoly[i],polygon)=False
+	'			doubleLimOutPoint+=1
+	'	End
+	'Next
+	
+	
+	Print "HUOUOUOUPUPUPUPUPUPUPA"
+	
+	
+	
+
+	If outPointIndex<>-1
+		Print "outpoint"
+		Local newCutPoly:=New Stack<Vec2d>
+		
+		For Local i:=outPointIndex Until cutPoly.Length-1
+			newCutPoly.Add(cutPoly[i])
+		Next
+		For Local i:=0 Until outPointIndex
+			newCutPoly.Add(cutPoly[i])
+		Next
+		
+		newCutPoly.Add(newCutPoly[0])
+		
+		Return PolyCutSided(polygon,newCutPoly)
+	Else 'Si completement dans poly limit incl alors split le poly
+		Print "Inpoints"
+		Local pa:Vec2d
+		Local pb:Vec2d
+		
+		
+		Local vda:=cutPoly[2]-cutPoly[1]
+		Local vdb:=cutPoly[1]-cutPoly[0]
+		vda=vda*Pi/4.0 '(pour éviter que ça tombe pile sur les vertices de polygones réguliers)
+		vdb=vdb*Pi/4.0
+		pa=cutPoly[0]+vda
+		pb=cutPoly[1]+vdb
+	
+
+		
+		Local cutLine:=New Line2D(pa,pb-pa)
+		Local cutLineIntersections:=New Stack<PointAndInt>
+		For Local i:=0 Until polygon.Length-1
+			Local tLine:=New Line2D(polygon[i],polygon[i+1]-polygon[i])
+			Local cutPAB:=cutLine.LineSegmentIntersectsPAB(tLine)
+			If cutPAB.b=True
+				Print "intersect"+cutPAB.p
+				If cutLineIntersections.Length=0
+					cutLineIntersections.Add(New PointAndInt(cutPAB.p,i))
+				Else
+					If cutPAB.p<>cutLineIntersections[0].p
+						Print "meme point"
+						cutLineIntersections.Add(New PointAndInt(cutPAB.p,i))
+					End
+					If cutLineIntersections.Length=2 Then Exit
+				End	
+			End
+		Next
+		If cutLineIntersections.Length<2
+			#If __DEBUG__
+				Print"ROPROBLEM cutLineIntersection<2 returning empty Stack"
+			#End
+			Return New Stack<Stack<Stack<Vec2d>>>
+		End
+		
+		Local polygonA:=New Stack<Vec2d>
+		Local polygonB:=New Stack<Vec2d>
+
+		
+		If cutLineIntersections[0].i>cutLineIntersections[1].i Then cutLineIntersections.Reverse()
+		
+		For Local i:=0 To cutLineIntersections[0].i
+			polygonA.Add(polygon[i])
+		Next
+		polygonA.Add(cutLineIntersections[0].p)
+		polygonA.Add(cutLineIntersections[1].p)
+		For Local i:=cutLineIntersections[1].i+1 Until polygon.Length-1
+			polygonA.Add(polygon[i])
+		Next
+		
+		For Local i:=cutLineIntersections[0].i+1 To cutLineIntersections[1].i
+			polygonB.Add(polygon[i])
+		Next
+		polygonB.Add(cutLineIntersections[1].p)
+		polygonB.Add(cutLineIntersections[0].p)	
+		
+		Local polygons:=New Stack<Stack<Vec2d>>
+		polygons.AddAll(ConvexPolyValidator(polygonA))
+		polygons.AddAll(ConvexPolyValidator(polygonB))
+		'Maintennant le 'gros' poly est coupé en deux avec un pt exterieur à cutPoly de chaque côté
+		
+		
+		
+		Local retStack:=New Stack<Stack<Stack<Vec2d>>>
+		retStack.Add(New Stack<Stack<Vec2d>>)
+		retStack.Add(New Stack<Stack<Vec2d>>)
+		
+		
+		'mettage de point extérieur en premier avce d'appeler polycutsided
+		For Local i:=0 Until polygons.Length
+			Print "CCCCCUUUUUUUUTING i: "+i
+			Local newCutPoly:Stack<Vec2d>
+			Local outPointI:=-1 'si un point est strictement à l'extérieur
+			For Local j:=0 Until cutPoly.Length-1
+				If InPolyInclLim(cutPoly[j],polygons[i])=False
+					outPointI=j
+				End
+			Next
+			If outPointI<>-1
+				Print "outpoint"
+				newCutPoly=New Stack<Vec2d>
+				
+				For Local j:=outPointI Until cutPoly.Length-1
+					newCutPoly.Add(cutPoly[j])
+				Next
+				For Local j:=0 Until outPointI
+					newCutPoly.Add(cutPoly[j])
+				Next
+				
+				newCutPoly.Add(newCutPoly[0])
+			Else
+				#If __DEBUG__
+					Print"ROPROBLEM split hole has no outside point: returning empty Stack"
+				#End
+				Return New Stack<Stack<Stack<Vec2d>>>
+			End
+			
+			Local stacky:=PolyCutSided(polygons[i],newCutPoly)
+
+			retStack[0].AddAll(stacky[0])
+			retStack[1].AddAll(stacky[1])
+			
+		Next
+	Return retStack
+		
+	End
+	#If __DEBUG__
+		Print"ROPROBLEM cutHole à pas marché! returning empty Stack"
+	#End
+	Return New Stack<Stack<Stack<Vec2d>>>
+	
+End
+
+Function ConvexPolyValidator:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>)
+	
+	Local tPoly:=CleanMinSlopes(polygon)
+	Local ret:=Max8Poly(tPoly)
+	For Local i:=0 Until ret.Length
+		ret[i]=MakeCCW(ret[i])
+	End
+	Return ret
+	
+End
+Function PolyCut:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>,cutEdges:Stack<Vec2d>)
 	'poly must be convex
-	'poly must be CCW
+	'poly must be CCW ?
 	'poly may not contain straigths (consecutive parallel edges)
 	'knife may not self intersect
 	Local knife:=New Stack<Vec2d>
@@ -433,9 +632,9 @@ Function polyCutter:Stack<Stack<Vec2d>>(polygon:Stack<Vec2d>,cutEdges:Stack<Vec2
 		retSta.Add(pright)
 	Else
 		Print "rFirestRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"+knife.Length
-		retSta.AddAll(polyCutter(pleft,knife))
+		retSta.AddAll(PolyCut(pleft,knife))
 		Print "rSecondRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"+knife.Length
-		retSta.AddAll(polyCutter(pright,knife))
+		retSta.AddAll(PolyCut(pright,knife))
 	End
 	
 	Return retSta
@@ -570,6 +769,18 @@ Function InPolyInclLim:Bool (point:Vec2d, poly:Stack<Vec2d>)
 	End
 	
 	Return Win
+	
+End
+
+Private
+
+Function PrintPoly(p:Stack<Vec2d>)
+	
+	Print "Polyprint: "
+	For Local pt:=Eachin p
+		Print pt
+	Next
+	Print "_____"
 	
 End
 

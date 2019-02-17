@@ -131,7 +131,6 @@ Function ConvexPartitionNOpt:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
 	
 End
 
-Private
 
 Function CleanMinSlopes:Stack<Vec2d>(p:Stack<Vec2d>)
 	
@@ -151,6 +150,8 @@ Function CleanMinSlopes:Stack<Vec2d>(p:Stack<Vec2d>)
 	Return tp
 	
 End
+
+Private
 
 Function IsPolyCollinearOrLessThan3Bayazit:Bool(p:Stack<Vec2d>)
 	
@@ -227,9 +228,12 @@ Function TPPLPArrToV2dStack:Stack<Vec2d>(in:TPPLPoint[])
 	Return out
 End
 
+Public
+
 Function Max8Poly:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
 	
-	Local tPoly:=poly
+	Local tPoly:=poly.Copy()
+	If tPoly.Top=tPoly[0] Then tPoly.Pop()
 	Local retStastack:=New Stack<Stack<Vec2d>>	
 	
 	While tPoly.Length>8
@@ -265,4 +269,6 @@ Function Max8Polys:Stack<Stack<Vec2d>>(polys:Stack<Stack<Vec2d>>)
 	Return retStastack
 	
 End
+
+Private
 

@@ -476,6 +476,8 @@ Function cleanDuples:Stack<Vec2d>(tCopy:Stack<Vec2d>)
 		
 End
 
+Public 
+
 Function cleanStraigths:Stack<Vec2d>(poly:Stack<Vec2d>,maxAngle:Double=0.001)
 	
 	If poly.Length<3 Then Return Null

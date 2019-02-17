@@ -1,14 +1,19 @@
 doing:
 ------
 
-polycut gauche droite (vérifier quand knife passe par extrème gauche)
 
-Créer fonction Validate polyStack
 
-Créer fonction qui slice même si c'est completement dedans
+
 
 todo:
 -----
+
+Cleaner Line2D puor que les methodes intersect segment aient les mêmes epsilon + Tester ça avec complex poly
+
+mettre cut test dans box2dxt bananas
+
+Creer fonction validatePoly (renvoye un polystack de ccw convex sans frichtis)
+Créer fonction Validate polyStack
 
 create ball
 create edge

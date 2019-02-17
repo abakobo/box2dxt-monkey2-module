@@ -155,6 +155,13 @@ Class Stack<T> Extension
 			Self.Swap(i,Self.Length-1-i)
 		Next
 	End
+	Method Copy:Stack<T>()
+		Local ret:=New Stack<T>
+		For Local e:=Eachin Self
+			ret.Add(e)
+		Next
+		Return ret
+	End
 
 End
 
@@ -215,6 +222,7 @@ Struct Line2D
 
 	End
 	
+	#rem FAUT corriger et utiliser même métode que dans intersectPAB
 	'donne false pour ligne égales même si en vrai elles on infinité d'intersections et false si touche le bord
 	Method SegmentIntersectsLimitsExcluded:Bool(line:Line2D)
 		
@@ -256,6 +264,7 @@ Struct Line2D
 		Return False
 		
 	End
+	#end
 	
 	Method IsCollinearAndInsideSegment:Bool(p:Vec2d)
 		
@@ -263,8 +272,10 @@ Struct Line2D
 			
 			Local insideSelf:=False
 			
+			Local epsilon:Double=0.2e-52
+			
 			If Abs(dp.SignedAngleWith(Self.d))<0.001
-				If dp.SqLength<=Self.d.SqLength
+				If dp.SqLength<=Self.d.SqLength+epsilon
 					insideSelf=True
 				End
 			End
@@ -283,21 +294,67 @@ Struct Line2D
 			Local dSelf:=inter-Self.o
 			Local dLine:=inter-line.o
 			
+			
+			Local epsilon:Double=0.2e-20
 			Local insideSelf:=False
-			If Abs(dSelf.SignedAngleWith(Self.d))<0.001
-				If dSelf.SqLength<=Self.d.SqLength
+			If Abs(dSelf.SignedAngleWith(Self.d))<0.001 Or Self.o.SqDistance(inter)<1e-5
+				Print "TinangleA°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
+				If dSelf.SqLength<=Self.d.SqLength+epsilon
 					insideSelf=True
+				Else
+					Print "pasinsideSelf: "+dSelf.SqLength+" <= "+Self.d.SqLength+" ?"
 				End
+			Else
+				Print "RonangleA°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
+				Print "d: "+Self.o.Distance(inter)+" : "+line.o.Distance(inter)
 			End
 			
 			Local insideLine:=False
-			If Abs(dLine.SignedAngleWith(line.d))<0.001
-				If dLine.SqLength<=line.d.SqLength
+			If Abs(dLine.SignedAngleWith(line.d))<0.001 Or line.o.SqDistance(inter)<1e-5
+				Print "TinangleB°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
+				Print "insideLine: "+dLine.SqLength+" <= "+line.d.SqLength+" ?"
+				If dLine.SqLength<=line.d.SqLength+epsilon
 					insideLine=True
+				Else
+					Print "NotinsideLine: "
 				End
+			Else
+				Print "RonangleB°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
+				Print "d: "+Self.o.Distance(inter)+" : "+line.o.Distance(inter)
 			End
 			
 			If insideSelf And insideLine
+				Return New PointAndBool(inter,True)
+			End
+			
+			Return New PointAndBool(inter,False)
+			
+		End
+		
+		Method LineSegmentIntersectsPAB:PointAndBool(segmentLine:Line2D)
+			
+			Local line:=segmentLine
+			
+			If Not Self.IsOkToIntersect(line)
+				Return New PointAndBool(New Vec2d(0,0),False)
+			End
+			
+			Local inter:=Self.Intersection(line)
+			Local dSelf:=inter-Self.o
+			Local dLine:=inter-line.o
+			Local epsilon:Double=0.2e-52
+			
+			Local insideLine:=False
+			If Abs(dLine.SignedAngleWith(line.d))<0.001
+				Print "Tinangle°°°°°°°°°°°°°°°°°°°°°°°°°°"
+				If dLine.SqLength<=line.d.SqLength+epsilon
+					insideLine=True
+				End
+			Else
+				Print "GrosNangle°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
+			End
+			
+			If insideLine=True
 				Return New PointAndBool(inter,True)
 			End
 			
