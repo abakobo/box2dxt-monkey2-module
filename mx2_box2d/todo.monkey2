@@ -49,6 +49,8 @@ virer m_blah? ou ajouter getters et Setters pour les m_blah attributes qui sont 
 
 AABB box pour dessiner que ce qui sera à l écran (debugdraw compris?)
 
+PolycutNotSided?
+
 
 TODO
 -----
