@@ -37,6 +37,24 @@ Function PolyCutSided:Stack<Stack<Stack<Vec2d>>>(poly:Stack<Vec2d>,cutEdges:Stac
 
 End
 
+Function PolyCut:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>,cutEdges:Stack<Vec2d>)
+	
+	Local polail:=New PolyAIL(poly,True)
+	Local LRStack:=PolyCutRecSided(polail,cutEdges)
+	
+	Local ret:=New Stack<Stack<Vec2d>>
+	
+	For Local pail:=Eachin LRStack
+			Local tleft:=cleanStraigths(pail.poly)
+			If tleft<>Null
+				ret.Add(tleft)
+			End
+	Next
+	
+	Return ret
+
+End
+
 Private
 
 Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
@@ -44,12 +62,12 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 	'poly must be CCW
 	'poly may not contain straigths (consecutive parallel edges)
 	'knife may not self intersect
-	If polygon=Null Then Print "Null poly!!!!!!!!!!!!!!!!!!!"
+	If polygon=Null Then Return Null 'Print "Null poly!!!!!!!!!!!!!!!!!!!"
 	Local knife:=New Stack<Vec2d>
-	Print "preknif: "+cutEdges.Length
-				For Local p:=Eachin cutEdges
-					Print p
-				Next
+	'Print "preknif: "+cutEdges.Length
+				'For Local p:=Eachin cutEdges
+				'	Print p
+				'Next
 	For Local p:=Eachin cutEdges
 		If InPolyExclLim(p,polygon.poly) And knife.Length>0
 			knife.Add(p)
@@ -62,14 +80,14 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 		knife.Pop()
 	End
 
-	Print "knifeé"+knife.Length
-	For Local p:=Eachin knife
-		Print p
-	Next
+	'Print "knifeé"+knife.Length
+	'For Local p:=Eachin knife
+	'	Print p
+	'Next
 	
 	Local retPolys:=New Stack<PolyAIL>
 	If knife.Length<2
-		Print "miniknifeInput"
+		'Print "miniknifeInput"
 		retPolys.Add(polygon)
 		Return retPolys
 	End
@@ -77,7 +95,7 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 	
 	Local poly:=ExtremeLeftise(polygon.poly)
 	poly.Add(poly[0])
-	Print "preInter:Polylength "+poly.Length
+	'Print "preInter:Polylength "+poly.Length
 	Local interKnife:=New Stack<PIP>
 	Local totInts:=0
 	Local tangeantI:=0
@@ -87,33 +105,33 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 	
 	For Local i:=0 Until knife.Length-1
 		Local kline:=New Line2D(knife[i],knife[i+1]-knife[i])
-		Print "kline:"+knife[i]+" "+knife[i+1]
+		'Print "kline:"+knife[i]+" "+knife[i+1]
 		For Local j:=0 Until poly.Length-1
 			Local pline:=New Line2D(poly[j],poly[j+1]-poly[j])
-			Print "pline:"+poly[j]+" "+poly[j+1]
+			'Print "pline:"+poly[j]+" "+poly[j+1]
 			Local pab:=pline.SegmentIntersectsPAB(kline)
 			If pab.b=True
-				Print "interrrr: "+i+" "+j
-				Print pab.p
+				'Print "interrrr: "+i+" "+j
+				'Print pab.p
 				If totInts=1
-					Print "TotInts=1 "+interKnife.Length
+					'Print "TotInts=1 "+interKnife.Length
 					If pab.p<>interKnife[0].intPoint 'si lintersection est juste la jonction entre deux edges
-						Print "same???: "+pab.p+" "+interKnife[0].intPoint
+						'Print "same???: "+pab.p+" "+interKnife[0].intPoint
 						totInts+=1
 						interKnife.Add(New PIP(pab.p,i,j))
-						Print "interknifeAdd: "+interKnife.Length
+						'Print "interknifeAdd: "+interKnife.Length
 					Else
-						Print "intersection is edge extreme, skipping one"
+						'Print "intersection is edge extreme, skipping one"
 						isEdgeExtreme=True
 					End
 				Else
-					Print "TotInts- "+totInts+" interkL"+interKnife.Length
+					'Print "TotInts- "+totInts+" interkL"+interKnife.Length
 					totInts+=1
 					interKnife.Add(New PIP(pab.p,i,j))
-					Print "interknifeAdd: "+interKnife.Length
+					'Print "interknifeAdd: "+interKnife.Length
 				End
 			Else
-				Print "No Intersection"
+				'Print "No Intersection"
 			End
 
 			If totInts=2 Then Exit
@@ -123,7 +141,7 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 		Local kpIn:=InPolyExclLim(knife[i+1],poly)
 		If (Not kIn) And (Not kpIn)
 			If totInts=1 
-				Print "PasRESSET intTOTDS"
+				'Print "PasRESSET intTOTDS"
 				totInts=0
 				interKnife.Pop()
 			End
@@ -132,9 +150,9 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 		If totInts=2 Then Exit
 	Next
 	
-	Print "preknifeChain"
-	Print "interL: "+interKnife.Length
-	Print "knifeL: "+knife.Length
+	'Print "preknifeChain"
+	'Print "interL: "+interKnife.Length
+	'Print "knifeL: "+knife.Length
 	Local polyA:=New Stack<Vec2d>
 	Local polyB:=New Stack<Vec2d>
 	
@@ -151,7 +169,7 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 	
 	If interKnife.Length<2
 		
-		Print "noCutHere----------------------"
+		'Print "noCutHere----------------------"
 		retPolys.Add(polygon)
 		Return retPolys
 		
@@ -159,7 +177,7 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 		Local knifeChain:=New Stack<Vec2d>
 
 		If interKnife[0].polyi=interKnife[1].polyi
-			Print "CCCUUUUUUTING ON THE SAME LINE !!!!!!!!!!!!!!!"
+			'Print "CCCUUUUUUTING ON THE SAME LINE !!!!!!!!!!!!!!!"
 			If poly[interKnife[0].polyi].SqDistance(interKnife[0].intPoint)>poly[interKnife[0].polyi].SqDistance(interKnife[1].intPoint)
 				interKnife.Reverse()
 			End
@@ -179,8 +197,14 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 			baseLRBegins=True
 			ptBaseIntLR=interKnife[0].intPoint
 			ptDirLR=knife[interKnife[0].knifi+1]
+				Print "Equal?"
+				Print ptBaseIntLR
+				Print ptDirLR
+			If ptBaseIntLR=ptDirLR
+				ptDirLR=ptBaseIntLR+(knife[interKnife[0].knifi+1]-knife[interKnife[0].knifi])
+			End
 		Else If diff>0
-			Print "diff>0"
+			'Print "diff>0"
 			baseLRBegins=True
 			ptBaseIntLR=interKnife[0].intPoint
 			ptDirLR=knife[interKnife[0].knifi+1]
@@ -189,7 +213,7 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 			Next
 			knifeChain.Add(interKnife[1].intPoint)
 		Else If diff<0
-			Print "diff<0$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+			'Print "diff<0$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 			baseLRBegins=False
 			ptBaseIntLR=interKnife[1].intPoint
 			ptDirLR=knife[interKnife[1].knifi+1]
@@ -199,7 +223,7 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 			knifeChain.Add(interKnife[1].intPoint)
 		End
 
-		Print "preLR"
+		'Print "preLR"
 		'faire poly starting from 0
 		For Local i:=0 To interKnife[0].polyi
 			polyA.Add(poly[i])
@@ -219,29 +243,50 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 			polyB.Add(knifeChain[i])
 		Next
 		
-		If polyA=Null Then Print "here it's NullAAAAAAAAAAAAAA"
-		If polyB=Null Then Print "here it's NullBBBBBBBBBBBBBB"
+		'If polyA=Null Then Print "here it's NullAAAAAAAAAAAAAA"
+		'If polyB=Null Then Print "here it's NullBBBBBBBBBBBBBB"
 		'LR
 		If baseLRBegins=True
+			
 			ptNormLR=poly[interKnife[0].polyi+1]
+			If ptNormLR=ptBaseIntLR
+				Print "=In baseTrue$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+				ptNormLR=ptNormLR+(poly[interKnife[0].polyi+1]-poly[interKnife[0].polyi])
+			End
 		Else
+			
 			ptNormLR=poly[interKnife[1].polyi]
+			If ptNormLR=ptBaseIntLR
+				Print "=In baseFalse$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+				ptNormLR=ptNormLR+(poly[interKnife[1].polyi+1]-poly[interKnife[1].polyi])
+			End
 		End
 	End
 	
 	'déterminer gauche/droite
 	Local lRVD:=ptDirLR-ptBaseIntLR
 	Local lRVN:=ptNormLR-ptBaseIntLR
-
+	Print "anglus"
+	Print lRVD
+	Print lRVN
 	Local pailA:PolyAIL
 	Local pailB:PolyAIL
 
-	If lRVD.SignedAngleWith(lRVN)>0
+
+
+	If lRVD.SignedAngleWith(lRVN)=0
+	'	If polyA=Null Then Print "here it's NullAAAAAAAAAAAAAA"
+	'	If polyB=Null Then Print "here it's NullBBBBBBBBBBBBBB"
+		Print "ANANANANANANANANGLE 0"
+		
+	Elseif lRVD.SignedAngleWith(lRVN)>0
+		Print lRVD.SignedAngleWith(lRVN)
 		Print "posAngle"
 		pailA=New PolyAIL (polyA,True)
 		pailB=New PolyAIL (polyB,False)
 	Else
-		Print "NegAngle"
+		Print lRVD.SignedAngleWith(lRVN)
+		Print "NegAngle?"
 		pailA=New PolyAIL (polyA,False)
 		pailB=New PolyAIL (polyB,True)
 	End	
@@ -260,9 +305,9 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 		retSta.Add(pailA)
 		retSta.Add(pailB)
 	Else
-		Print "rFirestRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"+knife.Length
+		'Print "rFirestRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"+knife.Length
 		retSta.AddAll(PolyCutRecSided(pailA,knife))
-		Print "rSecondRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"+knife.Length
+		'Print "rSecondRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"+knife.Length
 		retSta.AddAll(PolyCutRecSided(pailB,knife))
 	End
 	
@@ -311,13 +356,13 @@ Function PolyHole:Stack<Stack<Stack<Vec2d>>>(polygon:Stack<Vec2d>,cutPoly:Stack<
 	'Next
 	
 	
-	Print "HUOUOUOUPUPUPUPUPUPUPA"
+	'Print "HUOUOUOUPUPUPUPUPUPUPA"
 	
 	
 	
 
 	If outPointIndex<>-1
-		Print "outpoint"
+	'	Print "outpoint"
 		Local newCutPoly:=New Stack<Vec2d>
 		
 		For Local i:=outPointIndex Until cutPoly.Length-1
@@ -331,16 +376,16 @@ Function PolyHole:Stack<Stack<Stack<Vec2d>>>(polygon:Stack<Vec2d>,cutPoly:Stack<
 		
 		Return PolyCutSided(polygon,newCutPoly)
 	Else 'Si completement dans poly limit incl alors split le poly
-		Print "Inpoints"
+		'Print "Inpoints"
 		Local pa:Vec2d
 		Local pb:Vec2d
 		
-		
-		Local vda:=cutPoly[2]-cutPoly[1]
+		Local indoxMilieu:Int=(cutPoly.Length+1)/2
+		Local vda:=cutPoly[indoxMilieu]-cutPoly[indoxMilieu-1]
 		Local vdb:=cutPoly[1]-cutPoly[0]
 		vda=vda*(Pi/7.0) '(pour éviter que ça tombe pile sur les vertices de polygones réguliers)
 		vdb=vdb*(Pi/6.0)
-		pa=cutPoly[1]+vda
+		pa=cutPoly[indoxMilieu-1]+vda
 		pb=cutPoly[0]+vdb
 	
 
@@ -351,12 +396,12 @@ Function PolyHole:Stack<Stack<Stack<Vec2d>>>(polygon:Stack<Vec2d>,cutPoly:Stack<
 			Local tLine:=New Line2D(polygon[i],polygon[i+1]-polygon[i])
 			Local cutPAB:=cutLine.LineSegmentIntersectsPAB(tLine)
 			If cutPAB.b=True
-				Print "intersect"+cutPAB.p
+			'	Print "intersect"+cutPAB.p
 				If cutLineIntersections.Length=0
 					cutLineIntersections.Add(New PointAndInt(cutPAB.p,i))
 				Else
 					If cutPAB.p<>cutLineIntersections[0].p
-						Print "meme point"
+					'	Print "meme point"
 						cutLineIntersections.Add(New PointAndInt(cutPAB.p,i))
 					End
 					If cutLineIntersections.Length=2 Then Exit
@@ -405,7 +450,7 @@ Function PolyHole:Stack<Stack<Stack<Vec2d>>>(polygon:Stack<Vec2d>,cutPoly:Stack<
 		
 		'mettage de point extérieur en premier avce d'appeler polycutsided
 		For Local i:=0 Until polygons.Length
-			Print "CCCCCUUUUUUUUTING i: "+i
+		'	Print "CCCCCUUUUUUUUTING i: "+i
 			Local newCutPoly:Stack<Vec2d>
 			Local outPointI:=-1 'si un point est strictement à l'extérieur
 			For Local j:=0 Until cutPoly.Length-1
@@ -414,7 +459,7 @@ Function PolyHole:Stack<Stack<Stack<Vec2d>>>(polygon:Stack<Vec2d>,cutPoly:Stack<
 				End
 			Next
 			If outPointI<>-1
-				Print "outpoint"
+			'	Print "outpoint"
 				newCutPoly=New Stack<Vec2d>
 				
 				For Local j:=outPointI Until cutPoly.Length-1
@@ -599,7 +644,7 @@ Function PrintPoly(p:Stack<Vec2d>)
 	For Local pt:=Eachin p
 		Print pt
 	Next
-	Print "_____"
+	Print "Endpolyprint"
 	
 End
 

@@ -89,9 +89,9 @@ Struct Vec2<T> Extension
 	'- Pi to Pi
 	Method SignedAngleWith:Double(v:Vec2<T>)
 		If (Self.Length=0) Or (v.Length=0)
-			#If __DEBUG__
-				Print"Warning: null Vec2<T> for angle, returning zero"
-			#End
+			'#If __DEBUG__
+			'	Print"Warning: null Vec2<T> for angle, returning zero"
+			'#End
 			Return 0
 		End
 		
@@ -103,9 +103,9 @@ Struct Vec2<T> Extension
 	'0 to 2Pi
 	Method PositiveAngleWith:Double(v:Vec2<T>)
 		If (Self.Length=0) Or (v.Length=0)
-			#If __DEBUG__
-				Print"Warning: null Vec2<T> for angle, returning zero"
-			#End
+			'#If __DEBUG__
+			'	Print"Warning: null Vec2<T> for angle, returning zero"
+			'#End
 			Return 0
 		End
 		
@@ -298,29 +298,29 @@ Struct Line2D
 			Local epsilon:Double=0.2e-20
 			Local insideSelf:=False
 			If Abs(dSelf.SignedAngleWith(Self.d))<0.001 Or Self.o.SqDistance(inter)<1e-5
-				Print "TinangleA°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
+				'Print "TinangleA°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
 				If dSelf.SqLength<=Self.d.SqLength+epsilon
 					insideSelf=True
-				Else
-					Print "pasinsideSelf: "+dSelf.SqLength+" <= "+Self.d.SqLength+" ?"
+				'Else
+				'	Print "pasinsideSelf: "+dSelf.SqLength+" <= "+Self.d.SqLength+" ?"
 				End
-			Else
-				Print "RonangleA°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
-				Print "d: "+Self.o.Distance(inter)+" : "+line.o.Distance(inter)
+			'Else
+				'Print "RonangleA°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
+				'Print "d: "+Self.o.Distance(inter)+" : "+line.o.Distance(inter)
 			End
 			
 			Local insideLine:=False
 			If Abs(dLine.SignedAngleWith(line.d))<0.001 Or line.o.SqDistance(inter)<1e-5
-				Print "TinangleB°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
-				Print "insideLine: "+dLine.SqLength+" <= "+line.d.SqLength+" ?"
+				'Print "TinangleB°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
+				'Print "insideLine: "+dLine.SqLength+" <= "+line.d.SqLength+" ?"
 				If dLine.SqLength<=line.d.SqLength+epsilon
 					insideLine=True
-				Else
-					Print "NotinsideLine: "
+				'Else
+				'	Print "NotinsideLine: "
 				End
-			Else
-				Print "RonangleB°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
-				Print "d: "+Self.o.Distance(inter)+" : "+line.o.Distance(inter)
+			'Else
+			'	Print "RonangleB°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
+			'	Print "d: "+Self.o.Distance(inter)+" : "+line.o.Distance(inter)
 			End
 			
 			If insideSelf And insideLine
@@ -346,12 +346,12 @@ Struct Line2D
 			
 			Local insideLine:=False
 			If Abs(dLine.SignedAngleWith(line.d))<0.001
-				Print "Tinangle°°°°°°°°°°°°°°°°°°°°°°°°°°"
+			'	Print "Tinangle°°°°°°°°°°°°°°°°°°°°°°°°°°"
 				If dLine.SqLength<=line.d.SqLength+epsilon
 					insideLine=True
 				End
-			Else
-				Print "GrosNangle°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
+			'Else
+			'	Print "GrosNangle°°°°°°°°°°°°°°°°°°°°°°°°°°°°"
 			End
 			
 			If insideLine=True

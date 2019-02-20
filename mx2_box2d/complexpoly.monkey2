@@ -435,7 +435,7 @@ Function CreatePABIntersectionArray:PointAndBool[,](verts:Stack<Vec2d>)
 	
 End
 
-
+Public
 Function cleanDuples:Stack<Vec2d>(tCopy:Stack<Vec2d>)
 	
 		Local CleanIntersectionPass1Stack:=New Stack<Vec2d>
@@ -491,7 +491,12 @@ Function cleanStraigths:Stack<Vec2d>(poly:Stack<Vec2d>,maxAngle:Double=0.001)
 	For Local i:=0 Until poly.Length-2
 		Local va:=retPoly.Top-retPoly[retPoly.Length-2]
 		Local vb:=poly[i+2]-retPoly.Top
-		If Abs(va.SignedAngleWith(vb))>maxAngle Then retPoly.Add(poly[i+2])
+		If Abs(va.SignedAngleWith(vb))>maxAngle
+			retPoly.Add(poly[i+2])
+		Else
+			retPoly.Pop()
+			retPoly.Add(poly[i+2])
+		End
 	Next
 	
 	poly.Pop()

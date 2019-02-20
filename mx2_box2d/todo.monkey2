@@ -3,6 +3,17 @@ doing:
 
 
 
+régler prob de lignes colinéaires cutpoly/poly
+
+
+corriger cutsided avec cas particulers touchtouch:
+			faire passer par Print "=In baseFalse"
+			faire de petits cas particuliers pour checker
+
+cleanStraight marche pas avec
+Vec2(350,130)
+Vec2(350,138.97597901025657)
+Vec2(350,130.00000000000003) ?
 
 
 todo:
@@ -10,7 +21,21 @@ todo:
 
 Cleaner Line2D puor que les methodes intersect segment aient les mêmes epsilon + Tester ça avec complex poly
 
-mettre cut test dans box2dxt bananas
+mettre complex/concave/cut test dans box2dxt bananas
+
+corriger cutpoly pour le bug qui donne un "flat" poly: (pour le moment corrigé par slean straigths mais ça serait bien que ça aille just direct!?)
+	voir avec poly hole, le carré et
+		knife.Add(New Vec2<Double>(290,100))
+		knife.Add(New Vec2<Double>(240,50))
+		knife.Add(New Vec2<Double>(170,50))
+		knife.Add(New Vec2<Double>(180,150))
+		knife.Add(New Vec2<Double>(350,150))
+		knife.Add(New Vec2<Double>(350,130))
+		knife.Add(New Vec2<Double>(280,140))
+		knife.Add(New Vec2<Double>(290,100))
+
+Modifier poly cut non sided pour qu'il marche avec intersecting knife sans créer de doubles
+				--> le diviser en parties non intersect puis faire avec chanque parties? (ça risque quand même d'e^tre un peu durdur)
 
 Creer fonction validatePoly (renvoye un polystack de ccw convex sans frichtis)
 Créer fonction Validate polyStack
