@@ -121,7 +121,7 @@ Class b2Manager Extends Resource
 			
 			fd.shape = pshape
 			
-			Self.CreateFixture(name+"BoxFixture",body,fd)
+			Self.CreateFixture(name+"_Fixture",body,fd)
 			
 			If image<>Null
 				If imageHeigth=0.0 Then imageHeigth=height
@@ -152,7 +152,7 @@ Class b2Manager Extends Resource
 			
 			fd.shape = cshape
 			
-			Self.CreateFixture(name+"BallFixture",body,fd)
+			Self.CreateFixture(name+"_Fixture",body,fd)
 			
 			If image<>Null
 				If imageHeigth=0.0 Then imageHeigth=2*radius
@@ -231,6 +231,16 @@ Class b2Manager Extends Resource
 			Return body
 		
 	End
+	
+	
+	'
+	'
+	'
+	'
+	' DESTRUCTION
+	'
+	'
+	'
 	
 	
 	Method DestroyBodyNotClean:Bool(body:b2Body)
@@ -314,6 +324,56 @@ Class b2Manager Extends Resource
 		bodyImageMap=newBodyImageMap
 		'est-ce qu'il ne faut pas cleaner le UserData et Images (resource), je pense que non, le GC devrait s'en occuper vu que c'est un objet mx2
 	End
+	
+	'
+	'
+	'
+	'
+	' CUTTINGS
+	'
+	'
+	'
+	'
+	
+	Method CutBody(body:b2Body,knife:Stack<b2Vec2>)
+		
+		Local polyStack:=New Stack<Stack<b2Vec2>>
+		Local currentFixt:=body.GetFixtureList()
+		While currentFixt<>Null
+			
+			Local cShape:=currentFixt.GetShape()
+			Local poly:=New Stack<b2Vec2>
+			If cShape<>Null And cShape.m_type=2
+				Local ps:=Cast <b2PolygonShape>(currentFixt.GetShape())
+				For Local i:=0 Until ps.GetVertexCount()
+					poly.Add(ps.GetVertex(i))
+				Next
+			End
+			polyStack.Add(poly)
+			currentFixt=currentFixt.GetNext()
+		Wend
+		
+		'
+		'
+		' il faut transormer le knife avec la transfo de Body!
+		'
+		'
+		
+		Local cutPolyStack:=New Stack<Stack<b2Vec2>>
+		For Local poly:=Eachin polyStack
+			cutPolyStack.AddAll(PolyCut(poly,knife))
+		Next
+		Local bodyName:=body.GetName()
+		'Print "anglin: "+body.GetAngle()
+		Print "CuttBody: "+bodyName+" l: "+cutPolyStack.Length
+		
+		For Local npoly:=Eachin cutPolyStack
+			Self.CreatePolyBody(bodyName+"_cut",npoly.ToArray(),body.GetPosition(),body.GetAngle())'faut passer les vitesses aussi!
+		Next
+		Self.DestroyBodyClean(body)
+	End
+	
+	
 	
 	Method SetBodyImage (bi:b2BodyImageInfo,img:Image , worldHeight:Float=1.0,renderOrder:Int=1,opacity:Float=1.0,flip:Int=1,locPos:Vec2f=New Vec2f(0,0),locAngle:Float=0.0,aspectScale:Float=1.0)
 

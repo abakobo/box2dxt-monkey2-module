@@ -43,6 +43,7 @@ Class Canvas Extension
 End
 
 
+
 Struct AffineMat3<T> Extension
 
 	Method GetScale:Vec2f()
@@ -574,7 +575,7 @@ End
 '---------------------
 
 
-Function b2StackToV2dStack:Stack<Vec2d>(in:Stack<b2Vec2>)
+Function b2vStackToV2dStack:Stack<Vec2d>(in:Stack<b2Vec2>)
 	Local out:=New Stack<Vec2d>
 	For Local i:=0 Until in.Length
 		out.Add(New Vec2d(in[i].x,in[i].y))
@@ -582,7 +583,7 @@ Function b2StackToV2dStack:Stack<Vec2d>(in:Stack<b2Vec2>)
 	Return out
 End
 
-Function b2StackToV2fStack:Stack<Vec2f>(in:Stack<b2Vec2>)
+Function b2vStackToV2fStack:Stack<Vec2f>(in:Stack<b2Vec2>)
 	Local out:=New Stack<Vec2f>
 	For Local i:=0 Until in.Length
 		out.Add(New Vec2d(in[i].x,in[i].y))
@@ -590,23 +591,23 @@ Function b2StackToV2fStack:Stack<Vec2f>(in:Stack<b2Vec2>)
 	Return out
 End
 
-Function b2StastackToV2dStastack:Stack<Stack<Vec2d>>(in:Stack<Stack<b2Vec2>>)
+Function b2vStastackToV2dStastack:Stack<Stack<Vec2d>>(in:Stack<Stack<b2Vec2>>)
 	Local out:=New Stack<Stack<Vec2d>>
 	For Local i:=0 Until in.Length
-		out.Add(b2StackToV2dStack(in[i]))
+		out.Add(b2vStackToV2dStack(in[i]))
 	Next
 	Return out
 End
 
-Function b2StastackToV2fStastack:Stack<Stack<Vec2f>>(in:Stack<Stack<b2Vec2>>)
+Function b2vStastackToV2fStastack:Stack<Stack<Vec2f>>(in:Stack<Stack<b2Vec2>>)
 	Local out:=New Stack<Stack<Vec2f>>
 	For Local i:=0 Until in.Length
-		out.Add(b2StackToV2fStack(in[i]))
+		out.Add(b2vStackToV2fStack(in[i]))
 	Next
 	Return out
 End
 ' -----------
-Function V2dStackTob2Stack:Stack<b2Vec2>(in:Stack<Vec2d>)
+Function V2dStackTob2vStack:Stack<b2Vec2>(in:Stack<Vec2d>)
 	Local out:=New Stack<b2Vec2>
 	For Local i:=0 Until in.Length
 		out.Add(New b2Vec2(in[i].x,in[i].y))
@@ -614,7 +615,7 @@ Function V2dStackTob2Stack:Stack<b2Vec2>(in:Stack<Vec2d>)
 	Return out
 End
 
-Function V2fStackTob2Stack:Stack<b2Vec2>(in:Stack<Vec2f>)
+Function V2fStackTob2vStack:Stack<b2Vec2>(in:Stack<Vec2f>)
 	Local out:=New Stack<b2Vec2>
 	For Local i:=0 Until in.Length
 		out.Add(New b2Vec2(in[i].x,in[i].y))
@@ -622,18 +623,18 @@ Function V2fStackTob2Stack:Stack<b2Vec2>(in:Stack<Vec2f>)
 	Return out
 End
 
-Function V2dStastackTob2Stastack:Stack<Stack<b2Vec2>>(in:Stack<Stack<Vec2d>>)
+Function V2dStastackTob2vStastack:Stack<Stack<b2Vec2>>(in:Stack<Stack<Vec2d>>)
 	Local out:=New Stack<Stack<b2Vec2>>
 	For Local i:=0 Until in.Length
-		out.Add(V2dStackTob2Stack(in[i]))
+		out.Add(V2dStackTob2vStack(in[i]))
 	Next
 	Return out
 End
 
-Function V2fStastackTob2Stastack:Stack<Stack<b2Vec2>>(in:Stack<Stack<Vec2f>>)
+Function V2fStastackTob2vStastack:Stack<Stack<b2Vec2>>(in:Stack<Stack<Vec2f>>)
 	Local out:=New Stack<Stack<b2Vec2>>
 	For Local i:=0 Until in.Length
-		out.Add(V2fStackTob2Stack(in[i]))
+		out.Add(V2fStackTob2vStack(in[i]))
 	Next
 	Return out
 End

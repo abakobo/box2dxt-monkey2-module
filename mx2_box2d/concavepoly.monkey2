@@ -69,7 +69,7 @@ Function HMConvexor:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
 End
 
 Function ConvexPartitionOpt:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
-	Return V2dStastackTob2Stastack(ConvexPartitionOpt(b2StackToV2dStack(poly)))
+	Return V2dStastackTob2vStastack(ConvexPartitionOpt(b2vStackToV2dStack(poly)))
 End
 
 Function ConvexPartitionOpt:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)

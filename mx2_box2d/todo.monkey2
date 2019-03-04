@@ -1,20 +1,11 @@
 doing:
 ------
 
+CutBody dans b2Manager
 
+Ajouter clean min slopes dans polycut et polycutsided
 
-régler prob de lignes colinéaires cutpoly/poly
-
-
-corriger cutsided avec cas particulers touchtouch:
-			faire passer par Print "=In baseFalse"
-			faire de petits cas particuliers pour checker
-
-cleanStraight marche pas avec
-Vec2(350,130)
-Vec2(350,138.97597901025657)
-Vec2(350,130.00000000000003) ?
-
+remplacer Return emptyStack par Null
 
 todo:
 -----
@@ -34,8 +25,10 @@ corriger cutpoly pour le bug qui donne un "flat" poly: (pour le moment corrigé 
 		knife.Add(New Vec2<Double>(280,140))
 		knife.Add(New Vec2<Double>(290,100))
 
-Modifier poly cut non sided pour qu'il marche avec intersecting knife sans créer de doubles
+**Modifier poly cut non sided pour qu'il marche avec intersecting knife sans créer de doubles
 				--> le diviser en parties non intersect puis faire avec chanque parties? (ça risque quand même d'e^tre un peu durdur)
+
+***optimiser Line2D et cutPoly (aïe)
 
 Creer fonction validatePoly (renvoye un polystack de ccw convex sans frichtis)
 Créer fonction Validate polyStack
@@ -74,7 +67,6 @@ virer m_blah? ou ajouter getters et Setters pour les m_blah attributes qui sont 
 
 AABB box pour dessiner que ce qui sera à l écran (debugdraw compris?)
 
-PolycutNotSided?
 
 
 TODO

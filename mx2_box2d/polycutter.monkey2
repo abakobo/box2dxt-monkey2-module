@@ -18,12 +18,12 @@ Function PolyCutSided:Stack<Stack<Stack<Vec2d>>>(poly:Stack<Vec2d>,cutEdges:Stac
 	
 	For Local pail:=Eachin LRStack
 		If pail.isLeft=True
-			Local tleft:=cleanStraigths(pail.poly)
+			Local tleft:=cleanStraights(pail.poly)
 			If tleft<>Null
 				left.Add(tleft)
 			End
 		Else
-			Local tright:=cleanStraigths(pail.poly)
+			Local tright:=cleanStraights(pail.poly)
 			If tright<>Null
 				right.Add(tright)
 			End
@@ -37,6 +37,10 @@ Function PolyCutSided:Stack<Stack<Stack<Vec2d>>>(poly:Stack<Vec2d>,cutEdges:Stac
 
 End
 
+Function PolyCut:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>,cutEdges:Stack<b2Vec2>)
+	Return V2dStastackTob2vStastack(PolyCut(b2vStackToV2dStack(poly),b2vStackToV2dStack(cutEdges)))
+End
+
 Function PolyCut:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>,cutEdges:Stack<Vec2d>)
 	
 	Local polail:=New PolyAIL(poly,True)
@@ -45,7 +49,7 @@ Function PolyCut:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>,cutEdges:Stack<Vec2d>)
 	Local ret:=New Stack<Stack<Vec2d>>
 	
 	For Local pail:=Eachin LRStack
-			Local tleft:=cleanStraigths(pail.poly)
+			Local tleft:=cleanStraights(pail.poly)
 			If tleft<>Null
 				ret.Add(tleft)
 			End
@@ -266,9 +270,9 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 	'déterminer gauche/droite
 	Local lRVD:=ptDirLR-ptBaseIntLR
 	Local lRVN:=ptNormLR-ptBaseIntLR
-	Print "anglus"
-	Print lRVD
-	Print lRVN
+	'Print "anglus"
+	'Print lRVD
+	'Print lRVN
 	Local pailA:PolyAIL
 	Local pailB:PolyAIL
 
@@ -277,16 +281,16 @@ Function PolyCutRecSided:Stack<PolyAIL>(polygon:PolyAIL,cutEdges:Stack<Vec2d>)
 	If lRVD.SignedAngleWith(lRVN)=0
 	'	If polyA=Null Then Print "here it's NullAAAAAAAAAAAAAA"
 	'	If polyB=Null Then Print "here it's NullBBBBBBBBBBBBBB"
-		Print "ANANANANANANANANGLE 0"
+		'Print "ANANANANANANANANGLE 0"
 		
 	Elseif lRVD.SignedAngleWith(lRVN)>0
-		Print lRVD.SignedAngleWith(lRVN)
-		Print "posAngle"
+		'Print lRVD.SignedAngleWith(lRVN)
+		'Print "posAngle"
 		pailA=New PolyAIL (polyA,True)
 		pailB=New PolyAIL (polyB,False)
 	Else
-		Print lRVD.SignedAngleWith(lRVN)
-		Print "NegAngle?"
+		'Print lRVD.SignedAngleWith(lRVN)
+		'Print "NegAngle?"
 		pailA=New PolyAIL (polyA,False)
 		pailB=New PolyAIL (polyB,True)
 	End	
@@ -340,41 +344,31 @@ Function PolyHole:Stack<Stack<Stack<Vec2d>>>(polygon:Stack<Vec2d>,cutPoly:Stack<
 	End
 	
 	
-	
+	Local time:=Millisecs()
 	Local outPointIndex:=-1 'si un point est strictement à l'extérieur
 	For Local i:=0 Until cutPoly.Length-1
 		If InPolyInclLim(cutPoly[i],polygon)=False
 				outPointIndex=i
 		End
 	Next
-	'Local doubleLimOutPoint:=0 'si deux point sont non-strictement à l'extérieur
-	
-	'For Local i:=0 Until cutPoly.Length-1
-	'	If InPolyExclLim(cutPoly[i],polygon)=False
-	'			doubleLimOutPoint+=1
-	'	End
-	'Next
-	
-	
-	'Print "HUOUOUOUPUPUPUPUPUPUPA"
-	
-	
-	
+	Print "point ext: "+(Millisecs()-time)
 
 	If outPointIndex<>-1
 	'	Print "outpoint"
 		Local newCutPoly:=New Stack<Vec2d>
-		
+		time=Millisecs()
 		For Local i:=outPointIndex Until cutPoly.Length-1
 			newCutPoly.Add(cutPoly[i])
 		Next
 		For Local i:=0 Until outPointIndex
 			newCutPoly.Add(cutPoly[i])
 		Next
-		
+		Print "replacement polyext: "+(Millisecs()-time)
 		newCutPoly.Add(newCutPoly[0])
-		
-		Return PolyCutSided(polygon,newCutPoly)
+		time=Millisecs()
+		Local returnPoly:=PolyCutSided(polygon,newCutPoly)
+		Print "Polycut: "+(Millisecs()-time)
+		Return returnPoly
 	Else 'Si completement dans poly limit incl alors split le poly
 		'Print "Inpoints"
 		Local pa:Vec2d

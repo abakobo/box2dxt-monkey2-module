@@ -12,7 +12,7 @@ Public
 
 Function FullPartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
 	
-	Local polyStack:=SimplePartition(b2StackToV2dStack(poly))
+	Local polyStack:=SimplePartition(b2vStackToV2dStack(poly))
 	If polyStack=Null Then Return Null
 	If polyStack.Length=0 Then Return Null
 	
@@ -25,7 +25,7 @@ Function FullPartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
 	Next
 
 	
-	Return V2dStastackTob2Stastack(convexPolys)
+	Return V2dStastackTob2vStastack(convexPolys)
 	
 End
 
@@ -48,7 +48,7 @@ Function FullPartition:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
 End
 
 Function SimplePartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
-	Return V2dStastackTob2Stastack(SimplePartition(b2StackToV2dStack(poly)))
+	Return V2dStastackTob2vStastack(SimplePartition(b2vStackToV2dStack(poly)))
 End
 
 Function SimplePartition:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
@@ -66,7 +66,7 @@ Function SimplePartition:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 	Next
 	
 	Local CleanIntersectionPass1Stack:=cleanDuples(tCopy)
-	CleanIntersectionPass1Stack=cleanStraigths(CleanIntersectionPass1Stack)
+	CleanIntersectionPass1Stack=cleanStraights(CleanIntersectionPass1Stack)
 	
 	If CleanIntersectionPass1Stack.Top<>CleanIntersectionPass1Stack[0] Then CleanIntersectionPass1Stack.Add(CleanIntersectionPass1Stack[0])
 	
@@ -478,7 +478,7 @@ End
 
 Public 
 
-Function cleanStraigths:Stack<Vec2d>(poly:Stack<Vec2d>,maxAngle:Double=0.001)
+Function cleanStraights:Stack<Vec2d>(poly:Stack<Vec2d>,maxAngle:Double=0.001)
 	
 	If poly.Length<3 Then Return Null
 	If poly.Top<>poly[0] Then poly.Add(poly[0])
@@ -487,6 +487,8 @@ Function cleanStraigths:Stack<Vec2d>(poly:Stack<Vec2d>,maxAngle:Double=0.001)
 	Local retPoly:=New Stack<Vec2d>
 	retPoly.Add(poly[0])
 	retPoly.Add(poly[1])
+	Local baseP0:=poly[0]
+	Local baseP1:=poly[1]
 	
 	For Local i:=0 Until poly.Length-2
 		Local va:=retPoly.Top-retPoly[retPoly.Length-2]
@@ -501,8 +503,9 @@ Function cleanStraigths:Stack<Vec2d>(poly:Stack<Vec2d>,maxAngle:Double=0.001)
 	
 	poly.Pop()
 	poly.Pop()
-	If retPoly.Top=retPoly[1] Then retPoly.Pop()
-	If retPoly.Top=retPoly[0] Then retPoly.Pop()
+	
+	If retPoly.Top=baseP1 Then retPoly.Pop()
+	If retPoly.Top=baseP0 Then retPoly.Pop()
 	
 	If retPoly.Length>2 Then Return retPoly
 	
