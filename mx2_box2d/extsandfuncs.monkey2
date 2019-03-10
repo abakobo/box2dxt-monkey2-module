@@ -639,6 +639,47 @@ Function V2fStastackTob2vStastack:Stack<Stack<b2Vec2>>(in:Stack<Stack<Vec2f>>)
 	Return out
 End
 
+Class b2Body Extension
+	Method copyParamsFrom(body:b2Body,copyTransform:Bool=False,copyUserData:Bool=False)
+		If copyTransform=True 'position?
+			Self.SetTransform(body.GetPosition(),body.GetAngle())
+		End
+		If copyUserData=True
+			#If __DEBUG__
+				Print "copy body User_Data not implemented yet!"
+			#End
+		End
+		Self.SetActive(body.IsActive()) 	
+		Self.SetAngularDamping(body.GetAngularDamping())
+		Self.SetAngularVelocity(body.GetAngularVelocity())
+		Self.SetAwake(body.IsAwake())
+		Self.SetBullet(body.IsBullet())
+		Self.SetFixedRotation(body.IsFixedRotation())
+		Self.SetGravityScale(body.GetGravityScale())
+		Self.SetLinearDamping(body.GetLinearDamping())
+		Self.SetLinearVelocity(body.GetLinearVelocity())
+		Self.SetSleepingAllowed(body.IsSleepingAllowed())
+		Self.SetType(body.GetType())
+	End
+End
+
+Class b2Fixture Extension
+	Method copyParamsFrom(fixture:b2Fixture,copyIsSensor:Bool=False,copyUserData:Bool=False)
+		
+		Self.SetDensity(fixture.GetDensity())	
+		Self.SetFilterData(fixture.GetFilterData())
+		Self.SetFriction(fixture.GetFriction())	
+		Self.SetRestitution(fixture.GetRestitution())
+		If copyIsSensor Then Self.SetSensor(fixture.IsSensor())
+		If copyUserData
+				#If __DEBUG__
+				Print "copy fixture User_Data not implemented yet!"
+			#End
+		'Self.SetUserData(fixture.Get)
+		End
+	End
+End
+
 
 
 

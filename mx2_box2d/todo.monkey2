@@ -10,6 +10,10 @@ remplacer Return emptyStack par Null
 todo:
 -----
 
+implémenter copyUserData dans copyParamsFrom(body/fixture)
+
+bouger fixture.getname et body.getname de userDataextension vers extsAndfuncs 
+
 Cleaner Line2D puor que les methodes intersect segment aient les mêmes epsilon + Tester ça avec complex poly
 
 mettre complex/concave/cut test dans box2dxt bananas

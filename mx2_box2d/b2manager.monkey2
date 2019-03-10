@@ -1595,15 +1595,3 @@ Class b2Manager Extends Resource
 End
 
 
-
-'
-'
-'
-'  Polygon functions
-'
-'
-'
-
-
-
-
