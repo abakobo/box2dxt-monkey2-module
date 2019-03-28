@@ -368,7 +368,10 @@ Class b2Manager Extends Resource
 		Print "CuttBody: "+bodyName+" l: "+cutPolyStack.Length
 		
 		For Local npoly:=Eachin cutPolyStack
-			Self.CreatePolyBody(bodyName+"_cut",npoly.ToArray(),body.GetPosition(),body.GetAngle())'faut passer les vitesses aussi!
+			'MakeCCW(npoly)	
+			'Local tconvPolys:=ConvexPartitionOpt(npoly)
+			Local tBody:=Self.CreatePolyBody(bodyName+"_cut",npoly.ToArray(),body.GetPosition(),body.GetAngle())'faut passer les vitesses aussi!
+			tBody.copyParamsFrom(body)
 		Next
 		Self.DestroyBodyClean(body)
 	End

@@ -2,10 +2,15 @@ doing:
 ------
 
 CutBody dans b2Manager
+->faire b2manager createpolysBody qui prend un stack de polys
+ou un truc qui ajoute du poly à un body. Enfait faut que chaque fixture params soit copié sur
+ces "morceaux" donc faut storer dans Cutbody?
 
 Ajouter clean min slopes dans polycut et polycutsided
 
 remplacer Return emptyStack par Null
+
+créer Methodes addPolyToBody/circle ?
 
 todo:
 -----
