@@ -335,8 +335,16 @@ Class b2Manager Extends Resource
 	'
 	'
 	
-	Method CutBody(body:b2Body,knife:Stack<b2Vec2>)
+	Method CutBody(body:b2Body,cutKnife:Stack<b2Vec2>,knifeIsInWorldCoord:Bool=True)
 		
+		Local knife:=New Stack<b2Vec2>
+		If knifeIsInWorldCoord
+			For Local pt:=Eachin cutKnife
+				knife.Add(body.GetLocalPoint(pt))
+			Next
+		Else
+			knife=cutKnife
+		End
 		Local polyStack:=New Stack<Stack<b2Vec2>>
 		Local currentFixt:=body.GetFixtureList()
 		While currentFixt<>Null
