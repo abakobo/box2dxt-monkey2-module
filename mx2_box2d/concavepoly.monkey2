@@ -75,15 +75,23 @@ End
 Function ConvexPartitionOpt:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
 
 	Local convexResult:=BayazitConvexor(poly)
+	Print "convResult size: "+convexResult.Length
+	PrintPolyStack(convexResult)
 	
 	Local retStack:=New Stack<Stack<Vec2d>>
 	
 	For Local convPoly:=Eachin convexResult
 		
-		If convPoly=Null Then Continue
-		If convPoly.Length<3 Then Continue
+		If convPoly=Null
+			Continue
+		End
+		If convPoly.Length<3
+			Continue
+		End
 		convPoly=CleanMinSlopes(convPoly)
-		If IsPolyCollinearOrLessThan3Bayazit(convPoly) Then Continue
+		If IsPolyCollinearOrLessThan3Bayazit(convPoly)
+			Continue
+		End
 		Local tStack:=New Stack<Vec2d>
 		For Local pt:=Eachin convPoly
 			Local v2d:=New Vec2d(pt.x,pt.y)

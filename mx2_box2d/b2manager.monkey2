@@ -167,6 +167,8 @@ Class b2Manager Extends Resource
 	Method CreatePolyBody:b2Body( name:String="UnnamedPolyBody" , poly:b2Vec2[] ,initialPosition:b2Vec2,initialAngle:Float=0 ,  density:Float=1.0 , friction:Float=1.0 , restitution:Float=0.3 , type:b2BodyType=b2BodyType.b2_dynamicBody ,image:Image=Null , imageHeigth:Float=0.0 , imageStrech:Float=1.0 , imageHandle:Vec2f=New Vec2f(0.5,0.5) )
 	
 			Local tStack:=New Stack<b2Vec2>(poly)
+			Print "polyInCreate"
+			PrintPoly(tStack)
 			Local Stastack:=FullPartition(tStack)
 			Local fixtureCreated:=False
 			If Stastack=Null
@@ -174,10 +176,12 @@ Class b2Manager Extends Resource
 			End
 			
 			Local numFixtures:=Stastack.Length
-			Print "numFixt: "+numFixtures
+			Print "numFixt in createPolyBody: "+numFixtures
 			If numFixtures=0
 				#If __DEBUG__
-					Print "no Valid poly//fixtures for CreatePolyBody returning Null"
+					Print "e1: no Valid poly//fixtures for CreatePolyBody returning Null"
+					PrintPoly(tStack)
+					Print "-------"
 				#End
 				Return Null
 			End
@@ -207,7 +211,7 @@ Class b2Manager Extends Resource
 			If fixtureCreated=False
 				Self.DestroyBodyClean(body)
 				#If __DEBUG__
-					Print "no Valid poly/fixtures for CreatePolyBody returning Null"
+					Print "e2: no Valid poly/fixtures for CreatePolyBody returning Null"
 				#End
 				Return Null
 			End
@@ -345,6 +349,8 @@ Class b2Manager Extends Resource
 		Else
 			knife=cutKnife
 		End
+		Print "theWknife:"
+		PrintPoly(knife)
 		Local polyStack:=New Stack<Stack<b2Vec2>>
 		Local currentFixt:=body.GetFixtureList()
 		While currentFixt<>Null
@@ -361,25 +367,47 @@ Class b2Manager Extends Resource
 			currentFixt=currentFixt.GetNext()
 		Wend
 		
-		'
-		'
-		' il faut transormer le knife avec la transfo de Body!
-		'
-		'
+		Print "lvlone Cutting polys:"
+		PrintPolyStack(polyStack)
 		
-		Local cutPolyStack:=New Stack<Stack<b2Vec2>>
+		Local cutPolyStack:=New Stack<Stack<Stack<b2Vec2>>>
+		cutPolyStack.Add(New Stack<Stack<b2Vec2>>)
+		cutPolyStack.Add(New Stack<Stack<b2Vec2>>)
+		
 		For Local poly:=Eachin polyStack
-			cutPolyStack.AddAll(PolyCut(poly,knife))
+			'Print "precut-poly"
+			'PrintPoly(poly)
+			'Print "--knif-"
+			'PrintPoly(knife)
+			'Print "--"
+			Local cutSided:=PolyCutSided(poly,knife)
+			'Print cutSided.Length
+			'Print cutSided[0].Length
+			'PrintPolyStack(cutSided[0])
+			'Print cutSided[1].Length
+			'PrintPolyStack(cutSided[1])
+			'Print "postcut"
+			cutPolyStack[0].AddAll(cutSided[0])
+			cutPolyStack[1].AddAll(cutSided[1])
 		Next
 		Local bodyName:=body.GetName()
 		'Print "anglin: "+body.GetAngle()
-		Print "CuttBody: "+bodyName+" l: "+cutPolyStack.Length
-		
-		For Local npoly:=Eachin cutPolyStack
+		'Print "CuttBody: "+bodyName+" l: "+cutPolyStack.Length
+		Print "Creating new BodiesWith------------------------------"
+		PrintPolyStack(cutPolyStack[0])
+		Print "stckB-----"
+		PrintPolyStack(cutPolyStack[1])
+		Print "fin stcks"
+				
+		For Local npoly:=Eachin cutPolyStack[0]
 			'MakeCCW(npoly)	
 			'Local tconvPolys:=ConvexPartitionOpt(npoly)
 			Local tBody:=Self.CreatePolyBody(bodyName+"_cut",npoly.ToArray(),body.GetPosition(),body.GetAngle())'faut passer les vitesses aussi!
-			tBody.copyParamsFrom(body)
+			'tBody.copyParamsFrom(body)
+		Next
+		For Local npoly:=Eachin cutPolyStack[1]
+			Local tBody:=Self.CreatePolyBody(bodyName+"_cut",npoly.ToArray(),body.GetPosition(),body.GetAngle())'faut passer les vitesses aussi!
+		'	tBody.copyParamsFrom(body)
 		Next
 		Self.DestroyBodyClean(body)
 	End

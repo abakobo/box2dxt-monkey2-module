@@ -469,6 +469,10 @@ Struct PointsPair
 	
 End
 
+Function MakeCCW:Stack<b2Vec2>(pol:Stack<b2Vec2>)
+	Return V2dStackTob2vStack(MakeCCW(b2vStackToV2dStack(pol)))
+End
+
 Function MakeCCW<T>:Stack<Vec2<T>>(poly:Stack<Vec2<T>>)
 	
 	If poly.Top=poly[0] Then poly.Pop()
@@ -631,6 +635,14 @@ Function V2dStastackTob2vStastack:Stack<Stack<b2Vec2>>(in:Stack<Stack<Vec2d>>)
 	Return out
 End
 
+Function V2dStastastackTob2vStastastack:Stack<Stack<Stack<b2Vec2>>>(in:Stack<Stack<Stack<Vec2d>>>)
+	Local out:=New Stack<Stack<Stack<b2Vec2>>>
+	For Local i:=0 Until in.Length
+		out.Add(V2dStastackTob2vStastack(in[i]))
+	Next
+	Return out
+End
+
 Function V2fStastackTob2vStastack:Stack<Stack<b2Vec2>>(in:Stack<Stack<Vec2f>>)
 	Local out:=New Stack<Stack<b2Vec2>>
 	For Local i:=0 Until in.Length
@@ -680,6 +692,34 @@ Class b2Fixture Extension
 	End
 End
 
+Function PrintPoly(poly:Stack<b2Vec2>)
+	For Local pt:=Eachin poly
+		Print pt
+	Next		
+End
+Function PrintPoly(poly:Stack<Vec2d>)
+	For Local pt:=Eachin poly
+		Print pt
+	Next		
+End
+
+Function PrintPolyStack(polyStack:Stack<Stack<b2Vec2>>)
+	For Local poly:=Eachin polyStack
+	For Local pt:=Eachin poly
+		Print pt
+	Next
+	Print "-endpoly"
+	Next	
+End
+
+Function PrintPolyStack(polyStack:Stack<Stack<Vec2d>>)
+	For Local poly:=Eachin polyStack
+	For Local pt:=Eachin poly
+		Print pt
+	Next
+	Print "-endpoly"
+	Next	
+End
 
 
 

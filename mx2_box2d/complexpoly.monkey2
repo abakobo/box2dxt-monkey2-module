@@ -19,12 +19,11 @@ Function FullPartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
 	Local convexPolys:=New Stack<Stack<Vec2d>>
 	
 	For Local i:=0 Until polyStack.Length
-		MakeCCW(polyStack[i])	
+		MakeCCW(polyStack[i])
 		Local tconvPolys:=ConvexPartitionOpt(polyStack[i])
 		convexPolys.AddAll(tconvPolys)
 	Next
 
-	
 	Return V2dStastackTob2vStastack(convexPolys)
 	
 End
@@ -52,18 +51,35 @@ Function SimplePartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
 End
 
 Function SimplePartition:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
+	Local ret:=SimplePartitionNotClean(vertices)
+	For Local i:=0 Until ret.Length
+		ret[i]=CleanMinSlopes(ret[i])
+		ret[i]=cleanDuples(ret[i])
+	Next
+	
+	Return ret
+End
+
+Function SimplePartitionNotClean:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 
 	If vertices.Length<3
 		#If __DEBUG__
-			Print"ERROR less than 3 vertices for CreatePolygonShapes . "
+			Print"ERROR less than 3 vertices for Simplepartition . "
 		#End
 		Return Null
 	End
+	
+	Print "entering simplePartition with"
+	'PrintPoly(vertices)
+	Print"-------"
 
 	Local tCopy:=New Stack<Vec2d>
 	For Local i:=0 Until vertices.Length
 		tCopy.Add(vertices[i])
 	Next
+	Print "firsttcopy"
+	'PrintPoly(tCopy)
+	'Print "endfirsttcopy"
 	
 	Local CleanIntersectionPass1Stack:=cleanDuples(tCopy)
 	CleanIntersectionPass1Stack=cleanStraights(CleanIntersectionPass1Stack)
@@ -91,6 +107,11 @@ Function SimplePartition:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 	CleanIntersectionPass2Stack=cleanDuples(CleanIntersectionPass2Stack)
 	If CleanIntersectionPass2Stack.Top=CleanIntersectionPass2Stack[0] Then CleanIntersectionPass2Stack.Pop()
 
+	'CleanIntersectionPass2Stack=CleanMinSlopes(CleanIntersectionPass2Stack)
+	Print "Cleanint2"
+	'PrintPoly(CleanIntersectionPass2Stack)
+	'Print "endcleanint2"
+	
 	tCopy=New Stack<Vec2d>
 	
 	Local maxLeftPoint:=CleanIntersectionPass2Stack[0]
@@ -132,7 +153,9 @@ Function SimplePartition:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 	
 	tCopy.Add(tCopy[0])
 	
-
+	Print "tcopy:----------"
+	'PrintPoly(tCopy)
+	'Print "endtcopy--------"
 	Local cleanPoly:=New Stack<Vec2d>
 	
 	cleanPoly.Add(tCopy[0])
@@ -182,10 +205,15 @@ Function SimplePartition:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 	Until cleanPoly.Top=tCopy[0]
 	cleanPoly.Pop()
 	
+	Print "simplePartCleanPoly:"
+	'PrintPoly(cleanPoly)
+	'Print "----endsimplePartCleanPoly"
+	
 	Local retStack:=New Stack<Stack<Vec2d>>
 	
 	Local antiBugCount:=0
 	Repeat
+		Print "repeating..."+antiBugCount
 		If cleanPoly.Top=cleanPoly[0] Then cleanPoly.Pop()
 		Local interArr:=New Bool[cleanPoly.Length]
 		For Local i:=0 Until cleanPoly.Length
@@ -202,15 +230,21 @@ Function SimplePartition:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 				interStack.Add(i)	
 			End
 		Next
+		Print "AAAAAAAAAAAA interstackLength="+interStack.Length
 		If interStack.Length=0
 			If IsPolyCollinearOrLessThan3(cleanPoly)=False
 				retStack.Add(cleanPoly)
 			End
+			'Print "INTERSTAAAAAAACK=0"
+			'PrintPolyStack(retStack)
+			'Print "staAAAAAAAAAAA"
 			Return retStack
 		End
 		For Local i:=0 Until interStack.Length-1
+			Print "i: "+i
 			If cleanPoly[interStack[i]]=cleanPoly[interStack[i+1]]
 				simpleLoopStack.Add(New Vec2i(interStack[i],interStack[i+1]))
+				Print simpleLoopStack.Length
 			End
 		Next
 		If interStack.Length>1
@@ -218,7 +252,7 @@ Function SimplePartition:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 				simpleLoopStack.Add(New Vec2i(interStack[interStack.Length-1],interStack[0]))
 			End
 		End
-		
+		Print "BBBBBBBBBBBB simpleloopstckLength="+simpleLoopStack.Length
 		Local tCleanPoly:=New Stack<Vec2d>
 	
 		For Local lopIndex:=0 Until simpleLoopStack.Length
@@ -268,19 +302,23 @@ Function SimplePartition:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 					
 		Next
 		
-		
+		Print "CCCCCCCCCCCCCCCC tcleanPolyLength="+tCleanPoly.Length
 		tCleanPoly=cleanDuples(tCleanPoly)
-
+		Print "DDDDDDDDDDDDDD"
 		If tCleanPoly.Length>0
 			If tCleanPoly.Top<>tCleanPoly[0] Then tCleanPoly.Add(tCleanPoly[0])
 		Else
 			Return retStack
-		End		
+		End
+		Print "EEEEEEEEEEEEE"
 		If tCleanPoly.Length<4
 			Return retStack
 		Else
-			If IsPolyCollinearOrLessThan3(tCleanPoly)=True Then Return retStack
+			If IsPolyCollinearOrLessThan3(tCleanPoly)=True
+				Return retStack
+			End
 		End
+		Print "FFFFFFFFFFFFFFFF"
 		If HasPolyZeroAngleOrLessThan3(tCleanPoly)=True
 			#If __DEBUG__
 				Print "ERROR: encoutered zero-Angle in complex polygon partitionning!"
@@ -437,13 +475,14 @@ End
 
 Public
 Function cleanDuples:Stack<Vec2d>(tCopy:Stack<Vec2d>)
-	
+		'Print "enetering cleanDuples tcopyLangth="+tCopy.Length
+		
 		Local CleanIntersectionPass1Stack:=New Stack<Vec2d>
 		
 		If tCopy.Top=tCopy[0] Then tCopy.Pop()
 		
 		While tCopy.Length>0
-			
+			'Print "CleanDuplAAAAAAAAAA"
 			If CleanIntersectionPass1Stack.Length=0 'premier point est pris d'office
 			
 				CleanIntersectionPass1Stack.Add(tCopy.Pop())
@@ -469,7 +508,7 @@ Function cleanDuples:Stack<Vec2d>(tCopy:Stack<Vec2d>)
 				End
 	
 			End
-			
+			'Print "CleanDuplZZZZZZZ"
 		Wend
 				
 		Return CleanIntersectionPass1Stack
