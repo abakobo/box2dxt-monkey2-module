@@ -37,13 +37,13 @@ Function PolyCutSided:Stack<Stack<Stack<Vec2d>>>(poly:Stack<Vec2d>,cutEdges:Stac
 
 End
 
-'Function PolyCutSided:Stack<Stack<Stack<b2Vec2>>>(poly:Stack<b2Vec2>,cutEdges:Stack<b2Vec2>)
-'	Return V2dStastastackTob2vStastastack(PolyCutSided(b2vStackToV2dStack(poly),b2vStackToV2dStack(cutEdges)))
-'End
+Function PolyCutSided:Stack<Stack<Stack<b2Vec2>>>(poly:Stack<b2Vec2>,cutEdges:Stack<b2Vec2>)
+	Return V2dStastastackTob2vStastastack(PolyCutSided(b2vStackToV2dStack(poly),b2vStackToV2dStack(cutEdges)))
+End
 
-'Function PolyCut:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>,cutEdges:Stack<b2Vec2>)
-'	Return V2dStastackTob2vStastack(PolyCut(b2vStackToV2dStack(poly),b2vStackToV2dStack(cutEdges)))
-'End
+Function PolyCut:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>,cutEdges:Stack<b2Vec2>)
+	Return V2dStastackTob2vStastack(PolyCut(b2vStackToV2dStack(poly),b2vStackToV2dStack(cutEdges)))
+End
 
 Function PolyCut:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>,cutEdges:Stack<Vec2d>)
 	
