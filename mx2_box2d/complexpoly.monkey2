@@ -10,23 +10,23 @@ Using box2dxt..
 
 Public
 
-Function FullPartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
-	
-	Local polyStack:=SimplePartition(b2vStackToV2dStack(poly))
-	If polyStack=Null Then Return Null
-	If polyStack.Length=0 Then Return Null
-	
-	Local convexPolys:=New Stack<Stack<Vec2d>>
-	
-	For Local i:=0 Until polyStack.Length
-		MakeCCW(polyStack[i])
-		Local tconvPolys:=ConvexPartitionOpt(polyStack[i])
-		convexPolys.AddAll(tconvPolys)
-	Next
+'Function FullPartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
+'	
+'	Local polyStack:=SimplePartition(b2vStackToV2dStack(poly))
+'	If polyStack=Null Then Return Null
+'	If polyStack.Length=0 Then Return Null
+'	
+'	Local convexPolys:=New Stack<Stack<Vec2d>>
+'	
+'	For Local i:=0 Until polyStack.Length
+'		MakeCCW(polyStack[i])
+'		Local tconvPolys:=ConvexPartitionOpt(polyStack[i])
+'		convexPolys.AddAll(tconvPolys)
+'	Next
 
-	Return V2dStastackTob2vStastack(convexPolys)
+'	Return V2dStastackTob2vStastack(convexPolys)
 	
-End
+'End
 
 Function FullPartition:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
 	
@@ -46,9 +46,9 @@ Function FullPartition:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
 	
 End
 
-Function SimplePartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
-	Return V2dStastackTob2vStastack(SimplePartition(b2vStackToV2dStack(poly)))
-End
+'Function SimplePartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
+'	Return V2dStastackTob2vStastack(SimplePartition(b2vStackToV2dStack(poly)))
+'End
 
 Function SimplePartition:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 	Local ret:=SimplePartitionNotClean(vertices)
@@ -136,9 +136,11 @@ Function SimplePartitionNotClean:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 	Local polySignForCompare:=1
 	
 	Local vBegin:Vec2d=tCopy[1]-tCopy[0]
-	vBegin=vBegin.Normalize() '! normalize de Vec2d return Float et pas vect nomalisé
+	'vBegin=vBegin.Normalize() '! normalize de Vec2d return Float et pas vect nomalisé
+	vBegin.Normalize()
 	Local vEndin:Vec2d=tCopy[tCopy.Length-1]-tCopy[0]
-	vEndin=vEndin.Normalize()
+	'vEndin=vEndin.Normalize()
+	vEndin.Normalize()
 	
 	If vBegin.y=vEndin.y
 		#If __DEBUG__

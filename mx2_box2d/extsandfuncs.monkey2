@@ -83,8 +83,8 @@ End
 '
 '-------------------------------------
 
-Alias Vec2d:Vec2<Double>
-
+Alias Vec2d:b2Vec2'Vec2<Double>
+#rem
 Struct Vec2<T> Extension
 	
 	'- Pi to Pi
@@ -136,6 +136,58 @@ Struct Vec2<T> Extension
 	End
 		
 End
+#end
+Struct b2Vec2 Extension
+	
+	'- Pi to Pi
+	Method SignedAngleWith:Double(v:b2Vec2)
+		If (Self.Length()=0) Or (v.Length()=0)
+			'#If __DEBUG__
+			'	Print"Warning: null Vec2<T> for angle, returning zero"
+			'#End
+			Return 0
+		End
+		
+		Local dot := Self.x*v.x + Self.y*v.y    '  # dot product between [x1, y1] and [x2, y2]
+		Local det := Self.x*v.y - Self.y*v.x     ' # determinant
+		Return ATan2(det, dot) ' # atan2(y, x) or atan2(sin, cos)
+	End
+	
+	'0 to 2Pi
+	Method PositiveAngleWith:Double(v:b2Vec2)
+		If (Self.Length()=0) Or (v.Length()=0)
+			'#If __DEBUG__
+			'	Print"Warning: null Vec2<T> for angle, returning zero"
+			'#End
+			Return 0
+		End
+		
+		Local dot := Self.x*v.x + Self.y*v.y    '  # dot product between [x1, y1] and [x2, y2]
+		Local det := Self.x*v.y - Self.y*v.x     ' # determinant
+		Local a:= ATan2(det, dot) ' # atan2(y, x) or atan2(sin, cos)
+		If a<0 Then a=2*Pi+a
+		Return a
+	End
+	
+	
+	Method Cross:Double(v:b2Vec2)
+		Return x * v.y - y * v.x
+	End
+	
+	Property SqLength:Double()
+		
+		Return (x*x)+(y*y)
+		
+	End
+	
+	Method SqDistance:Double(v:b2Vec2)
+		
+		Local tv:=v-Self
+		Return (tv.x*tv.x)+(tv.y*tv.y)
+		
+	End
+		
+End
 
 
 '--------------------------------------
@@ -174,16 +226,20 @@ End
 
 Struct Line2D
 	
-	Field o:Vec2<Double>
-	Field d:Vec2<Double>
+	Field o:Vec2d
+	Field d:Vec2d
 	
-	Method New(origin:Vec2<Double>,directionSegment:Vec2<Double>)
+	Method New(origin:Vec2d,directionSegment:Vec2d)
 		o=origin
 		d=directionSegment
 	End
 	
 	Method IsParallel:Bool(line:Line2D)
-		If Self.d.Normalize()<>line.d.Normalize() And Self.d.Normalize()<>-line.d.Normalize()
+		Local sd:=Self.d
+		Local ld:=line.d
+		sd.Normalize()
+		ld.Normalize()
+		If sd<>ld And sd<>-ld
 			Return False
 		Else
 			Return True
@@ -204,7 +260,7 @@ Struct Line2D
 		
 	End
 	
-	Method Intersection:Vec2<Double>(line:Line2D)
+	Method Intersection:Vec2d(line:Line2D)
 
 		Local divisor:Double=1.0*(1.0*line.d.y*Self.d.x*1.0)-1.0*(1.0*Self.d.y*1.0*line.d.x)
 
@@ -273,7 +329,7 @@ Struct Line2D
 			
 			Local insideSelf:=False
 			
-			Local epsilon:Double=0.2e-52
+			Local epsilon:Float=0.2e-20
 			
 			If Abs(dp.SignedAngleWith(Self.d))<0.001
 				If dp.SqLength<=Self.d.SqLength+epsilon
@@ -343,7 +399,7 @@ Struct Line2D
 			Local inter:=Self.Intersection(line)
 			Local dSelf:=inter-Self.o
 			Local dLine:=inter-line.o
-			Local epsilon:Double=0.2e-52
+			Local epsilon:Double=0.2e-20
 			
 			Local insideLine:=False
 			If Abs(dLine.SignedAngleWith(line.d))<0.001
@@ -469,11 +525,11 @@ Struct PointsPair
 	
 End
 
-Function MakeCCW:Stack<b2Vec2>(pol:Stack<b2Vec2>)
-	Return V2dStackTob2vStack(MakeCCW(b2vStackToV2dStack(pol)))
-End
+'Function MakeCCW:Stack<b2Vec2>(pol:Stack<b2Vec2>)
+'	Return V2dStackTob2vStack(MakeCCW(b2vStackToV2dStack(pol)))
+'End
 
-Function MakeCCW<T>:Stack<Vec2<T>>(poly:Stack<Vec2<T>>)
+Function MakeCCW:Stack<Vec2d>(poly:Stack<Vec2d>)
 	
 	If poly.Top=poly[0] Then poly.Pop()
 	
@@ -485,9 +541,9 @@ Function MakeCCW<T>:Stack<Vec2<T>>(poly:Stack<Vec2<T>>)
 			maxLeftPointIndex=i
 		End
 	Next
-	Local pa:Vec2<T>
-	Local pb:Vec2<T>
-	Local pc:Vec2<T>
+	Local pa:Vec2d
+	Local pb:Vec2d
+	Local pc:Vec2d
 	
 	If maxLeftPointIndex=0
 		pa=poly[poly.Length-1]
@@ -504,9 +560,9 @@ Function MakeCCW<T>:Stack<Vec2<T>>(poly:Stack<Vec2<T>>)
 	End
 	
 	Local vBegin:=pa-pb
-	vBegin=vBegin.Normalize() 
+	vBegin.Normalize() 
 	Local vEndin:=pc-pb
-	vEndin=vEndin.Normalize()
+	vEndin.Normalize()
 	
 	If vBegin.y=vEndin.y
 		#If __DEBUG__
@@ -548,7 +604,7 @@ Function IsPolyCollinearOrLessThan3:Bool(p:Stack<Vec2d>)
 	Return True
 	
 End
-
+#rem
 Function IsPolyCollinearOrLessThan3:Bool(p:Stack<b2Vec2>)
 	
 	If p.Length>2
@@ -571,14 +627,14 @@ Function IsPolyCollinearOrLessThan3:Bool(p:Stack<b2Vec2>)
 	Return True
 	
 End
-
+#end
 '-----------------------
 '
 ' convert funcs
 '
 '---------------------
 
-
+#rem
 Function b2vStackToV2dStack:Stack<Vec2d>(in:Stack<b2Vec2>)
 	Local out:=New Stack<Vec2d>
 	For Local i:=0 Until in.Length
@@ -650,6 +706,14 @@ Function V2fStastackTob2vStastack:Stack<Stack<b2Vec2>>(in:Stack<Stack<Vec2f>>)
 	Next
 	Return out
 End
+#end
+
+
+'---------------------------
+'
+' params copieur
+'
+'------------------------------
 
 Class b2Body Extension
 	Method copyParamsFrom(body:b2Body,copyTransform:Bool=False,copyUserData:Bool=False)
@@ -697,11 +761,11 @@ Function PrintPoly(poly:Stack<b2Vec2>)
 		Print pt
 	Next		
 End
-Function PrintPoly(poly:Stack<Vec2d>)
-	For Local pt:=Eachin poly
-		Print pt
-	Next		
-End
+'Function PrintPoly(poly:Stack<Vec2d>)
+'	For Local pt:=Eachin poly
+'		Print pt
+'	Next		
+'End
 
 Function PrintPolyStack(polyStack:Stack<Stack<b2Vec2>>)
 	For Local poly:=Eachin polyStack
@@ -712,14 +776,14 @@ Function PrintPolyStack(polyStack:Stack<Stack<b2Vec2>>)
 	Next	
 End
 
-Function PrintPolyStack(polyStack:Stack<Stack<Vec2d>>)
-	For Local poly:=Eachin polyStack
-	For Local pt:=Eachin poly
-		Print pt
-	Next
-	Print "-endpoly"
-	Next	
-End
+'Function PrintPolyStack(polyStack:Stack<Stack<Vec2d>>)
+'	For Local poly:=Eachin polyStack
+'	For Local pt:=Eachin poly
+'		Print pt
+'	Next
+'	Print "-endpoly"
+'	Next	
+'End
 
 
 

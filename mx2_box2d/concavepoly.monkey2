@@ -68,9 +68,9 @@ Function HMConvexor:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
 		Return convertedResult
 End
 
-Function ConvexPartitionOpt:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
-	Return V2dStastackTob2vStastack(ConvexPartitionOpt(b2vStackToV2dStack(poly)))
-End
+'Function ConvexPartitionOpt:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
+'	Return V2dStastackTob2vStastack(ConvexPartitionOpt(b2vStackToV2dStack(poly)))
+'End
 
 Function ConvexPartitionOpt:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
 
@@ -182,8 +182,8 @@ Function IsPolyCollinearOrLessThan3Bayazit:Bool(p:Stack<Vec2d>)
 			Local angle:=Abs(v1.SignedAngleWith(v2))
 			'Print "angle: "+angle
 			#rem
-			v1=v1.Normalize()
-			v2=v2.Normalize()
+			'v1=v1.Normalize() '!!!! Normalize est différenc pour Vec2 et b2Vec2
+			'v2=v2.Normalize()
 			If v1.x<0 Then v1=-v1
 			If v2.x<0 Then v2=-v2
 			If v1.x=0
