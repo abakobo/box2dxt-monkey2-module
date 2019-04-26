@@ -557,7 +557,7 @@ Function ExtremeLeftise:Stack<Vec2d>(poly:Stack<Vec2d>)
 	
 End
 
-Function IsLeft:Int( P0:Vec2d, P1:Vec2d, P2:Vec2d )
+Function IsLeft:Float( P0:Vec2d, P1:Vec2d, P2:Vec2d )
 	return ( (P1.x - P0.x) * (P2.y - P0.y) - (P2.x - P0.x) * (P1.y - P0.y) )
 End
 

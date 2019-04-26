@@ -84,6 +84,9 @@ End
 '-------------------------------------
 
 Alias Vec2d:b2Vec2'Vec2<Double>
+
+Alias xtPoly:Stack<Vec2d>
+Alias xtPolyStack:Stack<Stack<Vec2d>>
 #rem
 Struct Vec2<T> Extension
 	
@@ -525,6 +528,38 @@ Struct PointsPair
 	
 End
 
+Struct PolyAndFixture
+	Field poly:Stack<Vec2d>	
+	Field fixture:b2Fixture
+	Method New(p:Stack<Vec2d>,f:b2Fixture)
+		poly=p
+		fixture=f
+	End
+
+		
+End
+
+Function AddPolyStackToPAFStack(ps:Stack<Stack<Vec2d>>,f:b2Fixture,PAFStack:Stack<PolyAndFixture>)
+	If ps=Null
+		#If __DEBUG__
+			Print"AddPolyStackToPAFStack has received null polystack, exiting"
+		#End
+		Return
+	End
+	If f=Null
+		#If __DEBUG__
+			Print"AddPolyStackToPAFStack has received null fixture, exiting"
+		#End
+		Return
+	End
+	If PAFStack=Null Then PAFStack=New Stack<PolyAndFixture>
+	
+	For Local p:=Eachin ps
+		PAFStack.Add(New PolyAndFixture(p,f))
+	Next
+	
+End
+
 'Function MakeCCW:Stack<b2Vec2>(pol:Stack<b2Vec2>)
 '	Return V2dStackTob2vStack(MakeCCW(b2vStackToV2dStack(pol)))
 'End
@@ -756,6 +791,14 @@ Class b2Fixture Extension
 	End
 End
 
+
+'
+'
+' Printeurs
+'
+'
+
+
 Function PrintPoly(poly:Stack<b2Vec2>)
 	For Local pt:=Eachin poly
 		Print pt
@@ -784,6 +827,23 @@ End
 '	Print "-endpoly"
 '	Next	
 'End
+
+
+'
+'
+' polys touch
+'
+'
+
+Function PolysAreTouching:Bool ( poly1:xtPoly , poly2:xtPoly )
+	
+	For Local tpt1:=Eachin poly1
+		If InPolyInclLim(tpt1,poly2) Then Return True	
+	Next
+	Return False
+	
+End
+
 
 
 

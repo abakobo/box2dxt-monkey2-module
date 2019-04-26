@@ -1,6 +1,12 @@
 doing:
 ------
 
+
+Method createpolyboy avec pAF ? fait ?
+Method AddpolyFixture avec PAF ? fait ?
+
+faut passer les vitesses dans CutBody
+
 CutBody dans b2Manager (test dans mx2/testb2manager/test2Cut.monkey2)
 ->faire b2manager createpolysBody qui prend un stack de polys
 ou un truc qui ajoute du poly à un body. Enfait faut que chaque fixture params soit copié sur
@@ -14,6 +20,8 @@ créer Methodes addPolyToBody/circle ?
 
 todo:
 -----
+
+Cut le images avec!!!!!***
 
 implémenter copyUserData dans copyParamsFrom(body/fixture)
 

@@ -164,12 +164,31 @@ Class b2Manager Extends Resource
 		
 	End
 	
-	Method CreatePolyBody:b2Body( name:String="UnnamedPolyBody" , poly:b2Vec2[] ,initialPosition:b2Vec2,initialAngle:Float=0 ,  density:Float=1.0 , friction:Float=1.0 , restitution:Float=0.3 , type:b2BodyType=b2BodyType.b2_dynamicBody ,image:Image=Null , imageHeigth:Float=0.0 , imageStrech:Float=1.0 , imageHandle:Vec2f=New Vec2f(0.5,0.5) )
 	
-			Local tStack:=New Stack<b2Vec2>(poly)
+	
+	Method CreatePolyBody:b2Body (name:String="UnnamedPolyBody", pAF:PolyAndFixture ,initialPosition:b2Vec2,initialAngle:Float=0 , type:b2BodyType=b2BodyType.b2_dynamicBody ,image:Image=Null , imageHeigth:Float=0.0 , imageStrech:Float=1.0 , imageHandle:Vec2f=New Vec2f(0.5,0.5) )
+		Local density:=pAF.fixture.GetDensity()
+		Local friction:=pAF.fixture.GetFriction()
+		Local restitution:=pAF.fixture.GetRestitution()
+		Local body:=CreatePolyBody (name,pAF.poly,initialPosition,initialAngle,density,friction,restitution,type,image,imageHeigth,imageStrech,imageHandle)
+		Local firstFixture:=body.GetFixtureList()
+		firstFixture.SetFilterData(pAF.fixture.GetFilterData())
+		firstFixture.SetSensor(pAF.fixture.IsSensor())
+		'UserData?
+		Return body
+	End
+	Method CreatePolyBody:b2Body( name:String="UnnamedPolyBody" , poly:b2Vec2[] ,initialPosition:b2Vec2,initialAngle:Float=0 ,  density:Float=1.0 , friction:Float=1.0 , restitution:Float=0.3 , type:b2BodyType=b2BodyType.b2_dynamicBody ,image:Image=Null , imageHeigth:Float=0.0 , imageStrech:Float=1.0 , imageHandle:Vec2f=New Vec2f(0.5,0.5) )
+		Local tStack:=New Stack<b2Vec2>(poly)
+		Return CreatePolyBody( name, tStack ,initialPosition,initialAngle,density,friction, restitution, type ,image , imageHeigth , imageStrech , imageHandle )
+		
+	End
+	
+	Method CreatePolyBody:b2Body( name:String="UnnamedPolyBody" , poly:Stack<b2Vec2> ,initialPosition:b2Vec2,initialAngle:Float=0 ,  density:Float=1.0 , friction:Float=1.0 , restitution:Float=0.3 , type:b2BodyType=b2BodyType.b2_dynamicBody ,image:Image=Null , imageHeigth:Float=0.0 , imageStrech:Float=1.0 , imageHandle:Vec2f=New Vec2f(0.5,0.5) )
+	
+			'Local tStack:=New Stack<b2Vec2>(poly)
 			Print "polyInCreate"
-			PrintPoly(tStack)
-			Local Stastack:=FullPartition(tStack)
+			PrintPoly(poly)
+			Local Stastack:=FullPartition(poly)
 			Local fixtureCreated:=False
 			If Stastack=Null
 				Return Null
@@ -180,7 +199,7 @@ Class b2Manager Extends Resource
 			If numFixtures=0
 				#If __DEBUG__
 					Print "e1: no Valid poly//fixtures for CreatePolyBody returning Null"
-					PrintPoly(tStack)
+					PrintPoly(poly)
 					Print "-------"
 				#End
 				Return Null
@@ -352,6 +371,7 @@ Class b2Manager Extends Resource
 		Print "theWknife:"
 		PrintPoly(knife)
 		Local polyStack:=New Stack<Stack<b2Vec2>>
+		Local polyFixStack:=New Stack<PolyAndFixture>
 		Local currentFixt:=body.GetFixtureList()
 		While currentFixt<>Null
 			
@@ -363,53 +383,199 @@ Class b2Manager Extends Resource
 					poly.Add(ps.GetVertex(i))
 				Next
 			End
-			polyStack.Add(poly)
+			polyFixStack.Add(New PolyAndFixture(poly,currentFixt))
 			currentFixt=currentFixt.GetNext()
 		Wend
 		
 		Print "lvlone Cutting polys:"
 		PrintPolyStack(polyStack)
 		
-		Local cutPolyStack:=New Stack<Stack<Stack<b2Vec2>>>
-		cutPolyStack.Add(New Stack<Stack<b2Vec2>>)
-		cutPolyStack.Add(New Stack<Stack<b2Vec2>>)
+		Local cutPolyStack:=New Stack<Stack<PolyAndFixture>>
+		cutPolyStack.Add(New Stack<PolyAndFixture>)
+		cutPolyStack.Add(New Stack<PolyAndFixture>)
+		cutPolyStack.Add(New Stack<PolyAndFixture>) 'pour ceux qui n'ont pas été coupés
 		
-		For Local poly:=Eachin polyStack
-			'Print "precut-poly"
-			'PrintPoly(poly)
-			'Print "--knif-"
-			'PrintPoly(knife)
-			'Print "--"
-			Local cutSided:=PolyCutSided(poly,knife)
-			'Print cutSided.Length
-			'Print cutSided[0].Length
-			'PrintPolyStack(cutSided[0])
-			'Print cutSided[1].Length
-			'PrintPolyStack(cutSided[1])
-			'Print "postcut"
-			cutPolyStack[0].AddAll(cutSided[0])
-			cutPolyStack[1].AddAll(cutSided[1])
+		For Local pAF:=Eachin polyFixStack
+			
+			Local cutSided:=PolyCutSided(pAF.poly,knife)
+			
+			If cutSided[0].Length=1 And cutSided[1].Length=0 'ce poly n'as pas été coupé
+				cutPolyStack[2].Add(New PolyAndFixture(cutSided[0][0],pAF.fixture))
+				Print "adding poly to non cut stack"
+			Else
+				For Local p:=Eachin cutSided[0]
+					cutPolyStack[0].Add(New PolyAndFixture(p,pAF.fixture))
+				Next
+				For Local p:=Eachin cutSided[1]
+					cutPolyStack[1].Add(New PolyAndFixture(p,pAF.fixture))
+				Next
+			End
 		Next
-		Local bodyName:=body.GetName()
-		'Print "anglin: "+body.GetAngle()
-		'Print "CuttBody: "+bodyName+" l: "+cutPolyStack.Length
-		Print "Creating new BodiesWith------------------------------"
-		PrintPolyStack(cutPolyStack[0])
-		Print "stckB-----"
-		PrintPolyStack(cutPolyStack[1])
-		Print "fin stcks"
+		Print "lengths"
+'		cutSided[0].Length
+'		cutSided[1].Length
+		Print cutPolyStack[0].Length
+		Print cutPolyStack[1].Length
+		Print cutPolyStack[2].Length
+		Print "endlegth"
+		'verification que y a de la coupe
+		If cutPolyStack[1].Length=0
+			#If __DEBUG__
+				Print "body is Not cut, aborting"
+			#End
+			Return	
+		End
+		'Vérification que il n'y a pas de poly qui touchent le knife mais qui sont pas coupés ==> pt inside alor que dans stack des pas coupés
+		For Local papaf:=Eachin cutPolyStack[2]
+			Print "testiti"
+			PrintPoly (papaf.poly)
+			Print "r"
+			For Local kp:=Eachin knife
+				Print kp
+				Print InPolyInclLim(kp,papaf.poly)
+				If InPolyInclLim(kp,papaf.poly)
+					#If __DEBUG__
+						Print "body is Not cut completely, aborting"
+					#End
+					Return
+				End
+			Next
+		Next
+		Print "cutting is valid"
+		'check dans stack 0,1,2 si tout le monde se touche et mettre dans nouveau stack de stack de polys par groupe qui se touche
+		'les stack 0 et 1 ne se touchent d'office pas
+		'le nombre de bodies sera égal au length A+B+C
+		Local touchStack:=New Stack<Stack<PolyAndFixture>>[3]
+		For Local ABC:=0 Until 3
+			touchStack[ABC]=New Stack<Stack<PolyAndFixture>>
+			
+			'placement d'un premier paf
+			If cutPolyStack[ABC].Length=0 Then Exit 'pour si cutPolyStack[2] est vide.. normalement 0 et 1 sont pas vides
+			
+			touchStack[ABC].Add(New Stack<PolyAndFixture>)
+			touchStack[ABC][0].Add(cutPolyStack[ABC].Pop())
+			
+			'triple bouclage pour caser tous les pafs restants avec un copain ou pas (faut encore reboucler jusqu'à ce qu'il n'y ait lus de coapains du tout)
+			'c'est juste un premier passage, le trouvage complet de copains ce fait après
+			While cutPolyStack[0].Length>0
+				Local currentPAF:=cutPolyStack[ABC].Pop()
+				Local touched:=False
 				
-		For Local npoly:=Eachin cutPolyStack[0]
-			'MakeCCW(npoly)	
-			'Local tconvPolys:=ConvexPartitionOpt(npoly)
-			Local tBody:=Self.CreatePolyBody(bodyName+"_cut",npoly.ToArray(),body.GetPosition(),body.GetAngle())'faut passer les vitesses aussi!
-			'tBody.copyParamsFrom(body)
+				For Local i:=0 Until touchStack[ABC].Length
+					For Local tPAF:=Eachin touchStack[ABC][i]
+						If PolysAreTouching(currentPAF.poly,tPAF.poly)
+							touchStack[ABC][i].Add(currentPAF)
+							touched=True
+							Exit
+						End
+					Next 'p
+					If touched=True Then Exit
+				Next 'i
+				If touched=False
+					touchStack[ABC].Add(New Stack<PolyAndFixture>)
+					touchStack[ABC].Top.Add( currentPAF )
+				End					
+			Wend
+			'Maintennant on a vidé cutpoly stack[ABC] et on reboucle sur touchStack[ABC] pour trouver des copains jusqu'à ce qu'on en rencontre plus
+			'Un poly peut indirectement toucher un autre donc il faut tester par stack de polys et mettre les copains ensemble
+			Local touchedInABC:Bool
+			Repeat
+				touchedInABC=False
+				Local iFriend:=-1 'les valeurs des touchStack à rassembler
+				Local jFriend:=-1
+				For Local i:=0 Until touchStack[ABC].Length
+					For Local j:=0 Until touchStack[ABC].Length
+						If i=j Then Exit
+						For Local pafi:=Eachin touchStack[ABC][i]
+							For Local pafj:=Eachin touchStack[ABC][j] 'houlala la grosse compexité on doit tester chaque poly de chaque stacks!
+						
+								If PolysAreTouching(pafi.poly,pafj.poly)
+									touchedInABC=True
+									iFriend=i
+									jFriend=j
+									Exit
+								End
+								
+							Next 'pafj
+							If touchedInABC=True Then Exit
+						Next 'pafi
+						If touchedInABC=True Then Exit
+					Next 'j
+					If touchedInABC=True Then Exit
+				Next 'i
+				If touchedInABC=True
+					touchStack[ABC][iFriend].AddAll(touchStack[ABC][jFriend])
+					touchStack[ABC].Erase(jFriend)
+				End	
+				
+				
+			Until touchedInABC=False
+		Next 'ABC
+		Print "length des copinouStacks"
+		Print touchStack[0].Length
+		Print touchStack[1].Length
+		Print touchStack[2].Length
+		
+		'Maintennant faut regrouper les éléments de touchStack[2] avec d'éventuels copains dans 0 ou 1
+
+		Local touchIn2:Bool
+		For Local AB:=0 To 1
+			Repeat
+				touchIn2=False
+				Local Friendi:=-1
+				Local Friendj:=-1
+				For Local i:=0 Until touchStack[2].Length
+					For Local j:=0 Until touchStack[AB].Length
+						For Local pafi:=Eachin touchStack[2][i]
+							For Local pafj:=Eachin touchStack[AB][j]
+						
+								If PolysAreTouching(pafi.poly,pafj.poly)
+									touchIn2=True
+									Friendi=i
+									Friendj=j
+									Exit
+								End
+								
+							Next 'pafj
+							If touchIn2=True Then Exit
+						Next 'pafi
+						If touchIn2=True Then Exit
+					Next 'j
+					If touchIn2=True Then Exit
+				Next 'i
+			If touchIn2=True
+				Print "youpa"
+				touchStack[2][Friendi].AddAll(touchStack[AB][Friendj])
+				touchStack[2].Erase(Friendi)
+			End	
+			Until touchIn2=False
+			
+		Next 'AB
+		
+		Print "length des copinouStacksBis"
+		Print touchStack[0].Length
+		Print touchStack[1].Length
+		Print touchStack[2].Length
+		
+		#rem
+		Local bodyName:=body.GetName()
+				
+		Local tBody0:=Self.CreatePolyBody(bodyName+"_cut",cutPolyStack[0].Top,body.GetPosition(),body.GetAngle())'faut passer les vitesses aussi!
+		cutPolyStack[0].Pop()
+		For Local np:=Eachin cutPolyStack[0]
+			Local npoly:=np.poly
+			 Self.CreatePolyFixture(bodyName+"_cut",tBody0,np)
 		Next
-		For Local npoly:=Eachin cutPolyStack[1]
-			Local tBody:=Self.CreatePolyBody(bodyName+"_cut",npoly.ToArray(),body.GetPosition(),body.GetAngle())'faut passer les vitesses aussi!
-		'	tBody.copyParamsFrom(body)
+
+		Local tBody1:=Self.CreatePolyBody(bodyName+"_cut",cutPolyStack[1].Top,body.GetPosition(),body.GetAngle())'faut passer les vitesses aussi!
+		cutPolyStack[1].Pop()
+		For Local np:=Eachin cutPolyStack[1]
+			Local npoly:=np.poly
+			 Self.CreatePolyFixture(bodyName+"_cut",tBody1,np)
 		Next
+		
 		Self.DestroyBodyClean(body)
+		#end
 	End
 	
 	
@@ -491,6 +657,26 @@ Class b2Manager Extends Resource
 	End
 	
 	
+	'add the poly with the fixture's settings
+	Method CreatePolyFixture:b2Fixture(name:String="",b:b2Body,pAF:PolyAndFixture)
+	
+		Local fd:=New b2FixtureDef
+		
+		fd.friction = pAF.fixture.GetFriction()
+		fd.restitution = pAF.fixture.GetRestitution()
+		fd.density = pAF.fixture.GetDensity()
+		fd.filter=pAF.fixture.GetFilterData()
+		fd.isSensor=pAF.fixture.IsSensor()
+		'userData...?
+		Local pshape:=New b2PolygonShape()
+		Local vs:=pAF.poly.ToArray()
+		'Print "vsl:"+vs.Length
+		pshape.Set(vs.Data, vs.Length)
+		fd.shape = pshape
+		
+		Return Self.CreateFixture(name,b,fd)
+
+	End
 	'----------------------------
 	'
 	' Manual Shapes
@@ -527,9 +713,9 @@ Class b2Manager Extends Resource
 		
 	End
 	
-	Method CreatePolygonShapes:b2PolygonShape[](vertices:b2Vec2[])
-		Return Null	
-	End
+	'Method CreatePolygonShapes:b2PolygonShape[](vertices:b2Vec2[])
+	'	Return Null	
+	'End
 	
 	
 	
