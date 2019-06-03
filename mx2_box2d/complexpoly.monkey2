@@ -10,23 +10,23 @@ Using box2dxt..
 
 Public
 
-Function FullPartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
-	
-	Local polyStack:=SimplePartition(b2vStackToV2dStack(poly))
-	If polyStack=Null Then Return Null
-	If polyStack.Length=0 Then Return Null
-	
-	Local convexPolys:=New Stack<Stack<Vec2d>>
-	
-	For Local i:=0 Until polyStack.Length
-		MakeCCW(polyStack[i])
-		Local tconvPolys:=ConvexPartitionOpt(polyStack[i])
-		convexPolys.AddAll(tconvPolys)
-	Next
+'Function FullPartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
+'	
+'	Local polyStack:=SimplePartition(b2vStackToV2dStack(poly))
+'	If polyStack=Null Then Return Null
+'	If polyStack.Length=0 Then Return Null
+'	
+'	Local convexPolys:=New Stack<Stack<Vec2d>>
+'	
+'	For Local i:=0 Until polyStack.Length
+'		MakeCCW(polyStack[i])
+'		Local tconvPolys:=ConvexPartitionOpt(polyStack[i])
+'		convexPolys.AddAll(tconvPolys)
+'	Next
 
-	Return V2dStastackTob2vStastack(convexPolys)
+'	Return V2dStastackTob2vStastack(convexPolys)
 	
-End
+'End
 
 Function FullPartition:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
 	
@@ -46,17 +46,23 @@ Function FullPartition:Stack<Stack<Vec2d>>(poly:Stack<Vec2d>)
 	
 End
 
-Function SimplePartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
-	Return V2dStastackTob2vStastack(SimplePartition(b2vStackToV2dStack(poly)))
-End
+'Function SimplePartition:Stack<Stack<b2Vec2>>(poly:Stack<b2Vec2>)
+'	Return V2dStastackTob2vStastack(SimplePartition(b2vStackToV2dStack(poly)))
+'End
 
 Function SimplePartition:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 	Local ret:=SimplePartitionNotClean(vertices)
-	For Local i:=0 Until ret.Length
-		ret[i]=CleanMinSlopes(ret[i])
-		ret[i]=cleanDuples(ret[i])
-	Next
-	
+	If ret=Null
+		#If __DEBUG__
+			Print"Simplepartition returned Null "
+		#End
+		Return Null
+	Else
+		For Local i:=0 Until ret.Length
+			ret[i]=CleanMinSlopes(ret[i])
+			ret[i]=cleanDuples(ret[i])
+		Next
+	End
 	Return ret
 End
 
@@ -77,13 +83,17 @@ Function SimplePartitionNotClean:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 	For Local i:=0 Until vertices.Length
 		tCopy.Add(vertices[i])
 	Next
+	If tCopy.Top=tCopy[0] Then tCopy.Pop()
+	
 	Print "firsttcopy"
-	'PrintPoly(tCopy)
-	'Print "endfirsttcopy"
+	PrintPoly(tCopy)
+	Print "endfirsttcopy"
 	
 	Local CleanIntersectionPass1Stack:=cleanDuples(tCopy)
 	CleanIntersectionPass1Stack=cleanStraights(CleanIntersectionPass1Stack)
 	
+	PrintPoly(CleanIntersectionPass1Stack)
+	Print "endclean1"
 	If CleanIntersectionPass1Stack.Top<>CleanIntersectionPass1Stack[0] Then CleanIntersectionPass1Stack.Add(CleanIntersectionPass1Stack[0])
 	
 	If CleanIntersectionPass1Stack.Length<4
@@ -96,6 +106,9 @@ Function SimplePartitionNotClean:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 	If CleanIntersectionPass1Stack.Top<>CleanIntersectionPass1Stack[0] Then CleanIntersectionPass1Stack.Add(CleanIntersectionPass1Stack[0])
 	Local pABInts:=CreatePABIntersectionArray(CleanIntersectionPass1Stack)
 
+
+
+
 	Local CleanIntersectionPass2Stack:=New Stack<Vec2d>
 	For Local i:=0 Until CleanIntersectionPass1Stack.Length-1
 		CleanIntersectionPass2Stack.Add(CleanIntersectionPass1Stack[i])
@@ -107,10 +120,7 @@ Function SimplePartitionNotClean:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 	CleanIntersectionPass2Stack=cleanDuples(CleanIntersectionPass2Stack)
 	If CleanIntersectionPass2Stack.Top=CleanIntersectionPass2Stack[0] Then CleanIntersectionPass2Stack.Pop()
 
-	'CleanIntersectionPass2Stack=CleanMinSlopes(CleanIntersectionPass2Stack)
-	Print "Cleanint2"
-	PrintPoly(CleanIntersectionPass2Stack)
-	Print "endcleanint2"
+	CleanIntersectionPass2Stack=CleanMinSlopes(CleanIntersectionPass2Stack)
 	
 	tCopy=New Stack<Vec2d>
 	
@@ -136,9 +146,11 @@ Function SimplePartitionNotClean:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 	Local polySignForCompare:=1
 	
 	Local vBegin:Vec2d=tCopy[1]-tCopy[0]
-	vBegin=vBegin.Normalize() '! normalize de Vec2d return Float et pas vect nomalisé
+	'vBegin=vBegin.Normalize() '! normalize de Vec2d return Float et pas vect nomalisé
+	vBegin.Normalize()
 	Local vEndin:Vec2d=tCopy[tCopy.Length-1]-tCopy[0]
-	vEndin=vEndin.Normalize()
+	'vEndin=vEndin.Normalize()
+	vEndin.Normalize()
 	
 	If vBegin.y=vEndin.y
 		#If __DEBUG__
@@ -156,6 +168,13 @@ Function SimplePartitionNotClean:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 	Print "tcopy:----------"
 	PrintPoly(tCopy)
 	'Print "endtcopy--------"
+	'tCopy=cleanDuples(tCopy)
+	'PrintPoly(tCopy)
+	Print "----------------hup"
+	'ttCopy=CleanMinSlopes(ttCopy)
+	'PrintPoly(ttCopy)
+	Print "------------waf"
+	
 	Local cleanPoly:=New Stack<Vec2d>
 	
 	cleanPoly.Add(tCopy[0])
@@ -504,8 +523,10 @@ Function cleanDuples:Stack<Vec2d>(tCopy:Stack<Vec2d>)
 					CleanIntersectionPass1Stack.Add(tCopy.Pop())
 					 					
 				Else
+					If tCopy.Top=CleanIntersectionPass1Stack[CleanIntersectionPass1Stack.Length-2] Then CleanIntersectionPass1Stack.Pop() 'avec antéprécédent
 					tCopy.Pop()
 				End
+			
 	
 			End
 			'Print "CleanDuplZZZZZZZ"

@@ -27,22 +27,22 @@ Class MyWindow Extends Window
 		poly.Add(New Vec2d(350,350))
 		poly.Add(New Vec2d(50,350))
 		
-		knife.Add(New Vec2<Double>(290,100))
-		knife.Add(New Vec2<Double>(240,50))
-		knife.Add(New Vec2<Double>(170,50))
-		knife.Add(New Vec2<Double>(180,150))
-		knife.Add(New Vec2<Double>(350,150))
-		knife.Add(New Vec2<Double>(350,130))
-		knife.Add(New Vec2<Double>(280,140))
-		knife.Add(New Vec2<Double>(290,100))
+		knife.Add(New Vec2d(290,100))
+		knife.Add(New Vec2d(240,50))
+		knife.Add(New Vec2d(170,50))
+		knife.Add(New Vec2d(180,150))
+		knife.Add(New Vec2d(350,150))
+		knife.Add(New Vec2d(350,130))
+		knife.Add(New Vec2d(280,140))
+		knife.Add(New Vec2d(290,100))
 		
 		
-		'knife.Add(New Vec2<Double>(150,140))
-		'knife.Add(New Vec2<Double>(270,130))
-		'knife.Add(New Vec2<Double>(280,210))
-		'knife.Add(New Vec2<Double>(160,210))
+		'knife.Add(New Vec2d(150,140))
+		'knife.Add(New Vec2d(270,130))
+		'knife.Add(New Vec2d(280,210))
+		'knife.Add(New Vec2d(160,210))
 		'
-		knife=New Stack<Vec2<Double>>
+		knife=New Stack<Vec2d>
 		
 		'polys=PolyCutSided(poly,knife)
 		'Print "polysLength: "+polys.Length
