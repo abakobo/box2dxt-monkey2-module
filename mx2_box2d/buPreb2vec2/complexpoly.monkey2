@@ -109,8 +109,8 @@ Function SimplePartitionNotClean:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 
 	'CleanIntersectionPass2Stack=CleanMinSlopes(CleanIntersectionPass2Stack)
 	Print "Cleanint2"
-	PrintPoly(CleanIntersectionPass2Stack)
-	Print "endcleanint2"
+	'PrintPoly(CleanIntersectionPass2Stack)
+	'Print "endcleanint2"
 	
 	tCopy=New Stack<Vec2d>
 	
@@ -154,7 +154,7 @@ Function SimplePartitionNotClean:Stack<Stack <Vec2d>>(vertices:Stack<Vec2d>)
 	tCopy.Add(tCopy[0])
 	
 	Print "tcopy:----------"
-	PrintPoly(tCopy)
+	'PrintPoly(tCopy)
 	'Print "endtcopy--------"
 	Local cleanPoly:=New Stack<Vec2d>
 	
