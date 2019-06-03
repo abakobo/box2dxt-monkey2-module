@@ -1,6 +1,8 @@
 doing:
 ------
 
+changer polyIsTouching  avec intersections parceque ptInpoly ça marche pas d office
+	---->expérimenter avec segments qui se supperposent pour voir comment intersection réagit
 
 Method createpolyboy avec pAF ? fait ?
 Method AddpolyFixture avec PAF ? fait ?
