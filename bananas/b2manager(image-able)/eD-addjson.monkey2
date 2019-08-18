@@ -102,16 +102,3 @@ Function Main()
 	New Box2DgfxTest( "Box2D_test",w_width,w_height )
 	App.Run()
 End
-
-Class Canvas Extension
-	
-	Method SetCameraByCenter(point:Vec2f,zoom:Float=1.0,rotation:Float=0,vr:Vec2f=New Vec2f(0,0))
- 
-		Translate(Viewport.Width/2,Viewport.Height/2)
-		Scale(zoom,zoom)
-		Rotate(rotation)
-		Translate(-point)
- 
-	End
-	
-End
